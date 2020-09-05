@@ -33,18 +33,20 @@ dependencies {
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.constraintlayout
     implementation rootProject.ext.dependencies.design
-    implementation files('libs/aip-java-sdk-4.1.1.jar')
-    implementation files('libs/json-20160810.jar')
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     //    guolin
     api rootProject.ext.dependencies.guolinpermission
     api rootProject.ext.dependencies.litepal
     api rootProject.ext.dependencies.xutils
     api rootProject.ext.dependencies.glide
     api rootProject.ext.dependencies.okhttp
+
+    implementation files('libs/aip-java-sdk-4.1.1.jar')
+    implementation files('libs/json-20160810.jar')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
     api files('libs/eventbus-3.1.1.jar')
     api files('libs/gson-2.3.1.jar')
     api files('libs/sun.misc.BASE64Decoder.jar')
