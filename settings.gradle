@@ -3,6 +3,6 @@ include ':zbar_qrcode'
 include ':qrcodescanner'
 include ':aall'
 include ':anccapilibs'
-include ':acommonlibs'
+//include ':acommonlibs'
 //include ':ncc'
 rootProject.name = "nccgit"

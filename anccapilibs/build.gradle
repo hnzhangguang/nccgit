@@ -44,11 +44,15 @@ dependencies {
     api rootProject.ext.dependencies.litepal
     api rootProject.ext.dependencies.xutils
     api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.okhttp
+    api files('libs/eventbus-3.1.1.jar')
+    api files('libs/gson-2.3.1.jar')
+    api files('libs/sun.misc.BASE64Decoder.jar')
+    api 'com.alibaba:fastjson:1.2.73'
     api "me.leolin:ShortcutBadger:1.1.22@aar"
     implementation 'com.github.yalantis:ucrop:2.2.3'
     implementation 'com.github.chrisbanes.photoview:library:1.2.4'
 //     先注释掉语音翻译功能,
 //    implementation 'com.github.adrielcafe:ffmpeg-android-java:2a627f6ecd@aar'
-    api project(':acommonlibs')
 
 }

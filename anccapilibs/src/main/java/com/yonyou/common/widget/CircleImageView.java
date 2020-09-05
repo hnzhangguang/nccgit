@@ -17,7 +17,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 
-import com.yonyou.common.utils.R;
+import com.yonyou.ancclibs.R;
+
 
 public class CircleImageView extends androidx.appcompat.widget.AppCompatImageView {
 

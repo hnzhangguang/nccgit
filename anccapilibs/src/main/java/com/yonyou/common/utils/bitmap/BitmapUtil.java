@@ -362,7 +362,7 @@ public class BitmapUtil {
 	
 	/**
 	 * @brief 从文件载入采样后的Bitmap
-	 * @see android.graphics.BitmapFactory.Options#inSampleSize
+	 * @see BitmapFactory.Options#inSampleSize
 	 */
 	public static Bitmap loadSampleSize(String path, int sampleSize) {
 		BitmapFactory.Options opts = new BitmapFactory.Options();
@@ -460,7 +460,7 @@ public class BitmapUtil {
 	
 	/**
 	 * @brief 从文件载入只获边框的Bitmap www.it165.net
-	 * @see android.graphics.BitmapFactory.Options#inJustDecodeBounds
+	 * @see BitmapFactory.Options#inJustDecodeBounds
 	 */
 	public BitmapFactory.Options loadJustDecodeBounds(String path) {
 		BitmapFactory.Options opts = new BitmapFactory.Options();

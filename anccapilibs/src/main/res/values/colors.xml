@@ -32,4 +32,15 @@
     <color name="ip_text_primary_inverted">#ffffff</color>
 
 
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="color_aaaaaa">#aaaaaa</color>
+    <color name="color_999999">#999999</color>
+
+    <color name="page_bg">#F5F5F9</color>
+
+
+
+
+
 </resources>

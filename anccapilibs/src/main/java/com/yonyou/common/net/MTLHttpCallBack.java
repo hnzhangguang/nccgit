@@ -5,5 +5,5 @@ package com.yonyou.common.net;
  */
 public interface MTLHttpCallBack {
     void onFailure(String error);
-    void onResponse(int code,String body);
+    void onResponse(int code, String body);
 }

@@ -12,4 +12,30 @@
     <dimen name="album_listview_margin_bottom">72dp</dimen>
     <dimen name="album_thumbview_image_size">42dp</dimen>
     <dimen name="ui_10_dip">10dp</dimen>
+
+    <dimen name="permission_dialog_width">200dp</dimen>
+    <dimen name="permission_dialog_title_height">48dp</dimen>
+    <dimen name="permission_dialog_title_icon_margin">18dp</dimen>
+    <dimen name="permission_dialog_title_text">15sp</dimen>
+    <dimen name="permission_dialog_btn_magrin_top">24dp</dimen>
+    <dimen name="permission_dialog_edit_padding_left">15dp</dimen>
+    <dimen name="permission_dialog_btn_magrin_left">15dp</dimen>
+    <dimen name="permission_dialog_btn_magrin_right">15dp</dimen>
+    <dimen name="permission_dialog_edit_text2">14sp</dimen>
+    <dimen name="permission_dialog_btn_height">52dp</dimen>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
+
+
+
 </resources>
