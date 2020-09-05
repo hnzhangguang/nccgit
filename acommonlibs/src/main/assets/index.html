@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>H5教程</title>
+    <style>
+        *{
+            font-size : 18px;
+        }
+
+
+
+
+
+    </style>
+    <script>
+
+        let id = 1;
+        const callbackMap = {};
+        window.JSSDK = {
+
+            // h5调用原生入扣
+            callAction(action,param,callback){
+                param.action = action;  // 把action添加进去
+                // 处理回调id
+                const callbackId = "call"+id++  // 生成回调id
+                // 绑定回调map
+                callbackMap[callbackId] = callback;  // 记录回调id和回调函数的对应关系
+                // 添加进param
+                param.callbackId = callbackId;  // 把callbackId添加进去
+                let str = JSON.stringify(param);
+                // 调用原生API
+                NativeBridge.call(action,str, callbackId);
+            },
+            // 原生回调H5API
+            receiveNativeMessage(callbackId,data){
+                // alert('aaa:'+callbackId);
+                // callbackId 也可以从data里面获取 eg data.callbackId
+                if(callbackMap[callbackId]){
+                    callbackMap[callbackId](data)
+                }
+            }
+        }
+
+         window.addEventListener('DOMContentLoaded',e => {
+            // h5 按钮
+            const showBtn = document.querySelector('#getNetwork');
+            showBtn.addEventListener('click',e=>{
+                getNccNetworkType()
+            });
+
+            const setStorage = document.querySelector('#setStorage');
+            setStorage.addEventListener('click',e=>{
+                setNccStorage();
+            });
+            const getStorage = document.querySelector('#getStorage');
+            getStorage.addEventListener('click',e=>{
+                getNccStorage();
+            });
+
+            const executeDBOperate = document.querySelector('#executeDBOperate');
+            executeDBOperate.addEventListener('click',e=>{
+                executeNccDBOperate();
+            });
+
+            const queryDBOperate = document.querySelector('#queryDBOperate');
+            queryDBOperate.addEventListener('click',e=>{
+                queryNccDBOperate();
+            });
+
+            const initLocation = document.querySelector('#initLocation');
+            initLocation.addEventListener('click',e=>{
+                initLocationNcc();
+            });
+
+            const openLocation = document.querySelector('#openLocation');
+            openLocation.addEventListener('click',e=>{
+                openLocationNcc();
+            });
+
+            const getLocation = document.querySelector('#getLocation');
+            getLocation.addEventListener('click',e=>{
+                getNccLocation();
+            });
+
+            const startContinuousLocation = document.querySelector('#startContinuousLocation');
+            startContinuousLocation.addEventListener('click',e=>{
+                startNccContinuousLocation();
+            });
+
+            const getContinuousLocation = document.querySelector('#getContinuousLocation');
+            getContinuousLocation.addEventListener('click',e=>{
+                getNccContinuousLocation();
+            });
+            const stopContinuousLocation = document.querySelector('#stopContinuousLocation');
+            stopContinuousLocation.addEventListener('click',e=>{
+                stopNccContinuousLocation();
+            });
+            const backlntercept = document.querySelector('#backlntercept');
+            backlntercept.addEventListener('click',e=>{
+                backlnterceptNcc();
+            });
+            const navigateBack = document.querySelector('#navigateBack');
+            navigateBack.addEventListener('click',e=>{
+                navigateBackNcc();
+            });
+            const chooselmage = document.querySelector('#chooselmage');
+            chooselmage.addEventListener('click',e=>{
+                chooselmageNcc();
+            });
+            const compressLocallmage = document.querySelector('#compressLocallmage');
+            compressLocallmage.addEventListener('click',e=>{
+                compressLocallmageNcc();
+            });
+            const previewDoc = document.querySelector('#previewDoc');
+            previewDoc.addEventListener('click',e=>{
+                previewDocNcc();
+            });
+            const previewOnlineImg = document.querySelector('#previewOnlineImg');
+            previewOnlineImg.addEventListener('click',e=>{
+                previewImageNcc();
+            });
+            const uploadFile = document.querySelector('#uploadFile');
+            uploadFile.addEventListener('click',e=>{
+                uploadFileNcc();
+            });
+            const simpleScanQRCode = document.querySelector('#simpleScanQRCode');
+            simpleScanQRCode.addEventListener('click',e=>{
+                simpleScanQRCodeNcc();
+            });
+            const customScanQRCode = document.querySelector('#customScanQRCode');
+            customScanQRCode.addEventListener('click',e=>{
+                customScanQRCodeNcc();
+            });
+            const registerResumeCallback = document.querySelector('#registerResumeCallback');
+            registerResumeCallback.addEventListener('click',e=>{
+                registerResumeCallbackNcc();
+            });
+            const changeFlashLightStatus = document.querySelector('#changeFlashLightStatus');
+            changeFlashLightStatus.addEventListener('click',e=>{
+                changeFlashLightStatusNcc();
+            });
+            const changeCustomScanMode = document.querySelector('#changeCustomScanMode');
+            changeCustomScanMode.addEventListener('click',e=>{
+                changeCustomScanModeNcc();
+            });
+            const getAppData = document.querySelector('#getAppData');
+            getAppData.addEventListener('click',e=>{
+                getAppDataNcc();
+            });
+            const getUcgConfigInfo = document.querySelector('#getUcgConfigInfo');
+            getUcgConfigInfo.addEventListener('click',e=>{
+                getUcgConfigInfoNcc();
+            });
+            const callService = document.querySelector('#callService');
+            callService.addEventListener('click',e=>{
+                callServiceNcc();
+            });
+            const getSystemInfo = document.querySelector('#getSystemInfo');
+            getSystemInfo.addEventListener('click',e=>{
+                getSystemInfoNcc();
+            });
+            const getUserYHTInfo = document.querySelector('#getUserYHTInfo');
+            getUserYHTInfo.addEventListener('click',e=>{
+                getUserYHTInfoNcc();
+            });
+            const markAndNavigationDestination = document.querySelector('#markAndNavigationDestination');
+            markAndNavigationDestination.addEventListener('click',e=>{
+                markAndNavigationDestinationNcc();
+            });
+            const openXYChatView = document.querySelector('#openXYChatView');
+            openXYChatView.addEventListener('click',e=>{
+                openXYChatViewNcc();
+            });
+            const changeScreenOrientation = document.querySelector('#changeScreenOrientation');
+            changeScreenOrientation.addEventListener('click',e=>{
+                changeScreenOrientationNcc();
+            });
+            const openLocalFile = document.querySelector('#openLocalFile');
+            openLocalFile.addEventListener('click',e=>{
+                openLocalFileNcc();
+            });
+            const downFile = document.querySelector('#downFile');
+            downFile.addEventListener('click',e=>{
+                downFileNcc();
+            });
+            const requestNccService = document.querySelector('#requestNccService');
+            requestNccService.addEventListener('click',e=>{
+                requestNccServiceNcc();
+            });
+
+
+        })
+
+        /**
+        |--------------------------------------------------
+        | 借助原生调用ncc服务
+        |--------------------------------------------------
+        */
+        function requestNccServiceNcc(){
+                action = 'http.requestNccService'  // 动作是什么?
+                let param = {'url':'/nccloud/mob/platform/standard/login','param':{'userCode':'zhangg','password':'111111a','loginType':'1'}}; // 参数是什么
+                //调用原生api
+                window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    const editText = document.querySelector('#editText');
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                })
+        }
+        /**
+        |--------------------------------------------------
+        | 获取网络状态api demo
+        |--------------------------------------------------
+        */
+        function getNccNetworkType(){
+                action = 'device.getNetworkType'  // 动作是什么?
+                let param = {'aaa':'本版本'}; // 参数是什么
+                //调用原生api
+                window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    const editText = document.querySelector('#editText');
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 借助原生存储临时数据(持久化)
+        |--------------------------------------------------
+        */
+        function setNccStorage(){
+            let action = 'storage.setStorage'  // 动作是什么?
+                let param = {'domain': 'a','key':"aab",'data':'data111'}; // 参数是什么
+                //调用原生api
+                window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    const editText = document.querySelector('#editText');
+                    if(value){
+                        let str = JSON.stringify(value);
+                        editText.value = str;
+                        alert(str);
+                    }else{
+                        editText.value = "default~";
+                    }
+
+                })
+        }
+        /**
+        |--------------------------------------------------
+        | 获取存储临时数据
+        |--------------------------------------------------
+        */
+        function getNccStorage(){
+            let action = 'storage.getStorage'  // 动作是什么?
+            let param = {'domain': 'ncc','key':"aab"}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+        }
+
+
+        /**
+        |--------------------------------------------------
+        | 执行sql, 没有返回值
+        |--------------------------------------------------
+        */
+        function executeNccDBOperate(){
+            let sqlString= "create table if not exists Websites ("
+                + "websiteID varchar, "//
+                + "name varchar, "//
+                + "url varchar, "//
+                + "alexa varchar, "//
+                + "country varchar"//
+                + ")";
+            //sqlString ="INSERT INTO Websites ('name', 'url', 'alexa', 'country')VALUES ('百度','https://www.baidu.com/','4','CN') ";
+            let action = 'database.execute'  // 动作是什么?
+                let param = {'sql': sqlString}; // 参数是什么
+                //调用原生api
+                window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    const editText = document.querySelector('#editText');
+                    if(value){
+                        let str = JSON.stringify(value);
+                        editText.value = str;
+                        alert(str);
+                    }else{
+                        editText.value = "default~";
+                    }
+
+                })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 执行sql 查询数据,又返回值
+        |--------------------------------------------------
+        */
+        function queryNccDBOperate(){
+            let action = 'database.query'  // 动作是什么?
+                let param = {'sql': 'select * from Websites '}; // 参数是什么
+                //调用原生api
+                window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    const editText = document.querySelector('#editText');
+                    if(value){
+                        let str = JSON.stringify(value);
+                        editText.value = str;
+                        alert(str);
+                    }else{
+                        editText.value = "default~";
+                    }
+
+                })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 物理返回键的注册事件
+        |--------------------------------------------------
+        */
+        function backKeyEvent(){
+            alert("getNccLocation");
+        }
+
+
+        /**
+        |--------------------------------------------------
+        | 初始化地图
+        |--------------------------------------------------
+        */
+        function initLocationNcc(){
+            let   action = "bdLocation.initLocation"; // 获取定位
+            let param = {'aa': 'aaa'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+        }
+        /**
+        |--------------------------------------------------
+        | 打开地图
+        |--------------------------------------------------
+        */
+        function openLocationNcc(){
+            let   action = "bdLocation.openLocation"; // 获取定位
+            let param = {'aa': 'aaa'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 获取地理位置
+        |--------------------------------------------------
+        */
+        function getNccLocation(){
+            let   action = "bdLocation.getLocation"; // 获取定位
+            let param = {'aa': 'aaa'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 开启持续定位
+        |--------------------------------------------------
+        */
+        function startNccContinuousLocation(){
+            alert("startNccContinuousLocation");
+        }
+
+        /**
+        |--------------------------------------------------
+        | 获取持续定位
+        |--------------------------------------------------
+        */
+        function getNccContinuousLocation(){
+            alert("getNccContinuousLocation");
+        }
+
+        /**
+        |--------------------------------------------------
+        | 停止持续定位
+        |--------------------------------------------------
+        */
+        function stopNccContinuousLocation(){
+            // alert("stopNccContinuousLocation");
+            let   action = "bdLocation.stopLocation"; // 获取定位
+            let param = {'aa': 'aaa'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 物理返回键事件
+        |--------------------------------------------------
+        */
+        function backlnterceptNcc(){
+            let action = 'window.backlntercept'  // 动作是什么?
+            let param = {}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    alert(value)
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                }
+
+            })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 导航栏返回事件
+        |--------------------------------------------------
+        */
+        function navigateBackNcc(){
+            let action = 'window.navigateBack'  // 动作是什么?
+            let param = {}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    let str = JSON.stringify(value);
+                    const div1 = document.querySelector('#div1');
+                    div1.innerHTML = str
+                }
+
+            })
+        }
+        /**
+        |--------------------------------------------------
+        | 选图片(相册,相机)
+        |--------------------------------------------------
+        */
+        function chooselmageNcc(){
+
+            // count: 1, // 默认9
+            // sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            // sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            // returnThumbnail: true,
+
+            let action = 'album.chooseImage'  // 动作是什么?
+            let param = {'sourceType': ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                returnThumbnail: true,
+                count: 2, // 默认9
+            }; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    let str = JSON.stringify(value);
+                    alert(str);
+                    let localIds = value.data.localIds ; // array
+
+
+                    const div1 = document.querySelector('#div1');
+                    div1.innerHTML = str
+                }else{
+                    editText.value = "default~";
+                }
+
+            })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 根据localId 拿到图片的真实路径
+        |--------------------------------------------------
+        */
+        function getLocalImgSrcNcc(localId){
+            let action2 = "album.getLocalImgSrc";
+            let param2 = {'localId': localId };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    let localImgSrc = value.data.imgSrc +"";
+
+                    // alert(imgArray instanceof Array);
+                    imgArray.push(localImgSrc);
+                    // alert(imgArray);
+                    editText.value = imgArray;
+                })
+
+        }
+        /**
+        |--------------------------------------------------
+        | 根据localId 拿到图片的base64字符串
+        |--------------------------------------------------
+        */
+        function getLocalImgDataNcc(localId){
+            // alert("getLocalImgSrcNcc");
+            let action2 = "album.getLocalImgData";  // 拿到图片的base64
+            let param2 = {'localId': localId };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    let localImgSrc = value.data.imgSrc +"";
+
+                    // alert(imgArray instanceof Array);
+                    imgArray.push(localImgSrc);
+                    // alert(imgArray);
+                    editText.value = imgArray;
+                })
+
+        }
+
+        /**
+        |--------------------------------------------------
+        | 在线预览图片
+        |--------------------------------------------------
+        */
+        function previewImageNcc(localId){
+            let action = "album.previewImage";  // 拿到图片的base64
+            let param = {
+            current: 'https://wx2.sinaimg.cn/mw690/70396e5agy1g0leayhrhoj211418gq9q.jpg', // 当前显示图片的http链接
+            urls: [
+                // 需要预览的图片http链接列表
+                'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leax4owvj211418gk2j.jpg',
+                'https://wx4.sinaimg.cn/mw690/70396e5agy1g0leay2ymtj211418gk11.jpg',
+                'https://wx2.sinaimg.cn/mw690/70396e5agy1g0leayhrhoj211418gq9q.jpg',
+                'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leazeikxj211418gqdc.jpg'
+                ]
+            };
+            window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    let localImgSrc = value.data.imgSrc +"";
+
+                    // alert(imgArray instanceof Array);
+                    imgArray.push(localImgSrc);
+                    // alert(imgArray);
+                    editText.value = imgArray;
+                })
+
+        }
+
+        //
+
+        /**
+        |--------------------------------------------------
+        | 压缩本地图片
+        |--------------------------------------------------
+        */
+        function compressLocallmageNcc(){
+
+            let action2 = "album.compressImg";  //
+            let param2 = {'level': 1, // 0 不压缩,1,低质量 2 中质量 3 高质量
+                type:1,//  0 是图片的base64, 1图片路径
+                imgData:'path'  // path
+                };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                })
+        }
+        /**
+        |--------------------------------------------------
+        | 预览文档
+        |--------------------------------------------------
+        */
+        function previewDocNcc(){
+
+        }
+
+        /**
+        |--------------------------------------------------
+        | 下载文件
+        |--------------------------------------------------
+        */
+        function downFileNcc(){
+            let action2 = "file.downFile";  //
+            let param2 = {'fileType':"doc",'filePath':'filePath'
+                };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = imgArray;
+                })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 上传文档
+        |--------------------------------------------------
+        */
+        function uploadFileNcc(){
+            let action2 = "album.uploadImage";  //
+            let param2 = {'localId': localId };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    let localImgSrc = value.data.imgSrc +"";
+
+                    // alert(imgArray instanceof Array);
+                    imgArray.push(localImgSrc);
+                    // alert(imgArray);
+                    editText.value = imgArray;
+                })
+        }
+
+
+
+        /**
+        |--------------------------------------------------
+        | 简单扫码
+        |--------------------------------------------------
+        */
+        function simpleScanQRCodeNcc(){
+            let action = 'scan.scanQRCode'  // 动作是什么?
+            let param = {}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    editText.value = str+"3333";
+                }
+
+            })
+        }
+        /**
+        |--------------------------------------------------
+        | 自定义扫码
+        |--------------------------------------------------
+        */
+        function customScanQRCodeNcc(){
+
+        }
+        /**
+        |--------------------------------------------------
+        | 注册resume回调事件
+        |--------------------------------------------------
+        */
+        function registerResumeCallbackNcc(){
+            let action = 'window.registerResume'  // 动作是什么?
+            let param = {}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    editText.value = str+"3333";
+                }
+
+            })
+        }
+        /**
+        |--------------------------------------------------
+        | 改变闪光点
+        |--------------------------------------------------
+        */
+        function changeFlashLightStatusNcc(){
+
+        }
+        /**
+        |--------------------------------------------------
+        |
+        |--------------------------------------------------
+        */
+        function changeCustomScanModeNcc(){
+
+        }
+        /**
+        |--------------------------------------------------
+        | 获取app信息
+        |--------------------------------------------------
+        */
+        function getAppDataNcc(){
+            let action2 = "storage.getAppInfo";  //
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    editText.value = str;
+                })
+        }
+        /**
+        |--------------------------------------------------
+        | 通过原生调用服务请求
+        |--------------------------------------------------
+        */
+        function callServiceNcc(){
+            let action2 = "ucg.requestService";  //
+            let url = '/nccloud/mob/platform/mob/openapp';
+            let paramValue = {'aa':'aas','bb':'bbss'}; // 业务参数
+            let param2 = {'url': url,'param':paramValue };
+
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                })
+        }
+        /**
+        |--------------------------------------------------
+        | 获取ucg 配置信息
+        |--------------------------------------------------
+        */
+        function getUcgConfigInfoNcc(){
+
+            let action2 = "ucg.readUCGConfig";  //
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    let localImgSrc = value.data.imgSrc +"";
+
+                    // alert(imgArray instanceof Array);
+                    imgArray.push(localImgSrc);
+                    // alert(imgArray);
+                    editText.value = imgArray;
+                })
+
+        }
+        /**
+        |--------------------------------------------------
+        | 获取app信息
+        |--------------------------------------------------
+        */
+        function getSystemInfoNcc(){
+
+            let action2 = "system.getStemInfo";
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                })
+
+        }
+        /**
+        |--------------------------------------------------
+        | 获取yht信息
+        |--------------------------------------------------
+        */
+        function getUserYHTInfoNcc(){
+            let action2 = "storage.getUserInfo";
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                    div1
+                    const div1 = document.querySelector('#div1');
+                    div1.innerHTML = str;
+                })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 地图打点
+        |--------------------------------------------------
+        */
+        function markAndNavigationDestinationNcc(){
+
+        }
+
+        /**
+        |--------------------------------------------------
+        | 打开小友
+        |--------------------------------------------------
+        */
+        function openXYChatViewNcc(){
+            alert("openXYChatViewNcc");
+        }
+
+        /**
+        |--------------------------------------------------
+        | 改变屏幕方向
+        |--------------------------------------------------
+        */
+        function changeScreenOrientationNcc(){
+            // 横屏false 竖屏true
+            let action2 = "window.ScreenOrientation";
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                })
+        }
+
+        /**
+        |--------------------------------------------------
+        | 打开本地文件
+        |--------------------------------------------------
+        */
+        function openLocalFileNcc(){
+            let action2 = "file.openLocalFile";
+            let param2 = {'fileType': 'pdf','filePath':'文件真实路径...' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+                    editText.value = str;
+                })
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+
+
+<body>
+
+<div>
+    <input id="editText1" placeholder="输入内容" type="text"/>
+    <br>
+    <input id="editText" placeholder="输入内容" type="text"/>
+    <div id="div6">```111</div>
+</div>
+
+<div>
+    <div id="div1">已调试.............</div>
+    <button id="getNetwork">获取网络getNetwork</button>
+    <button id="setStorage">setStorage</button>
+    <button id="getStorage">getStorage</button>
+    <button id="executeDBOperate">executeDBOperate</button>
+    <button id="queryDBOperate">queryDBOperate</button>
+    <button id="chooselmage">chooselmage</button>
+    <button id="previewOnlineImg">previewOnlineImg</button>
+    <button id="getUserYHTInfo">getUserYHTInfo</button>
+    <button id="getSystemInfo">getSystemInfo</button>
+    <button id="getAppData">getAppData</button>
+    <button id="getUcgConfigInfo">getUcgConfigInfo</button>
+    <button id="backlntercept">backlntercept</button>
+    <button id="navigateBack">navigateBack</button>
+    <button id="registerResumeCallback">registerResumeCallback</button>
+    <button id="changeScreenOrientation">changeScreenOrientation</button>
+    <button id="downFile">downFile</button>
+    <button id="openLocalFile">openLocalFile</button>
+    <button id="previewDoc">previewDoc 暂未用</button>
+    <button id="openXYChatView">openXYChatView 暂未支持</button>
+    <button id="compressLocallmage">compressLocallmage</button>
+    <button id="callService">callService</button>
+    <button id="initLocation">initLocation</button>
+    <button id="openLocation">openLocation</button>
+    <button id="getLocation">getLocation</button>
+    <button id="startContinuousLocation">startContinuousLocation</button>
+    <button id="getContinuousLocation">getContinuousLocation</button>
+    <button id="stopContinuousLocation">stopContinuousLocation</button>
+    <button id="simpleScanQRCode">simpleScanQRCode</button>
+    <button id="requestNccService">requestNccService</button>
+
+    <div id="div2">未调试.............</div>
+
+    <button id="uploadFile">uploadFile</button>
+    <button id="customScanQRCode">customScanQRCode</button>
+    <button id="changeFlashLightStatus">changeFlashLightStatus</button>
+    <button id="changeCustomScanMode">changeCustomScanMode</button>
+    <button id="markAndNavigationDestination">markAndNavigationDestination</button>
+
+
+</div>
+
+</body>
+
+
+</html>

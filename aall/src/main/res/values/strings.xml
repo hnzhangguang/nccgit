@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">NCC 移动</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_app_setting">设置常用</string>
+    <string name="tip_drag">长按编辑,拖拽排序</string>
+    <string name="my_cahnnel">我的频道</string>
+    <string name="other_channel">其他频道</string>
+    <string name="edit">编辑</string>
+    <string name="finish">完成</string>
+
+    <string name="account">请输入用户名</string>
+    <string name="password">请输入密码</string>
+    <string name="check_password">记住密码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="check_login">自动登录</string>
+    <string name="login">登录</string>
+    <string name="loading">正在加载数据</string>
+
+    <string name="checkin">快速模式</string>
+    <string name="menu_night_mode">白天模式</string>
+    <string name="menu_night_mode_system">跟随系统</string>
+    <string name="menu_night_mode_day">白天</string>
+    <string name="menu_night_mode_night">黑夜</string>
+    <string name="menu_night_mode_auto">自动</string>
+
+</resources>

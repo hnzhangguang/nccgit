@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+
+    <dbname value="nccdb" />
+    <version value="3" />
+
+    <list>
+
+        <!--        h5应用信息 -->
+        <mapping class="com.yonyou.common.vo.AppInfo" />
+        <!--        用户-->
+        <mapping class="com.yonyou.common.vo.NCCUserVo" />
+        <!--        普通存储-->
+        <mapping class="com.yonyou.common.vo.StorageVO" />
+    </list>
+
+
+</litepal>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F54D33</color>
+    <color name="colorPrimary_aa">#aaF54D33</color>
+    <color name="colorPrimaryDark">#ef4836</color>
+    <color name="colorPrimaryDark_ex">@color/colorPrimaryDark</color>
+    <!--    界面默认背景色-->
+    <color name="pager_bg_color">#F5F5F9</color>
+
+
+    <color name="colorAccent">#F54D33</color>
+    <color name="colorAccent_ff">#aaF54D33</color>
+    <color name="titleColor">#757575</color>
+    <color name="titleColorSelected">#F54D33</color>
+    <color name="tip">#9c9c9c</color>
+    <color name="bg_focus">#DDDDDD</color>
+    <color name="red_500">#ef4836</color>
+    <color name="red_">#FF0000</color>
+    <color name="white">#ffffff</color>
+    <color name="main_color">#5CB85C</color>
+    <color name="transparent_half">#a0000000</color>
+    <color name="transparent_half_orange">#a0ec6f1a</color>
+
+    <color name="main11">#0d8437</color>
+    <color name="lineE811">#e8e8e8</color>
+    <color name="black3">#333333</color>
+
+    <!--    系统灰色-->
+    <color name="system_gray">#5A595B</color>
+
+
+    <!--    网络设置界面-->
+    <color name="setting_bg_textview">#ffffff</color>
+    <color name="line_color">#818181</color>
+
+
+    <color name="top_bar_normal_bg">#ec6f1a</color>
+    <color name="bg_normal_gray">#8fff</color>
+    <color name="gray">#aaaaaa</color>
+
+    <!--    主题色-->
+    <color name="sys_main">@color/colorPrimary</color>
+    <color name="sys_main_aa">@color/colorPrimary_aa</color>
+    <!--    main tab-->
+    <color name="sys_tab_text">@color/system_gray</color>
+    <color name="sys_tab_text_select">@color/colorPrimaryDark</color>
+
+
+    <color name="orange_red">#ff0000</color>
+    <color name="orange_gray">#aaaaaa</color>
+    <color name="orange_deep">#ff6f3a</color>
+    <color name="orange_most">#C76114</color>
+    <color name="orange_litter">#80aa6136</color>
+    <color name="orange_black">#000000</color>
+
+
+    <color name="tv_gray_deep">#818181</color>
+
+</resources>

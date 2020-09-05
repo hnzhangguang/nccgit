@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_marginLeft="80dp"
+    android:layout_marginRight="80dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="25dp"
+    android:background="@color/transparent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/mtl_alert_background"
+        android:paddingTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:fontFamily="sans-serif-regular"
+            android:background="@color/transparent"
+            android:text="@string/js_alert_title"
+            />
+
+        <TextView
+            android:id="@+id/tv_dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:background="@color/transparent"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif-regular"
+            android:scrollbars="vertical"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.1px"
+            android:background="#dcdcdc"
+            />
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:text="确认"
+            android:fontFamily="sans-serif-regular"
+            android:background="@color/transparent"
+            android:textColor="#3A80FC"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

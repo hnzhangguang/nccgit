@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yonyou.nccmob">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--    相机-->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <!-- 允许使用PowerManager的 WakeLocks保持进程在休眠时从屏幕消失( Allows usingPowerManager WakeLocks to keep processor from sleeping or screen from dimming) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 允许一个程序接收到 ACTION_BOOT_COMPLETED广播在系统完成启动(Allows an application to receive the ACTION_BOOT_COMPLETED that is broadcast after the system finishes booting. ) -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 允许一个程序获取信息有关当前或最近运行的任务，一个缩略的任务状态，是否活动等等(Allows an application to get information about the currently correctly running tasks: a thumbnail representation of the tasks, what activities are running in it, etc.) -->
+    <!-- 允许挂载和反挂载文件系统可移动存储(Allows mounting and unmounting file systems for removable storage.) -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 允许程序调用killBackgroundProcesses(String).方法结束后台进程 -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <!-- 允许程序改变Wi-Fi连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 允许一个程序修改当前设置，如本地化 -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:name=".base.NccAppliction"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <!--        android:windowSoftInputMode="adjustPan|stateHidden" 键盘弹起时候隐藏掉bottomlayout布局-->
+        <activity
+            android:name="com.yonyou.nccmob.NCCMainPagerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+        </activity>
+        <!--        混合扫描界面  -->
+        <activity
+            android:name="com.yonyou.nccmob.scan.NCCWebViewScanActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--        单次扫描界面-->
+        <activity
+            android:name="com.yonyou.nccmob.scan.NCCSimpleScanActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.iqos.qrscanner.app.QRScannerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="cn.bingoogolapple.qrcode.zbar.CommonScanActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--        历史消息界面-->
+        <activity
+            android:name="com.yonyou.nccmob.message.history.HistoryMessageActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <!-- launch 界面-->
+        <activity
+            android:name="com.yonyou.nccmob.act.LaunchActivity"
+            android:screenOrientation="portrait"></activity>
+        <!-- 登录界面-->
+        <activity
+            android:name="com.yonyou.nccmob.act.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--        忘记密码-->
+        <activity
+            android:name="com.yonyou.nccmob.act.NCCForgetPWActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--        ncc 用户第一次登录系统需要重置密码 -->
+        <activity
+            android:name="com.yonyou.nccmob.act.NCCUserFirstResetPwActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--        绑定yht-->
+        <activity
+            android:name="com.yonyou.nccmob.act.NCCUserBindingYhtActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yonyou.nccmob.act.NCCResetPWActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--        应用设置界面-->
+        <activity
+            android:name="com.yonyou.nccmob.appsetting.NCCManagerAppActivity"
+            android:screenOrientation="portrait" />
+        <!--        网络设置界面-->
+        <activity
+            android:name="com.yonyou.nccmob.netsetting.NetSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yonyou.nccmob.act.NCCModifyPwActivity"
+            android:screenOrientation="portrait" />
+
+        <!--        联系我们-->
+        <activity
+            android:name="com.yonyou.nccmob.appsetting.usersetting.ContactsWeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yonyou.nccmob.appsetting.usersetting.AboutWeActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.yonyou.common.utils.permissions.PermissionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/GrantorNoDisplay" />
+
+
+        <activity
+            android:name="com.yonyou.common.download.offline.ui.UpdateActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--        功能测试界面-->
+        <activity
+            android:name="com.yonyou.nccmob.etc.NCCEtcMainActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--        打开h5解决-->
+        <activity
+            android:name="com.yonyou.nccmob.NCCOpenH5MainActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <!--        地理定位-->
+        <activity
+            android:name="com.yonyou.plugin.loc.LocationActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="XQt1KwKFA5bxi0cpwtewll3eOOD6F1U2" />
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+
+        <!--        aliyun-->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="30477317" /> <!-- 请填写你自己的- appKey -->
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="1970fea3dc204c1ce8a951e3cbe35c92" /> <!-- 请填写你自己的appSecret -->
+        <meta-data
+            android:name="com.alibaba.app.notificationchannel.id"
+            android:value="10011" />    <!-- 消息通知通道，android 8.0需要配置，否则消息栏不显示消息通知 -->
+        <meta-data
+            android:name="com.yonyou.nccmob.channelid"
+            android:value="10012" />    <!-- 消息通知通道，android 8.0需要配置，否则消息栏不显示消息通知 -->
+
+        <!-- 消息接收监听器 （用户可自主扩展） -->
+        <receiver
+            android:name="com.yonyou.mtlaliyunpush.component.MyMessageReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <!--        实现接收消息的服务 重要!!!-->
+        <service
+            android:name="com.yonyou.mtlaliyunpush.component.MyMessageIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.yonyou.nccmob.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
+    </application>
+
+    <!--    百度地图用到-->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:resizeable="true"
+        android:smallScreens="true" /> <!-- OpenGLES 2.0 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+
+</manifest>

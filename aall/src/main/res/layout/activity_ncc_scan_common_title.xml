@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_title"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:background="#55000000"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/csZbarScannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:background="#00000000"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:onClick="onReturnClick"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="扫一扫"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+
+        <!--        <ToggleButton-->
+        <!--            android:id="@+id/imageButton"-->
+        <!--            android:layout_width="25dp"-->
+        <!--            android:layout_height="25dp"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:layout_marginRight="20dp"-->
+        <!--            android:background="@drawable/togglebutton_light_background"-->
+        <!--            android:onClick="toggleFlash"-->
+        <!--            android:textColor="#00000000"-->
+        <!--            android:visibility="visible"/>-->
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/image_icon"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            android:layout_marginRight="30dp"-->
+        <!--            android:layout_toLeftOf="@+id/imageButton"-->
+        <!--            android:onClick="getImage"-->
+        <!--            android:src="@drawable/honor_scan_pic_nor"/>-->
+
+        <ImageView
+            android:id="@+id/imageButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:onClick="getImage"
+            android:src="@drawable/honor_scan_pic_nor" />
+
+        <ToggleButton
+            android:id="@+id/image_icon"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/imageButton"
+            android:background="@drawable/togglebutton_light_background"
+            android:onClick="toggleFlash"
+            android:textColor="#00000000"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

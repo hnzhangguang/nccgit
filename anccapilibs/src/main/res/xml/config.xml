@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget>
+    <feature name="ucg">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.ucg.UCGApiInvoker" />
+    </feature>
+    <feature name="file">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.file.FileApiInvoker" />
+    </feature>
+    <feature name="device">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.device.DeviceApiInvoker" />
+    </feature>
+
+    <feature name="bdLocation">
+        <param
+            name="android-package"
+            value="com.yonyou.plugin.loc.BDLocationApiInvoker" />
+    </feature>
+    <feature name="scan">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.scan.ScanApiInvoker" />
+    </feature>
+    <feature name="album">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.album.AlbumApiInvoker" />
+    </feature>
+    <feature name="translate">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.translatevoice.TranslateVoiceApiInvoker" />
+    </feature>
+    <feature name="http">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.http.HttpApiInvoker" />
+    </feature>
+    <feature name="storage">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.storage.StorageApiInvoker" />
+    </feature>
+    <feature name="database">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.sqlite.SqliteApiInvoke" />
+    </feature>
+    <feature name="update">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.offline.OffLineUpdateApiInvoker" />
+    </feature>
+
+    <feature name="event">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.device.EventApiInvoker" />
+    </feature>
+    <feature name="system">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.system.SystemApiInvoker" />
+    </feature>
+
+    <feature name="dialog">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.device.MTLDialogApiInvoker" />
+    </feature>
+    <feature name="window">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.window.WindowApiInvoker" />
+    </feature>
+
+    <!--    pda扫描-->
+    <feature name="barcode">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.barcode.BarcodeApiInvoker" />
+    </feature>
+
+
+    <!--....-->
+
+    <feature name="download">
+        <param
+            name="android-package"
+            value="com.yonyou.common.download.offline.OffLineUpdateApiInvoker" />
+    </feature>
+
+    <feature name="webcontrol">
+        <param
+            name="android-package"
+            value="com.yonyou.mtlmain.webcontrol.WebControlApiInvoker" />
+    </feature>
+
+    <feature name="umshare">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.umshare.UMShareApiInvoker" />
+    </feature>
+
+    <feature name="statusbar">
+        <param
+            name="android-package"
+            value="com.yonyou.mtlstatusbar.MTLStatusBarApiInvoker" />
+    </feature>
+    <feature name="barcode">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.barcode.BarcodeApiInvoker" />
+    </feature>
+    <feature name="webcontrol">
+        <param
+            name="android-package"
+            value="com.yonyou.mtlmain.webcontrol.WebControlApiInvoker" />
+    </feature>
+
+</widget>

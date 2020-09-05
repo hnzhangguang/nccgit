@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#303030</color>
+    <color name="colorPrimaryDark">#232323</color>
+    <color name="colorAccent">#ef4836</color>
+    <color name="page_bg">#232323</color>
+    <color name="orange_black">#fff</color>
+
+    <!--网络设置界面-->
+    <color name="setting_bg_textview">#303030</color>
+    <color name="line_color">#9c9c9c</color>
+    <color name="sys_main">#5A595B</color>
+    <color name="sys_main_aa">#aa5A595B</color>
+    <color name="sys_tab_text">#fff</color>
+    <color name="sys_tab_text_select">@color/colorAccent</color>
+
+
+</resources>

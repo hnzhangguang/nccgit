@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- album photo -->
+    <dimen name="album_photo_spacing">3dp</dimen>
+    <dimen name="album_photo_bottom_height">54dp</dimen>
+    <dimen name="album_photo_thumb_padding">8dp</dimen>
+    <dimen name="album_listitem_horizontal_margin">10dp</dimen>
+    <dimen name="album_listitem_vertical_padding">10dp</dimen>
+    <dimen name="album_listitem_image_size">50dp</dimen>
+    <dimen name="album_listitem_icon_size">32dp</dimen>
+    <dimen name="album_listitem_text">14sp</dimen>
+    <dimen name="album_listview_margin_bottom">72dp</dimen>
+    <dimen name="album_thumbview_image_size">42dp</dimen>
+    <dimen name="ui_10_dip">10dp</dimen>
+</resources>

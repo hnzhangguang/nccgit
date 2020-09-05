@@ -1,0 +1,74 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="app_name">ancclibs</string>
+
+
+    <!-- 图片浏览 -->
+    <string name="album_all_photo">全部图片</string>
+    <string name="album_only_choose_num">超出可选图片张数</string>
+    <string name="album_finish">完成</string>
+    <string name="album_original">原图</string>
+    <string name="album_invalidSD">sdcard无效或没有插入！</string>
+    <string name="album_photo">选择相册</string>
+    <string name="album_album_old">相册</string>
+    <string name="album_preview">预览</string>
+    <string name="album_unfinished">完成</string>
+    <string name="album_camera_cancel">取消</string>
+    <string name="album_no_photo">相册没有图片</string>
+    <string name="album_viewholder">viewholder</string>
+
+    <string name="album_params_error">请检查参数</string>
+    <string name="album_file_error">文件未找到</string>
+
+    <string name="album_ip_all_images">所有图片</string>
+    <string name="album_ip_folder_image_count">共%1$d张</string>
+    <string name="album_ip_preview_image_count">%1$d/%2$d</string>
+    <string name="album_ip_select_limit">最多选择%1$d张图片</string>
+    <string name="album_ip_complete">完成</string>
+    <string name="album_ip_select_complete">完成(%1$d/%2$d)</string>
+    <string name="album_ip_preview">预览</string>
+    <string name="album_ip_preview_count">预览(%1$d)</string>
+    <string name="album_ip_photo_crop">图片裁剪</string>
+    <string name="album_ip_origin">原图</string>
+    <string name="album_ip_origin_size">原图(%1$s)</string>
+
+    <string name="album_camera">拍照</string>
+    <string name="album_album">相册</string>
+    <string name="album_config_error">请检查project.json配置文件</string>
+    <string name="album_service_url_null">未配置serviceUrl</string>
+    <string name="album_upload_address_null">未配置上传地址</string>
+    <string name="album_download_address_null">未配置下载地址</string>
+    <string name="mtl_image_up_loading">正在上传，请稍候...</string>
+    <string name="mtl_image_down_loading">正在下载，请稍候...</string>
+    <string name="js_alert_title">提示</string>
+    <string name="mtl_apis_request_permisisson_error">权限申请失败</string>
+    <string name="mtl_apis_request_http_error">网络请求失败</string>
+    <string name="mtl_translate_voice_error">未识别到信息</string>
+    <string name="mtl_Device_getDeviceId_Error">获取设备ID失败</string>
+    <string name="audio_hello_world">测试AudioRecord，实现录音功能</string>
+    <string name="audio_menu_settings">Settings</string>
+    <string name="audio_view_record_wav">录音WAV文件</string>
+    <string name="audio_view_record_amr">录音AMR文件</string>
+    <string name="audio_view_stop">停止录音</string>
+
+    <string name="audio_error_no_sdcard">没有SD卡，无法存储录音数据</string>
+    <string name="audio_error_state_record">正在录音中，请先停止录音</string>
+    <string name="audio_error_unknown">无法识别的错误</string>
+
+    <string name="audio_audio_start">请先开启录音</string>
+    <string name="audio_localid_null">localId 为空</string>
+    <string name="audio_file_not_exist">文件不存在</string>
+    <string name="audio_config_error">请检查project.json配置文件</string>
+    <string name="audio_service_url_null">未配置serviceUrl</string>
+    <string name="audio_upload_address_null">未配置上传地址</string>
+    <string name="audio_download_address_null">未配置下载地址</string>
+    <string name="audio_http_error">服务器异常</string>
+    <string name="mtl_plugin_update_dialog_ignore">忽略此版本？</string>
+    <string name="mtl_offline_update_network_unavailable">网络不可用</string>
+    <string name="mtl_offline_update_update_http_request_error">更新接口请求失败</string>
+    <string name="mtl_plugin_update_dialog_title">更新</string>
+    <string name="mtl_plugin_update_dialog_message">确认更新？</string>
+    <string name="mtl_audio_up_loading">正在上传，请稍候...</string>
+    <string name="mtl_audio_down_loading">正在下载，请稍候...</string>
+
+
+</resources>

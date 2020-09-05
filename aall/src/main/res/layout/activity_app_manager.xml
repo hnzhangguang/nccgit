@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".appsetting.NCCManagerAppActivity">
+
+    <include layout="@layout/activity_commob_titlebar" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:expanded="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/pager_bg_color"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:gravity="center|left"
+                    android:paddingTop="@dimen/dp_2"
+                    android:paddingBottom="@dimen/dp_2"
+                    android:text="我的常用"></TextView>
+
+                <com.yonyou.nccmob.widget.ChildHeightViewPager
+                    android:id="@+id/viewpager_changyong"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    android:background="#fff" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <!--  悬浮菜单    app:tabMode="fixed"  scrollable：可滚动的    -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_app_group"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/pager_bg_color"
+                app:tabIndicatorColor="#f00"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="1dp"
+                app:tabInlineLabel="false"
+                app:tabMode="scrollable"
+                app:tabRippleColor="#fff"
+                app:tabSelectedTextColor="#f00"
+                app:tabTextColor="#333" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_all"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

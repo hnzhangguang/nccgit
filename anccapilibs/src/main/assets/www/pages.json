@@ -1,0 +1,23 @@
+{
+  "platforms": [
+    {
+      "platform": "wx",
+      "pages": {}
+    },
+    {
+      "platform": "ios",
+      "pages": {}
+    },
+    {
+      "platform": "android",
+      "pages": {
+        "login": {
+          "url": "http://www.baidu.com"
+        },
+        "index": {
+          "url": "http://www.baidu.com"
+        }
+      }
+    }
+  ]
+}

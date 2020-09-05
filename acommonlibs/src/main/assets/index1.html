@@ -1,0 +1,918 @@
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>
+        js调用java
+    </title>
+</head>
+
+<script src="./mtl.js"></script>
+<!--<script src="./mtl.speech.js"></script>-->
+<script>
+
+
+    function NCCresume() {
+        alert('ddd');
+
+    }
+
+
+    var appid = "ncc_test"
+    function getConfig() {
+        mtl.ncc.readUCGConfig({
+            "success": function (res) {
+                //data是服务返回的数据
+                // res.code
+                // res.msg
+                // res.data
+
+                alert(JSON.stringify(res))
+            },
+            fail: (err) => {
+                alert(JSON.stringify(err))
+            },
+            "complete": function (res) {
+
+            }
+        });
+
+    }
+    function setConfig() {
+        mtl.ncc.writeUCGConfig({
+            "config": {
+                "host": "172.23.79.2",
+                "port": "8080",
+                "ishttps": "false",  //是否使用https
+                "default_tp": "none"  //默认的传输协议
+            },
+            "success": function (res) {
+            },
+            fail: (err) => {
+                alert(err)
+            },
+            "complete": function (res) {
+
+            }
+        });
+    }
+    function login() {
+    alert(11111);
+        mtl.ncc.login({
+            appcode: appid,
+            upesncode: "42f0bff32b4c400a86b5eaf14909995",
+            success: (data) => {
+                alert(JSON.stringify(data))
+            },
+            "fail": (err) => {
+                alert(JSON.stringify(err))
+            },
+            "complete": function (res) {
+
+            }
+        })
+    }
+    function callACtion() {
+        mtl.ncc.callAction({
+            "url": "api/ncc/tp/qmp",
+            upesncode: "42f0bff32b4c400a86b5eaf14909995",
+            "params": {
+                busiParamJson: JSON.stringify({ "pagecode": "400400800_list", "appcode": "400400800" }),
+                sysParamJson: {
+                    "busiaction": "查询模板",
+                    "appCode": "400400800",
+                    "langCode": "simpchn",
+                    "ts": 1557126277441
+
+                }
+            },
+            "success": function (res) {
+                alert(JSON.stringify(res))
+                //data是服务返回的数据
+                // res.code
+                // res.msg
+                // res.data
+            },
+            "fail": (err) => {
+                alert(JSON.stringify(err))
+            },
+            "complete": function (res) {
+
+            }
+        });
+    }
+
+
+    function getNetworkType() {
+        mtl.getNetworkType({
+            success: function (res) {
+                var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+                alert("当前网络状态：" + networkType);
+            },
+            fail: function (err) {
+                var message = err.message;  // 错误信息
+                alert("获取错误：" + err.message);
+            }
+        });
+    }
+
+    function openLocation() {
+        mtl.openLocation({
+            latitude: 40.056885, // 纬度，浮点数，范围为90 ~ -90
+            longitude: 116.308142, // 经度，浮点数，范围为180 ~ -180。
+            name: '', // 位置名
+            address: '', // 地址详情说明
+            scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+            infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
+        });
+    }
+
+    function getLocation() {
+        mtl.getLocation({
+            type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                alert("经度：" + latitude + " ,  纬度" + longitude);
+            }
+        });
+    }
+
+    function startRecord() {
+          mtl.startRecord();
+    }
+
+    function stopRecord() {
+        mtl.stopRecord({
+            success: function (res) {
+                var localId = res.localId;
+                alert("localId === " + localId);
+            },
+          fail: function (err) {
+            var message = err.message;  // 错误信息
+            alert("获取错误：" + err.message);
+          }
+        });
+    }
+
+    function onVoiceRecordEnd() {
+        mtl.onVoiceRecordEnd({
+            // 录音时间超过一分钟没有停止的时候会执行 complete 回调
+            complete: function (res) {
+                var localId = res.localId;
+                 alert("完成的 localId === " + localId);
+            },
+              fail: function (err) {
+                var message = err.message;  // 错误信息
+                alert("获取错误：" + err.message);
+              }
+        });
+    }
+
+    function playVoice() {
+        mtl.playVoice({
+            localId: '1557716745733' // 需要播放的音频的本地ID，由stopRecord接口获得
+        });
+    }
+
+    function pauseVoice() {
+        mtl.pauseVoice({
+            localId: '' // 需要暂停的音频的本地ID，由stopRecord接口获得
+        });
+    }
+
+    function stopVoice() {
+        mtl.stopVoice({
+            localId: '' // 需要停止的音频的本地ID，由stopRecord接口获得
+        });
+    }
+
+    function onVoicePlayEnd() {
+        mtl.onVoicePlayEnd({
+            success: function (res) {
+                var localId = res.localId; // 返回音频的本地ID
+                alert('播放完的是：' + localId);
+            }
+        });
+    }
+
+    function scanQRCode() {
+        mtl.scanQRCode({
+            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+            scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+            success: function (res) {
+                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                alert('扫描结果是：' + result);
+            }
+        });
+    }
+
+    function chooseImage() {
+        mtl.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            returnThumbnail: true,
+            success: function (res) {
+                // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                let localIds = res.localIds;  // ['wxLocalResource://imageid123456789987654321', ...]
+                localId = res.localIds[0];
+                alert(JSON.stringify(localIds));
+            },
+            fail: function (err) {
+                var message = err.message;  // 错误信息
+            }
+        });
+    }
+
+    let localId ;
+    function getLocalImgSrc() {
+        mtl.getLocalImgSrc({
+            localId: localId, // 图片的localID
+            success: function (res) {
+                // src 可以直接用于 <img> 标签显示，在小程序上返回 base64，在 iOS 与 Android 返回路径
+                var src = res.imgSrc;
+                alert('图片路径：' + src);
+                document.getElementById('image').innerHTML = '<img style="width:100%; height:100%;" src="' + src + '" />'
+            }
+        });
+    }
+
+    function getLocalImgData() {
+        mtl.getLocalImgData({
+            localId: localId, // 图片的localID
+            success: function (res) {
+                var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+                document.getElementById('image').innerHTML = '<img style="width:100%; height:100%;" src="data:image/png;base64,' + localData + '" />'
+            }
+        });
+    }
+
+    function previewImage() {
+        mtl.previewImage({
+            current: 'https://wx2.sinaimg.cn/mw690/70396e5agy1g0leayhrhoj211418gq9q.jpg', // 当前显示图片的http链接
+            urls: [
+                // 需要预览的图片http链接列表
+                'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leax4owvj211418gk2j.jpg',
+                'https://wx4.sinaimg.cn/mw690/70396e5agy1g0leay2ymtj211418gk11.jpg',
+                'https://wx2.sinaimg.cn/mw690/70396e5agy1g0leayhrhoj211418gq9q.jpg',
+                'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leazeikxj211418gqdc.jpg'
+            ]
+        });
+    }
+
+    function faceRegister() {
+        mtl.faceRegister({
+            userId: '', //友户通ID
+            tenantId: '',//租户ID
+            group_id: '',//组ID
+            success: function (res) {
+                var result = res; // 返回注册结果
+                alert(JSON.stringify(result));
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+        });
+    }
+
+    function faceVerify() {
+        mtl.faceVerify({
+            group_id: '',//组ID
+            success: function (res) {
+                var result = res; // 返回识别结果
+                alert(JSON.stringify(result));
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+        });
+    }
+
+    function generateQRCode() {
+        mtl.generateQRCode({
+            str: '123', // 用于生成二维码的字符串
+            success: function (res) {
+                // src 可以直接用于 <img> 标签显示，在小程序上返回 base64，在 iOS 与 Android 返回路径
+                var src = res.imgSrc;
+                alert("路径：" + src);
+            }
+        });
+    }
+
+    function request() {
+        mtl.request({
+            url: 'http://172.20.4.61:8080/console/login',
+            method: 'POST',  // 默认值
+            params: {
+                __: '4581559542825607',
+            },
+            data: {
+                username: 'design',
+                password: 'yonyou@1',
+                domainCode: '00000',
+                moduleCode: 'BQ',
+                lauguage: 'zh-CN'
+            },
+            header: {
+                'X-Requested-With': 'XMLHttpRequest',// 默认值
+                'content-type': 'form-data',
+            },
+            responseType: 'json', // 默认值
+            success: function (res) {
+                alert('请求成功:' + JSON.stringify(res.data))
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+        });
+    }
+
+    function requestGet() {
+        mtl.request({
+            url: 'http://172.20.4.61:8080/bq_self/dt/login/userLoginInfo',
+            method: 'GET',  // 默认值
+            params: {
+                __: '4311559698549804',
+            },
+            data: {
+            },
+            header: {
+            },
+            responseType: 'json', // 默认值
+            success: function (res) {
+                alert('请求成功:' + JSON.stringify(res.data))
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+
+        });
+    }
+
+    function requestEsn() {
+        mtl.request({
+            url: 'https://ec.diwork.com/',
+            method: 'GET',  // 默认值
+            params: {
+            },
+            data: {
+            },
+            header: {
+            },
+            responseType: 'json', // 默认值
+            success: function (res) {
+                alert('请求成功:' + JSON.stringify(res.data))
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+
+        });
+    }
+
+    function uploadToEsn() {
+        mtl.uploadFile({
+            url: 'https://mdoctor.yonyoucloud.com/mtldebugger/mtl/file/uploadToOSS',
+            filePath: '/storage/emulated/0/netease/cloudmusic/网易云音乐相册/123.jpg',
+            success: function (res) {
+                alert('请求成功:' + JSON.stringify(res.data))
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+        });
+    }
+
+    function esnScan() {
+      mtl.ncc.scanQRCode({
+        type: 0, // 0是扫描1次，1是连续扫描
+        customnavi: 1, // 0是默认页面头部，1是自定义页面头部
+        nocheckcode: 1, // 0是页面内处理扫描值，1是关闭页面给到上个页面调用方法的回调
+        leftItems: [{
+          title: '左事件',
+          callback: function () {
+            alert('左事件');
+          }
+        }],
+        rightItems: [{
+          title: '右事件',
+          callback: function () {
+            alert('右事件');
+          }
+        }],
+        centerItems: [{
+          title: "标题",
+          callback: ""
+        }],
+        callback: function (res) { // 扫描结果回调
+          alert(JSON.stringify(res));
+        }
+      });
+    }
+
+
+    function customScanQRCode() {
+      mtl.upesn.customScanQRCode({
+        type:1,
+        callback:"scanResultCallback",
+        url:'http://littlemeaning.gz01.bdysite.com/demo2/scan.html',
+        scanLeftRatio:0.25,
+        scanTopRatio:0.1,
+        scanWidthRatio:0.5,
+        scanHeightRatio:0.2,
+        customNavi:1,
+        leftItems: [{
+          title: '左事件',
+          isClose:0,
+          callback: 'leftCallback'
+        }],
+        rightItems: [{
+          title: '右事件',
+          callback: 'rightCallback'
+        }],
+        centerItems: [{
+          title: "标题",
+          callback: ""
+        }],
+        success: function (res) {
+            var value = res.data;
+            alert('存的值为：' + value);
+        },
+        fail: function (err) {
+          // 错误回调，返回 {message: '错误信息'}
+          var message = err.message;
+          alert('请求失败:' + message)
+        }
+      });
+    }
+
+    function registerClose() {
+        mtl.upesn.registerResumeCallback("NCCresume", function(){
+            console.log("调起的页面已经关闭");
+        });
+    }
+
+    function settingNavBar() {
+        mtl.mobile.settingNavBar({
+          backgroundColor: "#FFFFFF",
+          hideShadowImage: 0,
+          statusBarStyle: 0,
+          leftItems: [{ title: "返回", titleColor: "#e14c46", fontSize: 16 }],
+          centerItems: [
+            {
+              title: "外勤上报测试项目",
+              titleColor: "#292f33"
+            }
+          ],
+          rightItems: [
+            {
+              callback: "appHeadIconCallbackFun1548225070000",
+              icon:
+                "https://static.yonyoucloud.com/5417/3248448/201803/31/15224803692f1a9292f4751b6cfc25fa8d7d648a5b.png"
+            }
+          ],
+          success: function (res) {
+            alert('调用成功');
+          },
+          fail: function (err) {
+            alert('调用失败');
+          }
+        });
+    }
+
+
+    function executeDBOperate() {
+        mtl.upesn.executeDBOperate({
+          executeType:'5', //0:建表；1:删表；2:新增数据；3:删除数据；4:更新数据；5:查询数据
+          executeSql:'select * form NCC_TABLE_INFO', //业务方控制该sql安全性，创建表格要求表名字前缀为NCC_
+          success: function (res) {//调用成功
+            alert('调用成功'); //1.建表、删表、增删改：返回为成功失败，data无数据，成功；data有错误码，失败 2.查询，返回数据数组
+          },
+          fail: function (err) {//调用失败
+            alert('调用失败');
+          }
+        });
+    }
+
+    function setStorage() {
+        mtl.setStorage({
+            domain: 'a',  // 可选
+            key: 'key',
+            data: 123454321 // 支持原生类型、Date、及能够通过 JSON.stringify 序列化的对象。
+        });
+    }
+    function getStorage() {
+        mtl.getStorage({
+            domain: 'a',
+            key: 'key',
+            success: function (res) {
+                var value = res.data;
+                alert('存的值为：' + value);
+            },
+            fail: function (err) {
+              // 错误回调，返回 {message: '错误信息'}
+              var message = err.message;
+              alert('请求失败:' + message)
+            }
+        });
+    }
+    function removeStorage() {
+        mtl.removeStorage({
+            domain: 'a',
+            key: 'key'
+        });
+    }
+    function clearStorage() {
+        mtl.clearStorage({
+            domain: 'a'
+        });
+    }
+
+    function initShare() {
+        mtl.UMShareAgent.init({
+            ios: {
+                UMAppId: 'xx',
+                channel: 'xx',  // 可选，友盟渠道标识，默认为 'App Store'
+                list: [
+                    {
+                        platform: 0,
+                        config: {
+                            appKey: 'xxx',    // 应用 ID (特定平台对应的值可能是 appID)
+                            appSecret: 'xxx', // 应用密钥 (特定平台对应的值可能是 appKey)
+                            redirectURL: '',  // 可选，回调 URL
+                        }
+                    }
+                ],
+            },
+            android: {
+                UMAppId: '5cb688b7570df374f40004eb',
+                list: [
+                    {
+                        platform: 2,
+                        config: {
+                            appKey: 'wx134e8d5a376f4c87',
+                            appSecret: '30d56ca0862be3cb13b57a0c5b0c5d57',
+                        }
+                    },
+                    {
+                        platform: 32,
+                        config: {
+                            appKey: 'dingoastjrkstoilztbbzm',
+                            appSecret: '',
+                        }
+                    }
+                ],
+            },
+            complete: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    var result = res.data
+                }
+            }
+        });
+    }
+
+    function doShareWX() {
+        mtl.UMShareAgent.doShare({
+            platform: 2,
+            text: '分享内容',
+            img: 'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leax4owvj211418gk2j.jpg',
+            url: 'https://www.baidu.com/',
+            title: '标题',
+            complete: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    var result = res.data
+                }
+            }
+        });
+    }
+    function doShareWXCircle() {
+        mtl.UMShareAgent.doShare({
+            platform: 3,
+            text: '分享内容',
+            img: 'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leax4owvj211418gk2j.jpg',
+            url: 'https://www.baidu.com/',
+            title: '标题',
+            complete: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    var result = res.data
+                }
+            }
+        });
+    }
+
+    function doShareDD() {
+        mtl.UMShareAgent.doShare({
+            platform: 32,
+            text: '分享内容',
+            img: 'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leax4owvj211418gk2j.jpg',
+            url: 'https://www.baidu.com/',
+            title: '标题',
+            complete: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    var result = res.data
+                }
+            }
+        });
+    }
+
+    function openShare() {
+        mtl.UMShareAgent.openShare({
+            list: [0, 1, 2],
+            title: '标题',
+            text: '分享内容',
+            img: 'https://wx3.sinaimg.cn/mw690/70396e5agy1g0leax4owvj211418gk2j.jpg',
+            url: 'https://www.baidu.com/',
+            complete: function (res) {
+                if (res.code == 200) {
+                    // 成功
+                    var result = res.data
+                }
+            }
+        });
+    }
+
+    function navigateTo() {
+        mtl.navigateTo({
+            page: 'login',
+            parameters: {
+                key: 'value'
+            }
+        });
+    }
+
+    function redirectTo() {
+        mtl.redirectTo({
+            page: 'index',
+            parameters: {
+                key: 'value'
+            }
+        });
+    }
+
+    function uploadImage() {
+        mtl.uploadImage({
+          localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
+          isShowProgressTips: 1, // 默认为1，显示加载框提示
+          success: function (res) {
+            var serverId = res.data; // 返回图片的服务器端ID
+            alert(serverId);
+          }
+        });
+    }
+
+    function uploadImageGetBase64() {
+        mtl.getLocalImgData({
+          localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
+          isShowProgressTips: 1, // 默认为1，显示加载框提示
+          success: function (res) {
+            var serverId = res.data; // 返回图片的服务器端ID
+            alert(serverId);
+          }
+        });
+    }
+
+    function uploadTest() {
+        mtl.getLocalImgData({
+          localId: '/storage/emulated/0/netease/cloudmusic/网易云音乐相册/123.jpg', // 需要上传的图片的本地ID，由chooseImage接口获得
+          <!--localId: '/storage/emulated/0/DCIM/Camera/IMG_20190417_183611_HHT.jpg', // 需要上传的图片的本地ID，由chooseImage接口获得-->
+          <!--localId: '/var/mobile/Media/DCIM/110APPLE/IMG_0541.JPG', // 需要上传的图片的本地ID，由chooseImage接口获得-->
+          isShowProgressTips: 1, // 默认为1，显示加载框提示
+          success: function (res) {
+            var serverId = res.localData; // 返回图片的服务器端ID
+            alert(serverId);
+          }
+        });
+    }
+
+
+    function navigateBack() {
+        mtl.navigateBack();
+    }
+
+
+
+</script>
+
+<body>
+
+<div style="position: absolute; width: 50%; height: 100%;">
+    <div id="image"></div>
+
+
+    <h1>js api 调用java</h1>
+
+    <h1>UCG统一网关SDK接口</h1>
+    <h2>
+        <a href="#" onclick="getConfig()">获取配置文件</a>
+    </h2>
+    <h2>
+        <a href="#" onclick="setConfig()">设置配置文件</a>
+    </h2>
+    <h2>
+        <a href="#" onclick="login()">登录</a>
+    </h2>
+    <h2>
+        <a href="#" onclick="callACtion()">callAction</a>
+    </h2>
+
+    <h1>基础服务接口</h1>
+    <h3>
+        <a href="#" onclick="getNetworkType()">获取网络状态</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="request()">请求http</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="openLocation()">打开位置</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="getLocation()">获取当前位置</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="initSpeech()">初始化语音</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="openSpeechPage()">打开小友</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="startSpeechSyn()">开始合成</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="stopSpeechSyn()">停止合成</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="startSpeechRecog()">开始识别</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="stopSpeechRecog()">停止识别</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="speechRelease()">释放资源</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="startRecord()">开始录音api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="stopRecord()">停止录音api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="onVoiceRecordEnd()">监听录音停止api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="playVoice()">播放录音api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="pauseVoice()">暂停播放录音api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="stopVoice()">停止播放录音api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="onVoicePlayEnd()">播放录音完毕api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="scanQRCode()">扫一扫api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="generateQRCode()">生成二维码</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="chooseImage()">选图片api</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="getLocalImgSrc()">获取图片路径</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="getLocalImgData()">获取图片base64</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="previewImage()">预览图片</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="faceRegister()">人脸注册</a>
+    </h3>
+
+    <h3>
+        <a href="#" onclick="faceVerify()">人脸登录</a>
+    </h3>
+
+</div>
+<div style="position: absolute; left: 50%; width: 50%; height: 100%;">
+    <h1>NNNNNNNNNN</h1>
+    <h3>
+        <a href="#" onclick="setStorage()">设置存储</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="getStorage()">获取存储</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="removeStorage()">删除存储</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="clearStorage()">清除存储</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="requestGet()">http GET请求</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="initShare()">点我初始化分享</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="doShareWX()">直接分享微信</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="doShareWXCircle()">直接分享微信朋友圈</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="doShareDD()">直接分享钉钉</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="openShare()">面板分享</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="navigateTo()">跳转页面</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="redirectTo()">关闭跳转页面</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="navigateBack()">关闭页面</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="uploadImage()">上传图片</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="uploadImageGetBase64()">上传图片返回base64</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="uploadTest()">上传测试base64</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="requestEsn()">友空间网络请求</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="uploadToEsn()">友空间上传文件</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="esnScan()">友空间扫一扫</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="executeDBOperate()">友空间操作数据库</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="customScanQRCode()">友空间内嵌扫一扫</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="registerClose()">注册关闭页面</a>
+    </h3>
+    <h3>
+        <a href="#" onclick="settingNavBar()">导航栏配置</a>
+    </h3>
+
+</div>
+
+
+</body>
+
+</html>

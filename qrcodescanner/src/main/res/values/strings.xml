@@ -1,0 +1,5 @@
+<resources>
+    <string name="scan_text">扫一扫</string>
+    <string name="app_txt_scanner_title">扫描二维码</string>
+    <string name="scan_tip">把二维码放入取景框中即可自动扫描</string>
+</resources>

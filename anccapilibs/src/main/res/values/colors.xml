@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- func -->
+    <color name="album_gray">#FFCCCCCC</color>
+    <color name="func_name">#ff545d64</color>
+    <color name="func_background">#ffffff</color>
+    <color name="func_background_hl">@color/album_gray</color>
+    <color name="func_separator">@color/gray_e</color>
+    <color name="gray_e">#ffd8d8d8</color>
+    <color name="gray_57">#ff575757</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_dark_66">#66000000</color>
+    <color name="album_black">#000000</color>
+    <color name="album_color_e1e0de">#E1E0DE</color>
+    <color name="color_424342">#424342</color>
+    <color name="color_fefdfe">#fefdfe</color>
+    <color name="color_d7d8d7">#d7d8d7</color>
+    <color name="color_565756">#565756</color>
+    <color name="blue">#33b5e5</color>
+    <color name="ic_back_press">#323336</color>
+    <color name="ip_color_primary">#393A3F</color>
+    <color name="ip_color_primary_dark">#303135</color>
+    <color name="ip_color_primary_trans">#ec2f3335</color>
+    <color name="ip_color_press">#ffe0e0e0</color>
+    <color name="ip_camera_pre">#353535</color>
+    <color name="ip_color_accent_new">#1AAD19</color>
+    <color name="ip_text_secondary_inverted">#66ffffff</color>
+    <color name="ip_text_primary_inverted">#ffffff</color>
+
+
+</resources>

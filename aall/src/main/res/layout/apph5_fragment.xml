@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".appsetting.NCCManagerAppActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:expanded="true">
+
+
+            <!--            <com.youth.banner.banner.Banner-->
+            <!--                android:id="@+id/banner"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="200dp"-->
+            <!--                android:layout_marginTop="@dimen/dp_1"-->
+            <!--                android:layout_marginBottom="@dimen/dp_1"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:indicator_drawable_selected="@drawable/selected_radius"-->
+            <!--                app:layout_scrollFlags="scroll" />-->
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:gravity="center"
+                android:text="顶部内容"
+                android:textSize="0.1dp"
+                app:layout_scrollFlags="scroll" />
+
+            <!--     悬浮菜单           -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_app_group"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/pager_bg_color"
+                app:tabIndicatorColor="#f00"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="1dp"
+                app:tabInlineLabel="false"
+                app:tabMode="scrollable"
+                app:tabRippleColor="#fff"
+                app:tabSelectedTextColor="#f00"
+                app:tabTextColor="#333" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_all"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>

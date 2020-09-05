@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".appsetting.NCCManagerAppActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        app:expanded="true">
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="200dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="我是常用应用"-->
+        <!--            android:textSize="30sp"-->
+        <!--            app:layout_scrollFlags="scroll" />-->
+
+        <com.yonyou.nccmob.widget.ChildHeightViewPager
+            android:id="@+id/viewpager_changyong"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:background="#fff"
+            app:layout_scrollFlags="scroll" />
+
+
+        <!--  悬浮菜单    app:tabMode="fixed"  scrollable：可滚动的    -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_app_group1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/pager_bg_color"
+            app:tabIndicatorColor="#f00"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="1dp"
+            app:tabInlineLabel="false"
+            app:tabMode="fixed"
+            app:tabRippleColor="#fff"
+            app:tabSelectedTextColor="#f00"
+            app:tabTextColor="#333" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.yonyou.nccmob.widget.ChildViewPager
+            android:id="@+id/viewpager_all"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
