@@ -43,6 +43,7 @@ android {
         }
     }
 
+//    lambda 表达式支持
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
