@@ -28,7 +28,7 @@ android {
     repositories {
         flatDir {
             dirs 'libs',
-                    '../acommonlibs/libs',
+                    '../aall/libs',
                     '../anccapilibs/libs'
 
         }
