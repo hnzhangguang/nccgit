@@ -38,6 +38,8 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-feature android:name="android.hardware.camera" />
 
+
+<!--    resizeableActivity 是否支持多窗口模式 false 是不支持 , true 是支持-->
     <application
         android:name=".base.NccAppliction"
         android:allowBackup="true"
@@ -47,6 +49,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
+        android:resizeableActivity="false"
         android:usesCleartextTraffic="true">
         <!--        android:windowSoftInputMode="adjustPan|stateHidden" 键盘弹起时候隐藏掉bottomlayout布局-->
         <activity
