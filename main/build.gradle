@@ -1,18 +1,77 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         applicationId "com.yonyou.main"
-        minSdkVersion 23
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
+
+
+    // aar包添加
+    repositories {
+        flatDir {
+            dirs 'libs',
+                    '../acommonlibs/libs',
+                    '../anccapilibs/libs'
+
+        }
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    // 添加so库目录
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("nccmobsignature.keystore")
+            storePassword 'yonyou00'
+            keyAlias 'nccmobsignature'
+            keyPassword 'yonyou00'
+        }
+        release {
+            storeFile file('nccmobsignature.keystore')
+            storePassword 'yonyou00'
+            keyAlias 'nccmobsignature'
+            keyPassword 'yonyou00'
+        }
+    }
+
 
     buildTypes {
         release {
@@ -24,10 +83,28 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation rootProject.ext.dependencies.design
+    implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.constraintlayout
+    implementation rootProject.ext.dependencies.coordinatorlayout
+    implementation rootProject.ext.dependencies.multidex
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.guolinpermission
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    api project(':anccapilibs')
+    api project(':baidulocation_ncc')
+//    扫码单据界面
+    implementation project(':zbar_qrcode')
+//    自定义scanwebview
+    implementation project(':qrcodescanner')
+    implementation project(':aall')
+
+
+
 
 }
