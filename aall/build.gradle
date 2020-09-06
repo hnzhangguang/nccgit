@@ -20,7 +20,6 @@ android {
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
-        jackOptions.enabled = true
     }
 
     // aar包添加
