@@ -21,6 +21,7 @@ ext {
             litepal          : 'org.litepal.guolindev:core:3.1.1',
             glide            : 'com.github.bumptech.glide:glide:4.11.0',
             gson             : 'com.google.code.gson:gson:2.8.6',
-            guolinpermission : 'com.permissionx.guolindev:permissionx:1.2.2'
+            guolinpermission : 'com.permissionx.guolindev:permissionx:1.2.2',
+            swiperefreshlayout : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     ]
 }
