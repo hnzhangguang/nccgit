@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 
 /*
- * @功能: 修改密码
+ * @功能: 修改密码:根据就密码设置新密码
  * @Date  2020/9/1 2:42 PM
  * @Author zhangg
  **/
