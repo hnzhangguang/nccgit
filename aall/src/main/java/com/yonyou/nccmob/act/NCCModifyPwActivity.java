@@ -115,6 +115,18 @@ public class NCCModifyPwActivity extends BaseActivity {
     }
 
     public boolean checkParam() {
+        if (isNull(getModify_old_pw())){
+            showMessage("旧密码不可为空");
+            return  false;
+        }
+        if (isNull(getModify_new_pw())){
+            showMessage("新密码不可为空");
+            return  false;
+        }
+        if (isNull(getModify_confirm_pw())){
+            showMessage("确认密码不可为空");
+            return  false;
+        }
         boolean equals = getModify_new_pw().equals(getModify_confirm_pw());
         if (equals) {
             String modify_new_pw = getModify_new_pw();
@@ -123,10 +135,6 @@ public class NCCModifyPwActivity extends BaseActivity {
                 return false;
             }
         } else {
-            if (isNull(getModify_old_pw())){
-                showMessage("密码不可为空");
-                return  false;
-            }
             showMessage("新密码和确认密码不一致");
             return false;
         }
