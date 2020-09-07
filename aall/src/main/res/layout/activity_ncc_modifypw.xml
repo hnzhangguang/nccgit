@@ -22,12 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:gravity="center|left"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_15"
                 android:text="用户名" />
 
             <TextView
@@ -51,12 +53,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:gravity="center|left"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_15"
                 android:text="旧密码" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -79,12 +83,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:gravity="center|left"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_15"
                 android:text="新密码" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -106,6 +112,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
+            android:background="@color/white"
             android:gravity="center|left"
             android:orientation="horizontal">
 
@@ -113,6 +120,7 @@
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_15"
                 android:text="新密码" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -132,16 +140,20 @@
             android:layout_height="@dimen/dp_1" />
 
         <TextView
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp_15"
             android:layout_height="wrap_content"
             android:text="密码必须至少6个字符,而且包含字母与数字"></TextView>
 
         <TextView
+            android:layout_marginTop="@dimen/dp_10"
             android:id="@+id/modify_forgetpw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_5"
             android:text="忘记密码?"
+            android:layout_marginLeft="@dimen/dp_15"
             android:textColor="@color/red_" />
 
 
