@@ -123,6 +123,10 @@ public class NCCModifyPwActivity extends BaseActivity {
                 return false;
             }
         } else {
+            if (isNull(getModify_old_pw())){
+                showMessage("新密码和确认密码不一致");
+                return  false;
+            }
             showMessage("新密码和确认密码不一致");
             return false;
         }
