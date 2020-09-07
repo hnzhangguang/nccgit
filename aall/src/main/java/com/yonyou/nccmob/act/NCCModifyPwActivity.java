@@ -124,7 +124,7 @@ public class NCCModifyPwActivity extends BaseActivity {
             }
         } else {
             if (isNull(getModify_old_pw())){
-                showMessage("新密码和确认密码不一致");
+                showMessage("密码不可为空");
                 return  false;
             }
             showMessage("新密码和确认密码不一致");
