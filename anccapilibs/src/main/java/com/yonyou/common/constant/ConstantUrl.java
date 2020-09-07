@@ -13,8 +13,6 @@ public class ConstantUrl {
     public static final String requestAccountListUrl = "/nccloud/mob/platform/busicenter/query"; // 还未调试
     // 点击h5应用,计量计费url
     public static final String openH5appUrl = "/nccloud/mob/platform/mob/openapp";
-    // 重置密码url
-    public static final String resetPWUrl = "/nccloud/mob/platform/mob/resetpwd";
     // 登录url
     public static final String loginUrl = "/nccloud/mob/platform/standard/login";
     // 忘记密码(用户名+邮箱)
@@ -30,7 +28,7 @@ public class ConstantUrl {
     public static final String requestImgCheckCodeUrl = "/nccloud/mob/platform/requestimgcode/init";
     // 请求手机验证码
     public static final String requestPhoneCheckCodeUrl = "/nccloud/mob/platform/requestphonecode/init";
-    // 请求手机验证码
+    // 修改密码(ncc用户名登录时候)
     public static final String requestmodifypwUrl = "/nccloud/mob/platform/pwd/reset";
 
 
