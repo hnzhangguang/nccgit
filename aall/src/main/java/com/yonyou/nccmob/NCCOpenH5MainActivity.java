@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.yonyou.common.constant.Constant;
+import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.plugins.device.MTLBaseActivity;
 
@@ -25,7 +26,7 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
     private String url = "";
 
     public String getEdit() {
-        return edit.getText().toString();
+        return edit.getText().toString().trim();
     }
 
     @Override
@@ -84,6 +85,8 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
                 web, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         // 解决不是http:// , https:// 开头的网址不显示问题
 //		web.setWebChromeClient(new WebChromeClient());  // yywebview里面已经有了
+//        String userAgentString = web.getSettings().getUserAgentString();
+//        LogerNcc.e(userAgentString);
         web.loadUrl(url);
 
     }
