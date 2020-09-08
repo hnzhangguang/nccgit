@@ -1,5 +1,7 @@
 package com.yonyou.common.vo;
 
+import android.text.GetChars;
+
 import java.util.List;
 
 
@@ -46,6 +48,7 @@ public class MessageVO {
     private String url;
     private String billStutas;
     private String sendtime;
+    private String senderpersonname;
     private List<AttachmentVO> attachment;
     private int id;
     private List<String> enableActions; //按钮s
@@ -60,6 +63,14 @@ public class MessageVO {
         this.billStutas = billStutas;
         this.sendtime = sendtime;
         this.id = id;
+    }
+
+    public String getSenderpersonname() {
+        return senderpersonname;
+    }
+
+    public void setSenderpersonname(String senderpersonname) {
+        this.senderpersonname = senderpersonname;
     }
 
     public List<String> getEnableActions() {
@@ -161,6 +172,7 @@ public class MessageVO {
         sb.append(", url='").append(url).append('\'');
         sb.append(", billStutas='").append(billStutas).append('\'');
         sb.append(", sendtime='").append(sendtime).append('\'');
+        sb.append(", senderpersonname='").append(senderpersonname).append('\'');
         sb.append(", attachment=").append(attachment);
         sb.append(", id=").append(id);
         sb.append(", enableActions=").append(enableActions);
