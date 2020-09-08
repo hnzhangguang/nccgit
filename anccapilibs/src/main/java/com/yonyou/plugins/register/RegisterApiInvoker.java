@@ -14,7 +14,8 @@ public class RegisterApiInvoker implements IApiInvoker {
     private static final String rightBtnCallback = "rightcallback";
     private static final String scanCallback = "scancallback";
 
-    public static String leftCallbackName = "";
+    public static String leftCallbackName = "";  // 左按钮回调函数名称
+    public static String rightCallbackName = ""; // 右按钮回调函数名称
 
 
     @Override
@@ -44,6 +45,16 @@ public class RegisterApiInvoker implements IApiInvoker {
 
                 break;
             case rightBtnCallback:
+
+                String params = args.getParams();
+                LogerNcc.e(params);
+                JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(params);
+                String callbackName = jsonObj.optString("callbackName");
+                if (!TextUtils.isEmpty(callbackName)) {
+                    // 获取左按钮的回调函数名称
+                    rightCallbackName = callbackName;
+                }
+
 
                 break;
 
