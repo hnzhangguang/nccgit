@@ -96,7 +96,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
             rootView = view;
-//            fruitImage = (ImageView) view.findViewById(R.id.itemImage);
+            fruitImage = (ImageView) view.findViewById(R.id.itemImage);
             fruitName = (TextView) view.findViewById(R.id.itemName);
             fruitName2 = (TextView) view.findViewById(R.id.itemName22);
             fruitName3 = (TextView) view.findViewById(R.id.itemName33);
