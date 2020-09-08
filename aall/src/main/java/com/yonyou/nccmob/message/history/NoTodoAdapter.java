@@ -60,14 +60,9 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         MessageVO item = mFruitList.get(position);
-//		holder.fruitImage.setImageResource(item.getId());
         holder.fruitName.setText(item.getSubject());
-//        holder.fruitName2.loadData(Html.fromHtml(item.getContent()).toString(), "text/html", "GBK");
-//        holder.fruitName2.loadData(item.getContent(), "text/html", "GBK");
-//        holder.fruitName2.loadDataWithBaseURL(null, item.getContent(), "text/html", "utf-8", null);
-        holder.fruitName2.setText("发送人:张三...");
-        holder.fruitName3.setText(item.getSendtime());
-        holder.msg_date.setText(getDate(item.getSendtime()));
+        holder.fruitName2.setText(item.getSendtime());
+        holder.fruitName3.setText("消息发送人: 张三");
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,17 +91,16 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         TextView fruitName;
         TextView fruitName2;
         TextView fruitName3;
-        TextView msg_date;
         View rootView;
 
         public ViewHolder(View view) {
             super(view);
             rootView = view;
-            fruitImage = (ImageView) view.findViewById(R.id.itemImage);
+//            fruitImage = (ImageView) view.findViewById(R.id.itemImage);
             fruitName = (TextView) view.findViewById(R.id.itemName);
-            fruitName2 = (TextView) view.findViewById(R.id.itemName2);
-            fruitName3 = (TextView) view.findViewById(R.id.itemName3);
-            msg_date = (TextView) view.findViewById(R.id.msg_date);
+            fruitName2 = (TextView) view.findViewById(R.id.itemName22);
+            fruitName3 = (TextView) view.findViewById(R.id.itemName33);
+//            msg_date = (TextView) view.findViewById(R.id.msg_date);
         }
 
     }
