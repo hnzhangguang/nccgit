@@ -107,12 +107,13 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
 
     @Override
     protected void onResume() {
+
         super.onResume();
 
-        String resumecallbackid = UserUtil.getValueByKey(Constant.resumecallbackid);
-        if (!TextUtils.isEmpty(resumecallbackid)) {
-            exeCallbackIDWebView(resumecallbackid);
-            UserUtil.setKeyValue_gone(Constant.resumecallbackid); // 用完即销毁
+        String resumecallbackName = UserUtil.getValueByKey(Constant.resumecallbackName);
+        if (!TextUtils.isEmpty(resumecallbackName)) {
+            exeCallbackIDWebView(resumecallbackName);
+            UserUtil.setKeyValue_gone(Constant.resumecallbackName); // 用完即销毁
         }
 
 
@@ -122,7 +123,7 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
     protected void onDestroy() {
 
         // 页面关闭的时候,清空注册的所有事件
-        UserUtil.setKeyValue_gone(Constant.resumecallbackid);
+        UserUtil.setKeyValue_gone(Constant.resumecallbackName);
         UserUtil.setKeyValue_gone(Constant.BackPressedCallbackId);
 
         super.onDestroy();
