@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yonyou.common.constant.Constant;
 import com.yonyou.common.vo.MessageVO;
 import com.yonyou.nccmob.R;
 
@@ -71,6 +72,17 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
                 }
             }
         });
+
+        // 消息类型
+        String msgtype = item.getMsgtype();
+        if (Constant.msgtype_approve.equals(msgtype)) {  // 审批消息
+
+        } else if (Constant.msgtype_working.equals(msgtype)) { // 工作流
+
+        } else if (Constant.msgtype_business.equals(msgtype)) { // 业务
+
+        }
+
     }
 
     @Override
