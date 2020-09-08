@@ -81,13 +81,13 @@ public class NCCEtcMainActivity extends BaseActivity {
 
         if (R.id.btn_define == view.getId()) {  // 自定义扫码
 
-            ComponentName cn = new ComponentName(getPackageName(), "com.iqos.qrscanner.app.QRScannerActivity");
+            ComponentName cn = new ComponentName(getPackageName(), "com.yonyou.scan.NccWebviewScannerActivity");
             Intent intent = new Intent();
             intent.setComponent(cn);
             Bundle bundle = new Bundle();
             bundle.putString("aa", "aa");
             intent.putExtras(bundle);
-            startActivityForResult(intent, 111);
+            startActivity(intent);
 
 //        简单扫描界面
         } else if (R.id.btn_openSimpleScan == view.getId()) {
