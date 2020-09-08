@@ -8,6 +8,7 @@ import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.AppCache;
 import com.yonyou.common.utils.ResourcesUtils;
 import com.yonyou.common.utils.user.UserUtil;
+import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.plugins.IApiInvoker;
 import com.yonyou.plugins.MTLArgs;
 import com.yonyou.plugins.MTLException;
@@ -54,8 +55,13 @@ public class WindowApiInvoker implements IApiInvoker {
                 return "";
             case registerResume:
                 // 只是注册物理返回键的callbackId
-                String registerResume = args.getString("callbackId");
-                UserUtil.setKeyValue(Constant.resumecallbackid, registerResume);
+                String params = args.getParams();
+                JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(params);
+                String resumecallbackname = jsonObj.optString("resumecallbackname");
+                if (!TextUtils.isEmpty(resumecallbackname)) {
+                    UserUtil.setKeyValue(Constant.resumecallbackName, registerResume);
+                }
+
                 return "";
             case isScreenOrientatio:  // 横竖屏api
 
