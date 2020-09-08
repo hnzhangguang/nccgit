@@ -95,7 +95,7 @@ public class NoTODOFragment extends BaseFragment {
         adapter.setItemClick(new NoTodoAdapter.onItemClick() {
             @Override
             public void onClickItemEvent(MessageVO app) {
-                mActivity.showMessage(app);
+                mActivity.showMessage(app.getSubject());
                 String content = app.getContent();
                 LogerNcc.e(content);
             }
