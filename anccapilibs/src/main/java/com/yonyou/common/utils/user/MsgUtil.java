@@ -120,9 +120,11 @@ public class MsgUtil {
         String content = item.optString("content", "");
         String msgtype = item.optString("msgtype", "");
         String sendtime = item.optString("sendtime", "");
+        String senderpersonname = item.optString("senderpersonname", "");
         String attachment = item.optString("attachment", "");
         String buttonInfo = item.optString("buttonInfo", ""); // 消息按钮区域所有按钮
         MessageVO messageVO = new MessageVO();
+        messageVO.setSenderpersonname(senderpersonname);
         messageVO.setContent(content);
         messageVO.setMsgtype(msgtype);
         messageVO.setPk_detail(pk_detail);
