@@ -65,7 +65,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
 //        holder.fruitName2.loadData(Html.fromHtml(item.getContent()).toString(), "text/html", "GBK");
 //        holder.fruitName2.loadData(item.getContent(), "text/html", "GBK");
 //        holder.fruitName2.loadDataWithBaseURL(null, item.getContent(), "text/html", "utf-8", null);
-        holder.fruitName2.setText(item.getPk_message());
+        holder.fruitName2.setText("发送人:张三...");
         holder.fruitName3.setText(item.getSendtime());
         holder.msg_date.setText(getDate(item.getSendtime()));
         holder.rootView.setOnClickListener(new View.OnClickListener() {
