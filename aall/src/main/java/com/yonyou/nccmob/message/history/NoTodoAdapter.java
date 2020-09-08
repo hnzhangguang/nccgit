@@ -76,11 +76,13 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         // 消息类型
         String msgtype = item.getMsgtype();
         if (Constant.msgtype_approve.equals(msgtype)) {  // 审批消息
-
+            holder.fruitImage.setImageResource(R.mipmap.b3);
         } else if (Constant.msgtype_working.equals(msgtype)) { // 工作流
-
+            holder.fruitImage.setImageResource(R.mipmap.b2);
         } else if (Constant.msgtype_business.equals(msgtype)) { // 业务
-
+            holder.fruitImage.setImageResource(R.mipmap.b1);
+        } else {
+            holder.fruitImage.setImageResource(R.mipmap.ic_launcher);
         }
 
     }
