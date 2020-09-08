@@ -5,6 +5,11 @@
             name="android-package"
             value="com.yonyou.plugins.ucg.UCGApiInvoker" />
     </feature>
+    <feature name="register">
+        <param
+            name="android-package"
+            value="com.yonyou.plugins.register.RegisterApiInvoker" />
+    </feature>
     <feature name="file">
         <param
             name="android-package"

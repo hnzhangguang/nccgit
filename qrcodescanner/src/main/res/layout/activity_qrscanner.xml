@@ -1,47 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:keepScreenOn="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
-
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <!--SurfaceView-->
-        <SurfaceView
-            android:id="@+id/preview_view"
+        android:layout_height="400dp">
+
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:keepScreenOn="true">
+            <!--SurfaceView-->
+
+            <SurfaceView
+                android:id="@+id/preview_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!--自定义扫码界面-->
+            <com.iqos.qrscanner.widget.ViewfinderView
+                android:id="@+id/viewfinder_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:scan_line_color="#FF4081"
+                app:scan_line_move_speed="2"
+                app:scan_rect_corner_color="#FF4081"
+                app:scan_rect_corner_length="20dp"
+                app:scan_rect_corner_width="3dp"
+                app:scan_text_above_rect="false"
+                app:scan_tip_text="把二维码放入取景框即可自动扫描"
+                app:scan_tip_text_size="14sp"
+                app:scan_view_title_text="呵呵呵呵" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginTop="-200dp"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开启" />
+
+            <Button
+                android:id="@+id/btnclose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关闭" />
+
+
+            <Button
+                android:id="@+id/left_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回" />
+
+            <Button
+                android:id="@+id/right_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="右按钮" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:id="@+id/framelayout"
             android:layout_height="match_parent" />
-        <!--自定义扫码界面-->
-        <com.iqos.qrscanner.widget.ViewfinderView
-            android:id="@+id/viewfinder_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:scan_line_color="#FF4081"
-            app:scan_line_move_speed="3"
-            app:scan_rect_corner_color="#FF4081"
-            app:scan_rect_corner_length="20dp"
-            app:scan_rect_corner_width="3dp"
-            app:scan_text_above_rect="false"
-            app:scan_tip_text="把二维码放入取景框即可自动扫描"
-            app:scan_tip_text_size="14sp"
-            app:scan_view_title_text="呵呵呵呵" />
-    </RelativeLayout>
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开启"></Button>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <Button
-        android:id="@+id/btnclose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="关闭"></Button>
-</LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

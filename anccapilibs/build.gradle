@@ -54,6 +54,7 @@ dependencies {
     api "me.leolin:ShortcutBadger:1.1.22@aar"
     implementation 'com.github.yalantis:ucrop:2.2.3'
     implementation 'com.github.chrisbanes.photoview:library:1.2.4'
+    implementation project(':qrcodescanner')
 //     先注释掉语音翻译功能,
 //    implementation 'com.github.adrielcafe:ffmpeg-android-java:2a627f6ecd@aar'
 

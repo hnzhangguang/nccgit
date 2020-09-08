@@ -39,7 +39,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
 
-<!--    resizeableActivity 是否支持多窗口模式 false 是不支持 , true 是支持-->
+    <!--    resizeableActivity 是否支持多窗口模式 false 是不支持 , true 是支持-->
     <application
         android:name=".base.NccAppliction"
         android:allowBackup="true"
@@ -72,10 +72,14 @@
         <activity
             android:name="cn.bingoogolapple.qrcode.zbar.CommonScanActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yonyou.scan.NccWebviewScannerActivity"
+            android:screenOrientation="portrait"></activity>
         <!--        历史消息界面-->
         <activity
             android:name="com.yonyou.nccmob.message.history.HistoryMessageActivity"
             android:screenOrientation="portrait"></activity>
+
 
         <!-- launch 界面-->
         <activity
