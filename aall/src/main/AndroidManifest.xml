@@ -75,6 +75,9 @@
         <activity
             android:name="com.yonyou.scan.NccWebviewScannerActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.yonyou.scan.NccSingleScanActivity"
+            android:screenOrientation="portrait"></activity>
         <!--        历史消息界面-->
         <activity
             android:name="com.yonyou.nccmob.message.history.HistoryMessageActivity"

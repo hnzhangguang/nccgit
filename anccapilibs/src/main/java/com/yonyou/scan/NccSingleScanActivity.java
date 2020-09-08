@@ -38,7 +38,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.iqos.qrscanner.R;
 import com.iqos.qrscanner.app.QRScannerActivity;
 import com.iqos.qrscanner.camera.CameraManager;
 import com.iqos.qrscanner.decoding.CaptureActivityHandler;
@@ -59,12 +58,13 @@ import java.util.Vector;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
+
 /*
- * @功能: ncc 连续扫码界面
- * @Date  2020/9/8 9:14 PM
+ * @功能: ncc 非连续扫码界面
+ * @Date  2020/9/8 9:16 PM
  * @Author zhangg
  **/
-public class NccWebviewScannerActivity extends QRScannerActivity implements SurfaceHolder.Callback {
+public class NccSingleScanActivity extends QRScannerActivity implements SurfaceHolder.Callback {
     private static final String[] READ_GALLERY_PERMISSION = new String[]{READ_EXTERNAL_STORAGE};
     private static final long VIBRATE_DURATION = 200L;
     private static final float BEEP_VOLUME = 0.10f;
@@ -90,6 +90,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         this.init();
     }
 
+
     /**
      * fitSystem="true"
      */
@@ -107,36 +108,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
      * @return XML里面的布局文件
      */
     protected int getLayoutResources() {
-        return R.layout.activity_qrscanner;
-    }
-
-
-    /*
-     * @功能: 根据callbackName回调h5 js 函数
-     * @参数:
-     * @Date  2020/9/8 7:16 PM
-     * @Author zhangg
-     **/
-    public void exeCallbackNameWebViewForData(String callbackName, String dataString) {
-        try {
-            JSONObject jsonObject1 = new JSONObject();
-            jsonObject1.put("data", dataString);
-            String data = jsonObject1.toString();
-            // new  method
-            String jsCode = String.format("%s(%s,%s)", "" + callbackName, "'" + callbackName + "'", data);
-            jsCode = jsCode.replaceAll("%5C", "/");
-            jsCode = jsCode.replaceAll("%0A", "");
-            String script = "try{" + jsCode + "}catch(e){console.error(e)}";
-            Log.e("mmmm", "script: " + script);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                web.evaluateJavascript(script, null);
-            } else {
-                web.loadUrl("javascript:" + script);
-            }
-
-        } catch (Exception e) {
-            Log.e("mmmm", e.toString());
-        }
+        return com.iqos.qrscanner.R.layout.activity_qrscanner_single;
     }
 
 
@@ -176,9 +148,9 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
      * 获取XML里面的控件
      */
     protected void findViews() {
-        this.mScanView = findViewById(R.id.viewfinder_view);
+        this.mScanView = findViewById(com.iqos.qrscanner.R.id.viewfinder_view);
         // 闪光灯的控制
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(com.iqos.qrscanner.R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -191,7 +163,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
                 camera.setParameters(parameters);
             }
         });
-        findViewById(R.id.btnclose).setOnClickListener(new View.OnClickListener() {
+        findViewById(com.iqos.qrscanner.R.id.btnclose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Camera camera = CameraManager.get().getCamera();
@@ -207,7 +179,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         });
 
         // 返回按钮
-        findViewById(R.id.left_btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(com.iqos.qrscanner.R.id.left_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -225,7 +197,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
 
 
         // 右按钮
-        findViewById(R.id.right_btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(com.iqos.qrscanner.R.id.right_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String rightCallbackName = UserUtil.getValueByKey(Constant.rightbtncallbackNameKey);
@@ -240,7 +212,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         });
 
 
-        FrameLayout framelayout = findViewById(R.id.framelayout);
+        FrameLayout framelayout = findViewById(com.iqos.qrscanner.R.id.framelayout);
         web = new YYWebView(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             web.setWebContentsDebuggingEnabled(true);
@@ -275,7 +247,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
     //Resources_debug: The apk asset path = ApkAssets{path=/preas/china/overlay/GmsConfigOverlay.apk}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.scan_menu, menu);
+        getMenuInflater().inflate(com.iqos.qrscanner.R.menu.scan_menu, menu);
         return true;
     }
 
@@ -285,7 +257,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         if (i == android.R.id.home) {
             this.onBackPressed();
             return true;
-        } else if (i == R.id.open_gallery) {
+        } else if (i == com.iqos.qrscanner.R.id.open_gallery) {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                 if (null == getDeniedPms(READ_GALLERY_PERMISSION)) {
                     openGallery();
@@ -319,7 +291,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
     @Override
     protected void onResume() {
         super.onResume();
-        SurfaceView surfaceView = findViewById(R.id.preview_view);
+        SurfaceView surfaceView = findViewById(com.iqos.qrscanner.R.id.preview_view);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         if (hasSurface) {
             initCamera(surfaceHolder);
@@ -359,8 +331,6 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         UserUtil.setKeyValue_gone(Constant.leftbtncallbackNameKey);
         // 右按钮事件清除
         UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
-        // 扫码回调事件清除
-        UserUtil.setKeyValue_gone(Constant.scanCallbackKey);
 
         super.onDestroy();
     }
@@ -381,15 +351,6 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
      */
     public void handleDecode(Result result) {
         playBeepSoundAndVibrate();
-        String scanString = result.getText();
-
-        // 获取连续扫码,扫码到结果后的回调函数
-        String valueByKey = UserUtil.getValueByKey(Constant.scanCallbackKey);
-        if (!TextUtils.isEmpty(valueByKey)) {
-            // 执行js回调函数
-            exeCallbackNameWebViewForData(valueByKey, scanString);
-        }
-
         showResult(result.getText());
         /*inactivityTimer.onActivity();
         String resultStr = result.getText();
@@ -415,7 +376,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
                         // 得到剪贴板管理器
                         ClipboardManager cmb = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                         cmb.setPrimaryClip(ClipData.newPlainText("iqosjay@gmail.com", result));
-                        Toast.makeText(NccWebviewScannerActivity.this, "复制成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NccSingleScanActivity.this, "复制成功", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 })
@@ -432,7 +393,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
             ioe.printStackTrace();
         }
         if (null == handler) {
-            handler = new CaptureActivityHandler(NccWebviewScannerActivity.this, decodeFormats, characterSet);
+            handler = new CaptureActivityHandler(NccSingleScanActivity.this, decodeFormats, characterSet);
         }
     }
 
@@ -470,7 +431,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnCompletionListener(beepListener);
-            AssetFileDescriptor file = getResources().openRawResourceFd(R.raw.beep);
+            AssetFileDescriptor file = getResources().openRawResourceFd(com.iqos.qrscanner.R.raw.beep);
             try {
                 mediaPlayer.setDataSource(file.getFileDescriptor(), file.getStartOffset(), file.getLength());
                 file.close();
@@ -533,9 +494,9 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String qrContent = QRCodeDecoder.syncDecodeQRCode(NccWebviewScannerActivity.this, uri);
+                        String qrContent = QRCodeDecoder.syncDecodeQRCode(NccSingleScanActivity.this, uri);
                         if (TextUtils.isEmpty(qrContent)) {
-                            Toast.makeText(NccWebviewScannerActivity.this, "未发现二维码", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NccSingleScanActivity.this, "未发现二维码", Toast.LENGTH_SHORT).show();
                         } else {
                             showResult(qrContent);
                         }
