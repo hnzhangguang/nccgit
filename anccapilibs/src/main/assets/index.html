@@ -776,7 +776,7 @@
         */
         function registerResumeCallbackNcc(){
             let action = 'window.registerResume'  // 动作是什么?
-            let param = {}; // 参数是什么
+            let param = {resumecallbackname:'resumecallbacknamexxxx'}; // 参数是什么
             //调用原生api
             window.JSSDK.callAction(action,param,value=>{
                 console.log(value);
@@ -789,6 +789,12 @@
 
             })
         }
+
+        function resumecallbacknamexxxx(){
+            alert('resumecallbacknamexxxx')
+        }
+
+
         /**
         |--------------------------------------------------
         | 改变闪光点

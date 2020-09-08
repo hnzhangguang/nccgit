@@ -24,7 +24,7 @@ public class Constant {
     public static String accountListKey = "accountListKey";  // 账套信息列表 key
     public static String accessToken = "accessToken";  // accessToken
     public static String loginUserKey = "loginUserKey";  // accessToken
-    public static String resumecallbackid = "resumecallbackid";  //
+    public static String resumecallbackName = "resumecallbackname";  //
     public static String isAutoLogin = "isAutoLogin";  // 是否是自动登录标识
 
     // 消息常量key
