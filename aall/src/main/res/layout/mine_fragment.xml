@@ -79,7 +79,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:gravity="center"
-            android:text="账号与安全" />
+            android:text="更改密码" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -113,6 +113,7 @@
         android:id="@+id/contactsWe"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_44"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dp_15"
         android:background="@color/white"
         android:orientation="vertical"
