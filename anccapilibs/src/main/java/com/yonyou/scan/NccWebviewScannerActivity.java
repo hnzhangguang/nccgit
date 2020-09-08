@@ -149,7 +149,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
     public void exeCallbackNameWebView(String callbackName) {
         try {
             JSONObject jsonObject1 = new JSONObject();
-            jsonObject1.put("aaa", 111);
+            jsonObject1.put("code", 0);
             String data = jsonObject1.toString();
             // new  method
             String jsCode = String.format("%s(%s,%s)", "" + callbackName, "'" + callbackName + "'", data);
