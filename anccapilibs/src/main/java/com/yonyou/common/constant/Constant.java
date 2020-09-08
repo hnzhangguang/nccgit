@@ -41,6 +41,8 @@ public class Constant {
 
     // h5注册原生
     public static String titleNameKey = "titleNameKey";  // h5传来的连续扫码界面title key
+    public static String leftbtncallbackNameKey = "leftbtncallbackNameKey";
+    public static String rightbtncallbackNameKey = "rightbtncallbackNameKey";
 
 
 }

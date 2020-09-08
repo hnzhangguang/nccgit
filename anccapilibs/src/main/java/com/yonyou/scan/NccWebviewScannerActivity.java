@@ -46,6 +46,7 @@ import com.iqos.qrscanner.decoding.InactivityTimer;
 import com.iqos.qrscanner.utils.QRCodeDecoder;
 import com.iqos.qrscanner.widget.ViewfinderView;
 import com.yonyou.ancclibs.BuildConfig;
+import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.plugins.ExposedJsApi;
 import com.yonyou.plugins.register.RegisterApiInvoker;
@@ -177,10 +178,12 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         findViewById(R.id.left_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String leftCallbackName = RegisterApiInvoker.leftCallbackName;
+
+                String leftCallbackName = UserUtil.getValueByKey(Constant.leftbtncallbackNameKey);
                 if (!TextUtils.isEmpty(leftCallbackName)) {
                     exeCallbackNameWebView(leftCallbackName);
-                    RegisterApiInvoker.leftCallbackName = "";
+                    // 清理事件
+                    UserUtil.setKeyValue_gone(Constant.leftbtncallbackNameKey);
                 } else {
                     finish();
                 }
@@ -193,10 +196,11 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         findViewById(R.id.right_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String rightCallbackName = RegisterApiInvoker.rightCallbackName;
+                String rightCallbackName = UserUtil.getValueByKey(Constant.rightbtncallbackNameKey);
                 if (!TextUtils.isEmpty(rightCallbackName)) {
                     exeCallbackNameWebView(rightCallbackName);
-                    RegisterApiInvoker.rightCallbackName = "";
+                    // 清理事件
+                    UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
                 } else {
                     finish();
                 }
@@ -316,6 +320,13 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
     @Override
     protected void onDestroy() {
         releaseWebView();
+
+        // title
+        UserUtil.setKeyValue_gone(Constant.titleNameKey);
+        // 左按钮事件清除
+        UserUtil.setKeyValue_gone(Constant.leftbtncallbackNameKey);
+        // 右按钮事件清除
+        UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
 
         super.onDestroy();
     }

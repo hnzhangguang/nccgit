@@ -3,7 +3,9 @@ package com.yonyou.plugins.register;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.logs.LogerNcc;
+import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.plugins.IApiInvoker;
 import com.yonyou.plugins.MTLArgs;
@@ -22,8 +24,6 @@ public class RegisterApiInvoker implements IApiInvoker {
     private static final String titlename = "titlename";
     private static final String scanCallback = "scancallback";
 
-    public static String leftCallbackName = "";  // 左按钮回调函数名称
-    public static String rightCallbackName = ""; // 右按钮回调函数名称
     public static String titleName = ""; // 连续扫码界面title
 
 
@@ -41,6 +41,7 @@ public class RegisterApiInvoker implements IApiInvoker {
                     String titlename = jsonObj2.optString("titlename");
                     if (!TextUtils.isEmpty(titlename)) {
                         titleName = titlename;
+                        UserUtil.setKeyValue(Constant.titleNameKey, titlename);
 //                        Toast.makeText(args.getContext(), titlename, Toast.LENGTH_SHORT).show();
                         // 获取左按钮的回调函数名称
 //                        leftCallbackName = callbackName2;
@@ -66,8 +67,7 @@ public class RegisterApiInvoker implements IApiInvoker {
                     JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(params);
                     String callbackName = jsonObj.optString("callbackName");
                     if (!TextUtils.isEmpty(callbackName)) {
-                        // 获取左按钮的回调函数名称
-                        leftCallbackName = callbackName;
+                        UserUtil.setKeyValue(Constant.leftbtncallbackNameKey, callbackName);
                     }
 
 //                    JSONObject json = new JSONObject();
@@ -86,8 +86,7 @@ public class RegisterApiInvoker implements IApiInvoker {
                 JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(params);
                 String callbackName = jsonObj.optString("callbackName");
                 if (!TextUtils.isEmpty(callbackName)) {
-                    // 获取左按钮的回调函数名称
-                    rightCallbackName = callbackName;
+                    UserUtil.setKeyValue(Constant.rightbtncallbackNameKey, callbackName);
                 }
 
 
