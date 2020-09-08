@@ -49,7 +49,6 @@ import com.yonyou.ancclibs.BuildConfig;
 import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.plugins.ExposedJsApi;
-import com.yonyou.plugins.register.RegisterApiInvoker;
 import com.yonyou.plugins.window.YYWebView;
 
 import org.json.JSONObject;
