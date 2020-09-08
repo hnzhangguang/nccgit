@@ -59,7 +59,11 @@ import java.util.Vector;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
-
+/*
+ * @功能: ncc 连续扫码界面
+ * @Date  2020/9/8 9:14 PM
+ * @Author zhangg
+ **/
 public class NccWebviewScannerActivity extends QRScannerActivity implements SurfaceHolder.Callback {
     private static final String[] READ_GALLERY_PERMISSION = new String[]{READ_EXTERNAL_STORAGE};
     private static final long VIBRATE_DURATION = 200L;
