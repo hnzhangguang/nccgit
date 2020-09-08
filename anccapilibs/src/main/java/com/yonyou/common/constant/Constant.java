@@ -34,5 +34,9 @@ public class Constant {
     public static String notification_msg = "notice";  // 通知
     public static String all_msg = "all";  // 所有
 
+    public static String msgtype_approve = "approve";  // 审批
+    public static String msgtype_working = "working";  // 工作
+    public static String msgtype_business = "business";  // 业务
+
 
 }
