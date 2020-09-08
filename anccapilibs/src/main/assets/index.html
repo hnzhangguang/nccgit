@@ -369,6 +369,27 @@
                 }
             })
 
+            let action3 = 'register.titlename'  // 动作是什么?
+            let param3 = {'titlename': 'titlenamexxx'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action3,param3,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+
+
+
+
+
+
+
         }
 
         function leftcallbackmethod(){
