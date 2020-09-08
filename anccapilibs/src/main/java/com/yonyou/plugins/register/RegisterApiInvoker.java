@@ -9,6 +9,12 @@ import com.yonyou.plugins.IApiInvoker;
 import com.yonyou.plugins.MTLArgs;
 import com.yonyou.plugins.MTLException;
 
+
+/*
+ * @功能: h5注册回调到原生界面
+ * @Date  2020/9/8 9:01 PM
+ * @Author zhangg
+ **/
 public class RegisterApiInvoker implements IApiInvoker {
 
     private static final String leftBtnCallback = "leftcallback";
