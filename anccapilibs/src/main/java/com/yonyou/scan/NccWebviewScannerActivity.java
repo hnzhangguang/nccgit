@@ -151,9 +151,6 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
             JSONObject jsonObject1 = new JSONObject();
             jsonObject1.put("aaa", 111);
             String data = jsonObject1.toString();
-            JSONObject jsonObject = new JSONObject(data);
-            jsonObject.put("callbackName", callbackName);  // 添加回调方法
-            data = jsonObject.toString();
             // new  method
             String jsCode = String.format("%s(%s,%s)", "" + callbackName, "'" + callbackName + "'", data);
             jsCode = jsCode.replaceAll("%5C", "/");
