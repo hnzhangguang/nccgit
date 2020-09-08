@@ -1,119 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:foreground="?android:attr/selectableItemBackground"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="@dimen/dp_2"
-    android:layout_marginBottom="@dimen/dp_2"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
 
+    <!--一行-->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_1"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_5"
-        android:paddingTop="@dimen/dp_5">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginRight="@dimen/dp_10"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/itemImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher" />
-        </LinearLayout>
+        android:layout_margin="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_5"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/itemName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_gravity="center_vertical"
-                android:text="名称"
-                android:textSize="18sp" />
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:paddingLeft="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="名称" />
 
             <TextView
-                android:id="@+id/itemName2"
+                android:id="@+id/itemName22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="名称2"
-                android:textSize="18sp" />
-
-            <!--            <WebView-->
-            <!--                android:id="@+id/itemName2"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:layout_marginTop="@dimen/dp_5"-->
-            <!--                android:text="名称1"-->
-            <!--                android:textColor="@color/gray"-->
-            <!--                tools:ignore="WebViewLayout" />-->
-
-
-            <TextView
-                android:id="@+id/itemName3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/dp_5"
-                android:text="名称3"
-                android:visibility="gone"
-                android:textColor="@color/gray" />
+                android:layout_gravity="center_vertical|right"
+                android:padding="@dimen/dp_5"
+                android:text="名称22" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_5"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/msg_date"
-                android:layout_gravity="center_vertical"
-                android:text="时间"
-                android:textColor="@color/gray" />
-
-            <TextView
+                android:id="@+id/itemName33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/dp_5"
-                android:text="状态xxx"
-                android:visibility="gone"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:ellipsize="end"
+                android:gravity="center_vertical|left"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="2020-12-12"
                 android:textColor="@color/gray" />
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0.5"
-        android:layout_marginTop="@dimen/dp_2"
-        android:layout_marginBottom="@dimen/dp_2"
         android:background="@color/gray" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>
