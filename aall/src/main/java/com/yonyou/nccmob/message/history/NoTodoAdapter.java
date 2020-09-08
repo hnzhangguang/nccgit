@@ -45,7 +45,8 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         holder.fruitName.setText(item.getSubject());
 //        holder.fruitName2.loadData(Html.fromHtml(item.getContent()).toString(), "text/html", "GBK");
 //        holder.fruitName2.loadData(item.getContent(), "text/html", "GBK");
-        holder.fruitName2.loadDataWithBaseURL(null, item.getContent(), "text/html", "utf-8", null);
+//        holder.fruitName2.loadDataWithBaseURL(null, item.getContent(), "text/html", "utf-8", null);
+        holder.fruitName2.setText(item.getPk_message());
         holder.fruitName3.setText(item.getSendtime());
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +74,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView fruitImage;
         TextView fruitName;
-        WebView fruitName2;
+        TextView fruitName2;
         TextView fruitName3;
         View rootView;
 
@@ -82,7 +83,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
             rootView = view;
             fruitImage = (ImageView) view.findViewById(R.id.itemImage);
             fruitName = (TextView) view.findViewById(R.id.itemName);
-            fruitName2 = (WebView) view.findViewById(R.id.itemName2);
+            fruitName2 = (TextView) view.findViewById(R.id.itemName2);
             fruitName3 = (TextView) view.findViewById(R.id.itemName3);
         }
 
