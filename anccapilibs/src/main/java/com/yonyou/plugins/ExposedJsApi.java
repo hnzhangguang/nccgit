@@ -38,7 +38,7 @@ import java.lang.ref.WeakReference;
  **/
 public class ExposedJsApi {
     private static final String TAG = "mmmmExposedJsApi";
-    private static final String NCC_ANDROID = " nccAndroid";
+    private static final String NCC_ANDROID = " yonyou_ncc";
 
     private WeakReference<Activity> mCtx = null;
     private WeakReference<WebView> mWebView = null;
