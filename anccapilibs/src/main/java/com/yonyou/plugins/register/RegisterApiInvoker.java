@@ -1,6 +1,7 @@
 package com.yonyou.plugins.register;
 
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.vo.JsonObjectEx;
@@ -12,6 +13,7 @@ public class RegisterApiInvoker implements IApiInvoker {
 
     private static final String leftBtnCallback = "leftcallback";
     private static final String rightBtnCallback = "rightcallback";
+    private static final String titlename = "titlename";
     private static final String scanCallback = "scancallback";
 
     public static String leftCallbackName = "";  // 左按钮回调函数名称
@@ -22,6 +24,31 @@ public class RegisterApiInvoker implements IApiInvoker {
     public String call(String apiname, MTLArgs args) throws com.yonyou.plugins.MTLException, MTLException {
 
         switch (apiname) {
+
+            case titlename:
+                try {
+
+                    String params2 = args.getParams();
+                    LogerNcc.e(params2);
+                    JsonObjectEx jsonObj2 = JsonObjectEx.getJsonObj(params2);
+                    String titlename = jsonObj2.optString("titlename");
+                    if (!TextUtils.isEmpty(titlename)) {
+                        Toast.makeText(args.getContext(), titlename, Toast.LENGTH_SHORT).show();
+                        // 获取左按钮的回调函数名称
+//                        leftCallbackName = callbackName2;
+                        // 更改title名称
+                    }
+
+//                    JSONObject json = new JSONObject();
+//                    json.put("code", 200);
+//                    args.success(json);
+
+                } catch (Exception e) {
+
+                }
+
+                break;
+
             // 只是注册事件而已
             case leftBtnCallback:
                 try {
