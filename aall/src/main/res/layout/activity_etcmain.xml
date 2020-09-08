@@ -12,41 +12,41 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/dp_20"
         android:textColor="@color/red_500"
-        android:text="我是测试界面"/>
+        android:text="我是测试界面" />
 
 
     <Button
         android:id="@+id/changYongApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="常用应用设置"/>
+        android:text="常用应用设置" />
 
 
     <Button
         android:id="@+id/baiduMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="获取地理位置"/>
+        android:text="获取地理位置" />
 
 
     <Button
         android:id="@+id/baiduMapLoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="打开地图定位"/>
+        android:text="打开地图定位" />
 
     <Button
         android:id="@+id/openh5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="打开webView"/>
+        android:text="打开webView" />
 
     <Button
         android:id="@+id/downLoadH5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="下载h5包"/>
+        android:text="下载h5包" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -59,27 +59,27 @@
         android:id="@+id/getEditValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="调转界面"/>
+        android:text="调转界面" />
 
     <Button
         android:id="@+id/btn_openSimpleScan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="打开简单扫描界面"/>
+        android:text="打开简单扫描界面" />
 
     <Button
         android:id="@+id/btn_openWebViewScan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="扫描界面zbar"/>
+        android:text="扫描界面zbar-webviewScan" />
 
     <Button
         android:id="@+id/btn_define"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="自定义扫描界面QRScanner"/>
+        android:text="自定义扫描界面QRScanner" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
