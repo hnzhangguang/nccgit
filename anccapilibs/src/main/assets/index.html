@@ -139,6 +139,10 @@
             registerResumeCallback.addEventListener('click',e=>{
                 registerResumeCallbackNcc();
             });
+            const registerCallback = document.querySelector('#registerCallback');
+            registerCallback.addEventListener('click',e=>{
+                registerCallbackNcc();
+            });
             const changeFlashLightStatus = document.querySelector('#changeFlashLightStatus');
             changeFlashLightStatus.addEventListener('click',e=>{
                 changeFlashLightStatusNcc();
@@ -328,6 +332,52 @@
 
                 })
         }
+
+
+
+        function registerCallbackNcc(){
+            alert("registerCallbackNcc");
+            let action = 'register.leftcallback'  // 动作是什么?
+            let param = {'callbackName': 'leftcallbackmethod'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+
+
+            //
+            let action2 = 'register.rightcallback'  // 动作是什么?
+            let param2 = {'callbackName': 'rightcallbackmethod'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action2,param2,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+
+        }
+
+        function leftcallbackmethod(){
+            alert('leftcallbackmethod')
+        }
+        function rightcallbackmethod(){
+            alert('rightcallbackmethod')
+        }
+
 
         /**
         |--------------------------------------------------
@@ -918,6 +968,7 @@
     <button id="backlntercept">backlntercept</button>
     <button id="navigateBack">navigateBack</button>
     <button id="registerResumeCallback">registerResumeCallback</button>
+    <button id="registerCallback">registerCallback</button>
     <button id="changeScreenOrientation">changeScreenOrientation</button>
     <button id="downFile">downFile</button>
     <button id="openLocalFile">openLocalFile</button>
