@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.hardware.Camera;
 import android.media.AudioManager;
@@ -21,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -271,7 +271,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
 
     private String getDeniedPms(String[] permissions) {
         for (String s : READ_GALLERY_PERMISSION) {
-            if (0 != checkSelfPermission(s)) {
+            if (PackageManager.PERMISSION_GRANTED != checkSelfPermission(s)) {
                 return s;
             }
         }
