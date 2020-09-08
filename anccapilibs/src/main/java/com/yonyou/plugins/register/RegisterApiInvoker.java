@@ -29,7 +29,7 @@ public class RegisterApiInvoker implements IApiInvoker {
                     LogerNcc.e(params);
                     JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(params);
                     String callbackName = jsonObj.optString("callbackName");
-                    if (TextUtils.isEmpty(callbackName)) {
+                    if (!TextUtils.isEmpty(callbackName)) {
                         // 获取左按钮的回调函数名称
                         leftCallbackName = callbackName;
                     }
