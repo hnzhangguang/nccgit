@@ -9,6 +9,13 @@ import java.util.List;
  * @Author zhangg
  **/
 public class MessageVO {
+
+//    msgtype 有如下三中
+//    approve  审批
+//    working 工作
+//    business 业务
+
+
     //    {
 //        "pk_message":"消息的主键",
 //            "pk_detail":"消息对应的流程实例主键，审批的时候用",
