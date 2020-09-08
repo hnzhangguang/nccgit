@@ -39,4 +39,8 @@ public class Constant {
     public static String msgtype_business = "business";  // 业务
 
 
+    // h5注册原生
+    public static String titleName = "titleName";  // h5传来的连续扫码界面title key
+
+
 }
