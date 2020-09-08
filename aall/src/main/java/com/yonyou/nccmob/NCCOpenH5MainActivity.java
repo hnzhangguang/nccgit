@@ -54,6 +54,19 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
                             }
                         });
 
+        findViewById(R.id.btn_left).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exeCallbackNameWebView("leftcallbackmethod");
+            }
+        });
+        findViewById(R.id.btn_right).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         url = getIntent().getStringExtra(PREVIEW_URL);
         if (!TextUtils.isEmpty(url) && url.startsWith("file://")) {
             if (!url.contains("android_asset")) {
@@ -98,7 +111,7 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
 
         String resumecallbackid = UserUtil.getValueByKey(Constant.resumecallbackid);
         if (!TextUtils.isEmpty(resumecallbackid)) {
-            exeCallbackWebView(resumecallbackid);
+            exeCallbackIDWebView(resumecallbackid);
             UserUtil.setKeyValue_gone(Constant.resumecallbackid); // 用完即销毁
         }
 
@@ -122,7 +135,7 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
         // 获取h5注册的物理返回键拦截事件
         String callbackId = UserUtil.getValueByKey(Constant.BackPressedCallbackId);
         if (!TextUtils.isEmpty(callbackId)) {
-            exeCallbackWebView(callbackId);
+            exeCallbackIDWebView(callbackId);
             // 消费完情况物理返回键的callbackId
             UserUtil.setKeyValue(Constant.BackPressedCallbackId, "");
         } else {
@@ -132,7 +145,45 @@ public class NCCOpenH5MainActivity extends MTLBaseActivity {
     }
 
 
-    public void exeCallbackWebView(String callbackId) {
+    /*
+     * @功能: 根据callbackName回调h5 js 函数
+     * @参数:
+     * @Date  2020/9/8 7:16 PM
+     * @Author zhangg
+     **/
+    public void exeCallbackNameWebView(String callbackName) {
+        try {
+            JSONObject jsonObject1 = new JSONObject();
+            jsonObject1.put("aaa", 111);
+            String data = jsonObject1.toString();
+            JSONObject jsonObject = new JSONObject(data);
+            jsonObject.put("callbackName", callbackName);  // 添加回调方法
+            data = jsonObject.toString();
+            // new  method
+            String jsCode = String.format("%s(%s,%s)", "" + callbackName, "'" + callbackName + "'", data);
+            jsCode = jsCode.replaceAll("%5C", "/");
+            jsCode = jsCode.replaceAll("%0A", "");
+            String script = "try{" + jsCode + "}catch(e){console.error(e)}";
+            Log.e("mmmm", "script: " + script);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                web.evaluateJavascript(script, null);
+            } else {
+                web.loadUrl("javascript:" + script);
+            }
+
+        } catch (Exception e) {
+            Log.e("mmmm", e.toString());
+        }
+    }
+
+
+    /*
+     * @功能: 根据callbackID回调h5 js 函数
+     * @参数:
+     * @Date  2020/9/8 7:16 PM
+     * @Author zhangg
+     **/
+    public void exeCallbackIDWebView(String callbackId) {
         try {
             JSONObject jsonObject1 = new JSONObject();
             jsonObject1.put("aaa", 111);
