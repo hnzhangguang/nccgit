@@ -1,77 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center|left"
     android:foreground="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <!--一行-->
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/itemImage"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_10"
-        android:gravity="center_vertical"
         android:orientation="vertical">
 
-
+        <!--一行-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/itemName"
-                android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="center|left"
-                android:paddingLeft="@dimen/dp_5"
-                android:singleLine="true"
-                android:text="名称" />
-
-            <TextView
-                android:id="@+id/itemName22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|right"
-                android:padding="@dimen/dp_5"
-                android:text="名称22" />
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:layout_marginRight="@dimen/dp_15"
-            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_margin="@dimen/dp_10"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/itemName33"
-                android:layout_width="wrap_content"
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:ellipsize="end"
-                android:gravity="center_vertical|left"
-                android:maxLines="3"
-                android:paddingLeft="@dimen/dp_5"
-                android:text="2020-12-12"
-                android:textColor="@color/gray" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/itemName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="名称" />
+
+                <TextView
+                    android:id="@+id/itemName22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:padding="@dimen/dp_5"
+                    android:text="名称22" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/itemName33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|left"
+                    android:maxLines="3"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:text="2020-12-12"
+                    android:textColor="@color/gray" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.5"
+            android:background="@color/gray" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0.5"
-        android:background="@color/gray" />
-
 </androidx.appcompat.widget.LinearLayoutCompat>
+
