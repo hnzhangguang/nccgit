@@ -16,14 +16,19 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,8 +45,16 @@ import com.iqos.qrscanner.decoding.CaptureActivityHandler;
 import com.iqos.qrscanner.decoding.InactivityTimer;
 import com.iqos.qrscanner.utils.QRCodeDecoder;
 import com.iqos.qrscanner.widget.ViewfinderView;
+import com.yonyou.ancclibs.BuildConfig;
+import com.yonyou.common.utils.user.UserUtil;
+import com.yonyou.plugins.ExposedJsApi;
+import com.yonyou.plugins.register.RegisterApiInvoker;
+import com.yonyou.plugins.window.YYWebView;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Vector;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -62,6 +75,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
     private boolean hasSurface;
     private boolean playBeep;
     private boolean vibrate;
+    private YYWebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +104,38 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
      */
     protected int getLayoutResources() {
         return R.layout.activity_qrscanner;
+    }
+
+
+    /*
+     * @功能: 根据callbackName回调h5 js 函数
+     * @参数:
+     * @Date  2020/9/8 7:16 PM
+     * @Author zhangg
+     **/
+    public void exeCallbackNameWebView(String callbackName) {
+        try {
+            JSONObject jsonObject1 = new JSONObject();
+            jsonObject1.put("aaa", 111);
+            String data = jsonObject1.toString();
+            JSONObject jsonObject = new JSONObject(data);
+            jsonObject.put("callbackName", callbackName);  // 添加回调方法
+            data = jsonObject.toString();
+            // new  method
+            String jsCode = String.format("%s(%s,%s)", "" + callbackName, "'" + callbackName + "'", data);
+            jsCode = jsCode.replaceAll("%5C", "/");
+            jsCode = jsCode.replaceAll("%0A", "");
+            String script = "try{" + jsCode + "}catch(e){console.error(e)}";
+            Log.e("mmmm", "script: " + script);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                web.evaluateJavascript(script, null);
+            } else {
+                web.loadUrl("javascript:" + script);
+            }
+
+        } catch (Exception e) {
+            Log.e("mmmm", e.toString());
+        }
     }
 
 
@@ -131,17 +177,47 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         findViewById(R.id.left_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String leftCallbackName = RegisterApiInvoker.leftCallbackName;
+                if (!TextUtils.isEmpty(leftCallbackName)) {
+                    exeCallbackNameWebView(leftCallbackName);
+                    RegisterApiInvoker.leftCallbackName = "";
+                } else {
+                    finish();
+                }
 
             }
         });
+
 
         // 右按钮
         findViewById(R.id.right_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String rightCallbackName = RegisterApiInvoker.rightCallbackName;
+                if (!TextUtils.isEmpty(rightCallbackName)) {
+                    exeCallbackNameWebView(rightCallbackName);
+                    RegisterApiInvoker.rightCallbackName = "";
+                } else {
+                    finish();
+                }
             }
         });
+
+
+        FrameLayout framelayout = findViewById(R.id.framelayout);
+        web = new YYWebView(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            web.setWebContentsDebuggingEnabled(true);
+        }
+
+        ExposedJsApi exposedJsApi = new ExposedJsApi(this, web);
+        // 注入对象
+//		web.addJavascriptInterface(exposedJsApi, "mtlBridge");
+        web.addJavascriptInterface(exposedJsApi, "NativeBridge"); // 可以添加多个
+        framelayout.addView(
+                web, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        String url = "file:////android_asset/index.html";
+        web.loadUrl(url);
     }
 
 
@@ -160,6 +236,7 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         }
     }
 
+    //Resources_debug: The apk asset path = ApkAssets{path=/preas/china/overlay/GmsConfigOverlay.apk}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.scan_menu, menu);
@@ -238,7 +315,8 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
 
     @Override
     protected void onDestroy() {
-        inactivityTimer.shutdown();
+        releaseWebView();
+
         super.onDestroy();
     }
 
@@ -414,4 +492,63 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
+    private void releaseWebView() {
+        if (null != web) {
+            // 如果先调用destroy()方法，则会命中if (isDestroyed()) return;
+            // 这一行代码，需要先onDetachedFromWindow()，再
+            // destory()
+            ViewParent parent = web.getParent();
+            if (parent != null) {
+                ((ViewGroup) parent).removeView(web);
+            }
+
+            web.stopLoading();
+            // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
+            web.getSettings().setJavaScriptEnabled(false);
+            web.clearHistory();
+            web.clearView();
+            web.removeAllViews();
+            web.destroy();
+            web = null;
+        }
+        releaseAllWebViewCallback();
+    }
+
+    public void releaseAllWebViewCallback() {
+        if (android.os.Build.VERSION.SDK_INT < 16) {
+            try {
+                Field field = WebView.class.getDeclaredField("mWebViewCore");
+                field = field.getType().getDeclaredField("mBrowserFrame");
+                field = field.getType().getDeclaredField("sConfigCallback");
+                field.setAccessible(true);
+                field.set(null, null);
+            } catch (NoSuchFieldException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            } catch (IllegalAccessException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            try {
+                Field sConfigCallback =
+                        Class.forName("android.webkit.BrowserFrame").getDeclaredField(
+                                "sConfigCallback");
+                if (sConfigCallback != null) {
+                    sConfigCallback.setAccessible(true);
+                    sConfigCallback.set(null, null);
+                }
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 }
