@@ -16,6 +16,7 @@ import com.yonyou.common.net.HttpCallBack;
 import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.utils.user.MsgUtil;
 import com.yonyou.common.utils.user.UserUtil;
+import com.yonyou.common.utils.utils.JsonUtil;
 import com.yonyou.common.utils.utils.NetUtil;
 import com.yonyou.common.vo.MessageVO;
 import com.yonyou.common.vo.NCCUserVo;
@@ -95,9 +96,10 @@ public class NoTODOFragment extends BaseFragment {
         adapter.setItemClick(new NoTodoAdapter.onItemClick() {
             @Override
             public void onClickItemEvent(MessageVO app) {
+                LogerNcc.e(JsonUtil.toJson(app));
                 mActivity.showMessage(app.getSubject());
                 String content = app.getContent();
-                LogerNcc.e(content);
+//                LogerNcc.e(content);
             }
         });
         recyclerViewTodo.setAdapter(adapter);
