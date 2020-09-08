@@ -81,6 +81,7 @@ public class NCCModifyPwActivity extends BaseActivity {
                             String code = successJson.optString("code");
                             if ("200".equals(code)) {
                                 showMessage("修改成功");
+                                finish();
                             }
                         }
                     });
@@ -115,17 +116,17 @@ public class NCCModifyPwActivity extends BaseActivity {
     }
 
     public boolean checkParam() {
-        if (isNull(getModify_old_pw())){
+        if (isNull(getModify_old_pw())) {
             showMessage("旧密码不可为空");
-            return  false;
+            return false;
         }
-        if (isNull(getModify_new_pw())){
+        if (isNull(getModify_new_pw())) {
             showMessage("新密码不可为空");
-            return  false;
+            return false;
         }
-        if (isNull(getModify_confirm_pw())){
+        if (isNull(getModify_confirm_pw())) {
             showMessage("确认密码不可为空");
-            return  false;
+            return false;
         }
         boolean equals = getModify_new_pw().equals(getModify_confirm_pw());
         if (equals) {
