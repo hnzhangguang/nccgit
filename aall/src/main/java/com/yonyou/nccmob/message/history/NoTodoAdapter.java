@@ -1,8 +1,10 @@
 package com.yonyou.nccmob.message.history;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +39,23 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         return holder;
     }
 
+
+    /*
+     * @功能: 获取发送消息日期(去掉时分秒)
+     * @参数: sendtime
+     * @Date  2020/9/8 1:38 PM
+     * @Author zhangg
+     **/
+    public String getDate(String sendtime) {
+        if (TextUtils.isEmpty(sendtime) || sendtime.equals("null")) {
+            return "";
+        }
+        if (sendtime.length() > 10) {
+            return sendtime.substring(0, 10);
+        }
+        return sendtime;
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
@@ -48,6 +67,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
 //        holder.fruitName2.loadDataWithBaseURL(null, item.getContent(), "text/html", "utf-8", null);
         holder.fruitName2.setText(item.getPk_message());
         holder.fruitName3.setText(item.getSendtime());
+        holder.msg_date.setText(getDate(item.getSendtime()));
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +96,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         TextView fruitName;
         TextView fruitName2;
         TextView fruitName3;
+        TextView msg_date;
         View rootView;
 
         public ViewHolder(View view) {
@@ -85,6 +106,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
             fruitName = (TextView) view.findViewById(R.id.itemName);
             fruitName2 = (TextView) view.findViewById(R.id.itemName2);
             fruitName3 = (TextView) view.findViewById(R.id.itemName3);
+            msg_date = (TextView) view.findViewById(R.id.msg_date);
         }
 
     }
