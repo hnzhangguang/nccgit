@@ -24,6 +24,7 @@ public class RegisterApiInvoker implements IApiInvoker {
 
     public static String leftCallbackName = "";  // 左按钮回调函数名称
     public static String rightCallbackName = ""; // 右按钮回调函数名称
+    public static String titleName = ""; // 连续扫码界面title
 
 
     @Override
@@ -39,7 +40,8 @@ public class RegisterApiInvoker implements IApiInvoker {
                     JsonObjectEx jsonObj2 = JsonObjectEx.getJsonObj(params2);
                     String titlename = jsonObj2.optString("titlename");
                     if (!TextUtils.isEmpty(titlename)) {
-                        Toast.makeText(args.getContext(), titlename, Toast.LENGTH_SHORT).show();
+                        titleName = titlename;
+//                        Toast.makeText(args.getContext(), titlename, Toast.LENGTH_SHORT).show();
                         // 获取左按钮的回调函数名称
 //                        leftCallbackName = callbackName2;
                         // 更改title名称
