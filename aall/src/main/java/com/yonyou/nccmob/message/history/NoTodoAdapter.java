@@ -61,7 +61,7 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
 
         MessageVO item = mFruitList.get(position);
         holder.fruitName.setText(item.getSubject());
-        holder.fruitName2.setText(item.getSendtime());
+        holder.fruitName2.setText(getDate(item.getSendtime()));
         holder.fruitName3.setText("消息发送人: 张三");
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
