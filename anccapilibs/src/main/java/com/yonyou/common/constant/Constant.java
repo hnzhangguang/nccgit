@@ -40,7 +40,7 @@ public class Constant {
 
 
     // h5注册原生
-    public static String titleName = "titleName";  // h5传来的连续扫码界面title key
+    public static String titleNameKey = "titleNameKey";  // h5传来的连续扫码界面title key
 
 
 }
