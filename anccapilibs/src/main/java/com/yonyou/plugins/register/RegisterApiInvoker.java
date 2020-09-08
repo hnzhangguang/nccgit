@@ -29,7 +29,7 @@ public class RegisterApiInvoker implements IApiInvoker {
     public String call(String apiname, MTLArgs args) throws com.yonyou.plugins.MTLException, MTLException {
 
         switch (apiname) {
-            // 只是执行sql语句
+            // 只是注册事件而已
             case leftBtnCallback:
                 try {
 
