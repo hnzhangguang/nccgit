@@ -384,14 +384,31 @@
                 }
             })
 
-
+// 扫码结果回调注册
+            let action32 = 'register.scancallback'  // 动作是什么?
+            let param32 = {'callbackName': 'scanCallback'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action32,param32,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
 
 
 
 
 
         }
-
+        function scanCallback(name,value){
+            let str = JSON.stringify(value);
+            alert(str )
+        }
         function leftcallbackmethod(){
             alert('leftcallbackmethod')
         }
@@ -767,7 +784,19 @@
         |--------------------------------------------------
         */
         function customScanQRCodeNcc(){
+            let action = 'register.continueScanType'  // 动作是什么?
+            let param = {type:'1'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
 
+                    editText.value = str+"3333";
+                }
+
+            })
         }
         /**
         |--------------------------------------------------
@@ -1011,11 +1040,10 @@
     <button id="stopContinuousLocation">stopContinuousLocation</button>
     <button id="simpleScanQRCode">simpleScanQRCode</button>
     <button id="requestNccService">requestNccService</button>
-
+    <button id="customScanQRCode">customScanQRCode</button>
     <div id="div2">未调试.............</div>
 
     <button id="uploadFile">uploadFile</button>
-    <button id="customScanQRCode">customScanQRCode</button>
     <button id="changeFlashLightStatus">changeFlashLightStatus</button>
     <button id="changeCustomScanMode">changeCustomScanMode</button>
     <button id="markAndNavigationDestination">markAndNavigationDestination</button>

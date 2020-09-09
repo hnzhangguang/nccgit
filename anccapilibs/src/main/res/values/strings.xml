@@ -71,7 +71,6 @@
     <string name="mtl_audio_down_loading">正在下载，请稍候...</string>
 
 
-
     <string name="permission_message">当前应用缺少必要权限。\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
     <string name="permission_title">帮助</string>
     <string name="permission_exit">退出</string>
@@ -83,7 +82,8 @@
 
     <string name="title_activity_history_message">HistoryMessageActivity</string>
 
-
+    <string name="app_txt_scanner_title">扫一扫</string>
+    <string name="scan_tip">把二维码放入取景框中即可自动扫描</string>
 
 
 </resources>

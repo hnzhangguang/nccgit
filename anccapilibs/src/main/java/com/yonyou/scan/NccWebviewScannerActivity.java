@@ -22,11 +22,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.zxing.Result;
-import com.iqos.qrscanner.R;
 import com.iqos.qrscanner.app.QRScannerActivity;
 import com.iqos.qrscanner.camera.CameraManager;
 import com.iqos.qrscanner.utils.QRCodeDecoder;
 import com.yonyou.ancclibs.BuildConfig;
+import com.yonyou.ancclibs.R;
 import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.plugins.ExposedJsApi;
@@ -44,6 +44,7 @@ import java.lang.reflect.Field;
 public class NccWebviewScannerActivity extends QRScannerActivity implements SurfaceHolder.Callback {
     private YYWebView web;
 
+    private static boolean isContinueScan = false;  // 是否开启连续扫码,默认false
 
     /*
      * @功能: 根据callbackName回调h5 js 函数
@@ -108,14 +109,44 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
      */
     protected void findViews() {
         super.findViews();
+
+
+        // 左按钮
+        getBack().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String leftCallbackName = UserUtil.getValueByKey(Constant.leftbtncallbackNameKey);
+                if (!TextUtils.isEmpty(leftCallbackName)) {
+                    exeCallbackNameWebView(leftCallbackName);
+                    // 清理事件
+                    UserUtil.setKeyValue_gone(Constant.leftbtncallbackNameKey);
+                } else {
+                    finish();
+                }
+            }
+        });
+        //右按钮
+        getTitleBar_right().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String rightCallbackName = UserUtil.getValueByKey(Constant.rightbtncallbackNameKey);
+                if (!TextUtils.isEmpty(rightCallbackName)) {
+                    exeCallbackNameWebView(rightCallbackName);
+                    // 清理事件
+                    UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
+                } else {
+                    finish();
+                }
+            }
+        });
+
+
         // 闪光灯的控制
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Camera camera = CameraManager.get().getCamera();
-
-
                 camera.startPreview();
                 Camera.Parameters parameters = camera.getParameters();
                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);// 开启
@@ -133,39 +164,6 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
 //					camera.stopPreview();
 //					camera.release();
 //					camera = null;
-                }
-            }
-        });
-
-        // 返回按钮
-        findViewById(R.id.left_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String leftCallbackName = UserUtil.getValueByKey(Constant.leftbtncallbackNameKey);
-                if (!TextUtils.isEmpty(leftCallbackName)) {
-                    exeCallbackNameWebView(leftCallbackName);
-                    // 清理事件
-                    UserUtil.setKeyValue_gone(Constant.leftbtncallbackNameKey);
-                } else {
-                    finish();
-                }
-
-            }
-        });
-
-
-        // 右按钮
-        findViewById(R.id.right_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String rightCallbackName = UserUtil.getValueByKey(Constant.rightbtncallbackNameKey);
-                if (!TextUtils.isEmpty(rightCallbackName)) {
-                    exeCallbackNameWebView(rightCallbackName);
-                    // 清理事件
-                    UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
-                } else {
-                    finish();
                 }
             }
         });
@@ -201,6 +199,8 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
         // 扫码回调事件清除
         UserUtil.setKeyValue_gone(Constant.scanCallbackKey);
+        // 是否是连续
+        UserUtil.setKeyValue_gone(Constant.isContinueScanKey);
 
         super.onDestroy();
     }
@@ -220,6 +220,15 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
         if (!TextUtils.isEmpty(valueByKey)) {
             // 执行js回调函数
             exeCallbackNameWebViewForData(valueByKey, scanString);
+
+        }
+
+        // 判断是否是连续扫码
+        String scanType = UserUtil.getValueByKey(Constant.isContinueScanKey);
+        if (TextUtils.isEmpty(scanType) || "0".equals(scanType)) {  // 单次
+            finish();
+        } else if ("1".equals(scanType)) { // 连续扫码
+//            restartQRScanner();
         }
 
         showResult(result.getText());

@@ -3,6 +3,7 @@ package com.yonyou.common.utils.user;
 import android.text.TextUtils;
 
 import com.yonyou.common.constant.Constant;
+import com.yonyou.common.utils.utils.StringUtil;
 import com.yonyou.common.vo.AttachmentVO;
 import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.common.vo.MessageVO;
@@ -125,7 +126,7 @@ public class MsgUtil {
         String buttonInfo = item.optString("buttonInfo", ""); // 消息按钮区域所有按钮
         MessageVO messageVO = new MessageVO();
         messageVO.setSenderpersonname(senderpersonname);
-        messageVO.setContent(content);
+        messageVO.setContent(StringUtil.getShowContent(content));
         messageVO.setMsgtype(msgtype);
         messageVO.setPk_detail(pk_detail);
         messageVO.setPk_message(pk_message);

@@ -26,6 +26,7 @@ import com.iqos.qrscanner.app.QRScannerActivity;
 import com.iqos.qrscanner.camera.CameraManager;
 import com.iqos.qrscanner.utils.QRCodeDecoder;
 import com.yonyou.ancclibs.BuildConfig;
+import com.yonyou.ancclibs.R;
 import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.plugins.ExposedJsApi;
@@ -84,7 +85,7 @@ public class NccSingleScanActivity extends QRScannerActivity implements SurfaceH
     protected void findViews() {
         super.findViews();
         // 闪光灯的控制
-        findViewById(com.iqos.qrscanner.R.id.btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -97,7 +98,7 @@ public class NccSingleScanActivity extends QRScannerActivity implements SurfaceH
                 camera.setParameters(parameters);
             }
         });
-        findViewById(com.iqos.qrscanner.R.id.btnclose).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnclose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Camera camera = CameraManager.get().getCamera();
@@ -113,7 +114,7 @@ public class NccSingleScanActivity extends QRScannerActivity implements SurfaceH
         });
 
         // 返回按钮
-        findViewById(com.iqos.qrscanner.R.id.left_btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.left_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -131,7 +132,7 @@ public class NccSingleScanActivity extends QRScannerActivity implements SurfaceH
 
 
         // 右按钮
-        findViewById(com.iqos.qrscanner.R.id.right_btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.right_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String rightCallbackName = UserUtil.getValueByKey(Constant.rightbtncallbackNameKey);
@@ -146,7 +147,7 @@ public class NccSingleScanActivity extends QRScannerActivity implements SurfaceH
         });
 
 
-        FrameLayout framelayout = findViewById(com.iqos.qrscanner.R.id.framelayout);
+        FrameLayout framelayout = findViewById(R.id.framelayout);
         web = new YYWebView(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             web.setWebContentsDebuggingEnabled(true);

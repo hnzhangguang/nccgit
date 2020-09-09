@@ -23,6 +23,7 @@ public class RegisterApiInvoker implements IApiInvoker {
 
     private static final String leftBtnCallback = "leftcallback";
     private static final String rightBtnCallback = "rightcallback";
+    private static final String continueScanType = "continueScanType";
     private static final String titlename = "titlename";
     private static final String scanCallback = "scancallback";
     private static final String openSingleScanActivity = "opensinglescanpage";  // 调起单次扫码界面
@@ -35,6 +36,20 @@ public class RegisterApiInvoker implements IApiInvoker {
     public String call(String apiname, MTLArgs args) throws com.yonyou.plugins.MTLException, MTLException {
 
         switch (apiname) {
+
+            case continueScanType:
+
+                String params21 = args.getParams();
+                LogerNcc.e(params21);
+                JsonObjectEx jsonObj2 = JsonObjectEx.getJsonObj(params21);
+                String value = jsonObj2.optString("type");
+                if (!TextUtils.isEmpty(value)) {
+                    UserUtil.setKeyValue(Constant.isContinueScanKey, value);
+                }
+
+
+                break;
+
 
             case openSingleScanActivity:
 
@@ -64,10 +79,10 @@ public class RegisterApiInvoker implements IApiInvoker {
             case titlename:
                 try {
 
-                    String params2 = args.getParams();
-                    LogerNcc.e(params2);
-                    JsonObjectEx jsonObj2 = JsonObjectEx.getJsonObj(params2);
-                    String titlename = jsonObj2.optString("titlename");
+                    String params22 = args.getParams();
+                    LogerNcc.e(params22);
+                    JsonObjectEx jsonObj22 = JsonObjectEx.getJsonObj(params22);
+                    String titlename = jsonObj22.optString("titlename");
                     if (!TextUtils.isEmpty(titlename)) {
                         titleName = titlename;
                         UserUtil.setKeyValue(Constant.titleNameKey, titlename);
@@ -125,12 +140,12 @@ public class RegisterApiInvoker implements IApiInvoker {
 
 
                 // 连续扫码,扫码结果回调事件注册
-                String params2 = args.getParams();
-                LogerNcc.e(params2);
-                JsonObjectEx jsonObj2 = JsonObjectEx.getJsonObj(params2);
-                String callbackName2 = jsonObj2.optString("callbackName");
-                if (!TextUtils.isEmpty(callbackName2)) {
-                    UserUtil.setKeyValue(Constant.scanCallbackKey, callbackName2);
+                String params23 = args.getParams();
+                LogerNcc.e(params23);
+                JsonObjectEx jsonObj23 = JsonObjectEx.getJsonObj(params23);
+                String callbackName23 = jsonObj23.optString("callbackName");
+                if (!TextUtils.isEmpty(callbackName23)) {
+                    UserUtil.setKeyValue(Constant.scanCallbackKey, callbackName23);
                 }
 
 
