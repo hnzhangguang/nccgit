@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.hardware.Camera;
 import android.media.AudioManager;
@@ -72,6 +73,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
 //        this.setFitSystem();
         this.findViews();
         this.init();
+        Log.e("mmmm", "onCreate: " + this.getClass());
     }
 
     /**
@@ -192,7 +194,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
 
     private String getDeniedPms(String[] permissions) {
         for (String s : READ_GALLERY_PERMISSION) {
-            if (0 != checkSelfPermission(s)) {
+            if (PackageManager.PERMISSION_GRANTED != checkSelfPermission(s)) {
                 return s;
             }
         }
@@ -241,6 +243,18 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     @Override
     protected void onDestroy() {
         try {
+            if (null != mScanView) {
+                mScanView = null;
+            }
+            if (null != handler) {
+                handler = null;
+            }
+            if (null != decodeFormats) {
+                decodeFormats = null;
+            }
+            if (null != mediaPlayer) {
+                mediaPlayer = null;
+            }
             inactivityTimer.shutdown();
         } catch (Exception e) {
             Log.e("mmmm", e.toString());

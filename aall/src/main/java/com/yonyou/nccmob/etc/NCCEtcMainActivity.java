@@ -93,7 +93,8 @@ public class NCCEtcMainActivity extends BaseActivity {
         } else if (R.id.btn_openSimpleScan == view.getId()) {
 //			Intent intent = new Intent(NCCEtcMainActivity.this, NCCSimpleScanActivity.class);
 //			startActivityForResult(intent, 111);
-            ComponentName cn = new ComponentName(getPackageName(), "com.yonyou.nccmob.scan.NCCSimpleScanActivity");
+//            ComponentName cn = new ComponentName(getPackageName(), "com.yonyou.nccmob.scan.NCCSimpleScanActivity");
+            ComponentName cn = new ComponentName(getPackageName(), "com.yonyou.scan.NccSingleScanActivity");
             Intent intent = new Intent();
             intent.setComponent(cn);
             Bundle bundle = new Bundle();

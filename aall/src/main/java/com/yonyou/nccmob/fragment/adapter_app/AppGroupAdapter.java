@@ -21,6 +21,7 @@ import com.yonyou.common.utils.MTLLog;
 import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.utils.net.MTLHttpDownCallBack;
 import com.yonyou.common.utils.net.MTLOKHttpUtils;
+import com.yonyou.common.utils.utils.JsonUtil;
 import com.yonyou.common.vo.AppInfo;
 import com.yonyou.nccmob.NCCOpenH5MainActivity;
 import com.yonyou.nccmob.R;
@@ -107,6 +108,7 @@ public class AppGroupAdapter extends RecyclerView.Adapter {
             appsAdapter.setItemClick(new AppsAdapter.onItemClick() {
                 @Override
                 public void onClickItemEvent(AppInfo app) {
+                    LogerNcc.e(JsonUtil.toJson(app));
                     downloadAndOpenH5(app);
                     Toast.makeText(context, app.toString(), Toast.LENGTH_LONG).show();
                 }
