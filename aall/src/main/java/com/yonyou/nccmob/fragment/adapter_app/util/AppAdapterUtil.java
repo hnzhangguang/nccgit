@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yonyou.common.constant.Constant;
+import com.yonyou.common.vo.AppInfo;
 import com.yonyou.nccmob.R;
-import com.yonyou.nccmob.fragment.adapter_app.App;
 import com.yonyou.nccmob.fragment.adapter_app.AppGroup;
 import com.yonyou.nccmob.fragment.adapter_app.AppsAdapter;
 
@@ -30,7 +30,7 @@ public class AppAdapterUtil {
      * @Date  2020/8/12;
      * @Author zhangg
      **/
-    public static List<View> getOneViewByAppInfoData(Context context, List<App> listApps, AppsAdapter.onItemClick itemClick) {
+    public static List<View> getOneViewByAppInfoData(Context context, List<AppInfo> listApps, AppsAdapter.onItemClick itemClick) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View inflate = layoutInflater.inflate(R.layout.fragment, null);
@@ -41,7 +41,7 @@ public class AppAdapterUtil {
         recyclerView.setAdapter(appsAdapter);
         appsAdapter.setItemClick(new AppsAdapter.onItemClick() {
             @Override
-            public void onClickItemEvent(App app) {
+            public void onClickItemEvent(AppInfo app) {
                 if (itemClick != null) {
                     itemClick.onClickItemEvent(app);
                 }
@@ -64,7 +64,7 @@ public class AppAdapterUtil {
      * @Date  2020/8/12;
      * @Author zhangg
      **/
-    public static List<View> getViewsByAppInfoData(Context context, List<App> listApps, AppsAdapter.onItemClick itemClick) {
+    public static List<View> getViewsByAppInfoData(Context context, List<AppInfo> listApps, AppsAdapter.onItemClick itemClick) {
         List<View> pagerViews = new ArrayList<>();
         int rowAppSumapp_ = Constant.ROW_APP_NUM * 2;
         int pagerNum = listApps.size() / rowAppSumapp_;  // 默认分页数
@@ -97,19 +97,19 @@ public class AppAdapterUtil {
     }
 
 
-    public static List<App> getCommonUseApp() {
+    public static List<AppInfo> getCommonUseApp() {
         ArrayList listApps = new ArrayList<>();
-        listApps.add(new App("英语等级1", false));
-        listApps.add(new App("英语等级2", false));
-        listApps.add(new App("英语等级3", false));
-        listApps.add(new App("英语等级4", false));
-        listApps.add(new App("英语等级5", false));
-        listApps.add(new App("英语等级6", false));
-        listApps.add(new App("英语等级7", false));
-        listApps.add(new App("英语等级8", false));
-        listApps.add(new App("英语等级9", false));
-        listApps.add(new App("英语等级10", false));
-        listApps.add(new App("英语等级11", false));
+        listApps.add(new AppInfo("英语等级1", "false", "1"));
+        listApps.add(new AppInfo("英语等级2", "false", "12"));
+        listApps.add(new AppInfo("英语等级3", "false", "13"));
+        listApps.add(new AppInfo("英语等级4", "false", "14"));
+        listApps.add(new AppInfo("英语等级5", "false", "15"));
+        listApps.add(new AppInfo("英语等级6", "false", "16"));
+        listApps.add(new AppInfo("英语等级7", "false", "17"));
+        listApps.add(new AppInfo("英语等级8", "false", "18"));
+        listApps.add(new AppInfo("英语等级9", "false", "19"));
+        listApps.add(new AppInfo("英语等级10", "false", "10"));
+        listApps.add(new AppInfo("英语等级11", "false", "11"));
         return listApps;
     }
 
@@ -117,42 +117,42 @@ public class AppAdapterUtil {
 
         List<AppGroup> listAppGroup = new ArrayList<>();
 
-        List<App> listApps = new ArrayList<>();
-        listApps.add(new App(11, "移动采购", false, "yonyou/mobile_pu.zip", "mobile_pu.zip"));
-        listApps.add(new App(22, "平台platform", false, "yonyou/mobile_platform.zip", "mobile_platform.zip"));
-        listApps.add(new App(33, "平台uapbd", false, "yonyou/mobile_uapbd.zip", "mobile_uapbd.zip"));
-        listApps.add(new App("供应商协同", false));
-        listApps.add(new App("移动销售", false));
-        listApps.add(new App("客户协同", false));
-        listApps.add(new App("移动库管", false));
+        List<AppInfo> listApps = new ArrayList<>();
+        listApps.add(new AppInfo("移动采购", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("平台platform", "false", "yonyou/mobile_platform.zip"));
+        listApps.add(new AppInfo("平台uapbd", "false", "yonyou/mobile_uapbd.zip"));
+        listApps.add(new AppInfo("供应商协同", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("移动销售", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("客户协同", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("移动库管", "false", "yonyou/mobile_pu.zip"));
 
         listAppGroup.add(new AppGroup("NCC供应链", listApps));
 
 
         listApps = new ArrayList<>();
-        listApps.add(new App("考试查询", false));
-        listApps.add(new App("考试查询", false));
-        listApps.add(new App("考试查询", false));
-        listApps.add(new App("考试查询", false));
+        listApps.add(new AppInfo("考试查询", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("考试查询", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("考试查询", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("考试查询", "false", "yonyou/mobile_pu.zip"));
 
         listAppGroup.add(new AppGroup("NCC资产", listApps));
 
         listApps = new ArrayList<>();
-        listApps.add(new App("通知公告", false));
-        listApps.add(new App("通知公告", false));
-        listApps.add(new App("通知公告", false));
-        listApps.add(new App("通知公告", false));
-        listApps.add(new App("通知公告", false));
+        listApps.add(new AppInfo("通知公告", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("通知公告", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("通知公告", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("通知公告", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("通知公告", "false", "yonyou/mobile_pu.zip"));
 
         listAppGroup.add(new AppGroup("NCC财资", listApps));
 
         listApps = new ArrayList<>();
-        listApps.add(new App("英语等级", false));
-        listApps.add(new App("英语等级", false));
-        listApps.add(new App("英语等级", false));
-        listApps.add(new App("英语等级", false));
-        listApps.add(new App("英语等级", false));
-        listApps.add(new App("英语等级", false));
+        listApps.add(new AppInfo("英语等级", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("英语等级", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("英语等级", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("英语等级", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("英语等级", "false", "yonyou/mobile_pu.zip"));
+        listApps.add(new AppInfo("英语等级", "false", "yonyou/mobile_pu.zip"));
 
         listAppGroup.add(new AppGroup("NCC其他", listApps));
 

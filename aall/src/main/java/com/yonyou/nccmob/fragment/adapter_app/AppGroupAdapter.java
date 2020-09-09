@@ -21,6 +21,7 @@ import com.yonyou.common.utils.MTLLog;
 import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.utils.net.MTLHttpDownCallBack;
 import com.yonyou.common.utils.net.MTLOKHttpUtils;
+import com.yonyou.common.vo.AppInfo;
 import com.yonyou.nccmob.NCCOpenH5MainActivity;
 import com.yonyou.nccmob.R;
 
@@ -105,8 +106,7 @@ public class AppGroupAdapter extends RecyclerView.Adapter {
             vh.recyclerView.setAdapter(appsAdapter);
             appsAdapter.setItemClick(new AppsAdapter.onItemClick() {
                 @Override
-                public void onClickItemEvent(App app) {
-                    int id = app.getId();
+                public void onClickItemEvent(AppInfo app) {
                     downloadAndOpenH5(app);
                     Toast.makeText(context, app.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -114,9 +114,9 @@ public class AppGroupAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public void downloadAndOpenH5(App app) {
-        String downloadUrl = "http://10.6.243.157/" + app.getDownloadUrl();
-        String fileName = app.getRename();
+    public void downloadAndOpenH5(AppInfo app) {
+        String downloadUrl = "http://10.6.243.157/" + app.getZipurl();
+        String fileName = app.getAppid();
         String filePath = OfflineUpdateControl.getOfflinePathWhitoutAppId(context);
 
         String openPaht = filePath + "/mobile_pu/app/purchaser/main/index.html";

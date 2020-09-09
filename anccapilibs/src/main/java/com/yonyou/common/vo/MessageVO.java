@@ -2,6 +2,9 @@ package com.yonyou.common.vo;
 
 import android.text.GetChars;
 
+import org.litepal.crud.LitePalSupport;
+
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -10,7 +13,7 @@ import java.util.List;
  * @Date  2020/8/13;
  * @Author zhangg
  **/
-public class MessageVO {
+public class MessageVO extends LitePalSupport implements Serializable {
 
 //    msgtype 有如下三中
 //    approve  审批

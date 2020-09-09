@@ -14,11 +14,11 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.yonyou.common.vo.AppInfo;
 import com.yonyou.nccmob.R;
 import com.yonyou.nccmob.appsetting.NCCManagerAppActivity;
 import com.yonyou.nccmob.base.BaseActivity;
 import com.yonyou.nccmob.base.BaseFragment;
-import com.yonyou.nccmob.fragment.adapter_app.App;
 import com.yonyou.nccmob.fragment.adapter_app.AppsAdapter;
 import com.yonyou.nccmob.fragment.adapter_app.util.AppAdapterUtil;
 import com.yonyou.nccmob.fragment.msg.Fragment_undo;
@@ -86,12 +86,6 @@ public class MsgFragment extends BaseFragment {
 
     private void initData(View mRootView) {
 
-//		ArrayList mFragments = new ArrayList<>();
-//		for (int i = 0; i < mTitles.length; i++) {
-//			ImageFragment imageFragment = ImageFragment.newInstance(R.mipmap.ic_launcher);
-//			mFragments.add(imageFragment);
-//		}
-
         mViewPager.setAdapter(new FragmentPagerAdapter(mActivity.getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -131,15 +125,15 @@ public class MsgFragment extends BaseFragment {
 
 
         // 常用应用s
-        List<App> listApps = AppAdapterUtil.getCommonUseApp();
-        listApps.add(new App("Add", false));
+        List<AppInfo> listApps = AppAdapterUtil.getCommonUseApp();
+        listApps.add(new AppInfo("Add", "false", ""));
 
         // 获取views
         List<View> pagerViews = (AppAdapterUtil.getViewsByAppInfoData(mActivity, listApps, new AppsAdapter.onItemClick() {
             @Override
-            public void onClickItemEvent(App app) {
+            public void onClickItemEvent(AppInfo app) {
                 mActivity.showMessage(app);
-                if (app.getShortName().equals("Add")) {
+                if (app.getAppname().equals("Add")) {
                     Intent intent = new Intent(mActivity, NCCManagerAppActivity.class);
                     mActivity.startActivity(intent);
                 }

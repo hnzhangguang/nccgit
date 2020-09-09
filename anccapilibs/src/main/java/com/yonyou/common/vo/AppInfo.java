@@ -33,6 +33,18 @@ public class AppInfo extends LitePalSupport implements Serializable {
     @Column(defaultValue = "false")
     private String isCat;   // 是否是分组
 
+    public AppInfo() {
+
+    }
+
+    public AppInfo(String appname, String cat, String appid) {
+
+        this.appname = appname;
+        this.isCat = cat;
+        this.appid = appid;
+    }
+
+
     public String getIsCat() {
         return isCat;
     }
