@@ -11,6 +11,7 @@ import com.yonyou.common.utils.FileUtils;
 import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.common.vo.AppInfo;
+import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.common.vo.NCCUserVo;
 import com.yonyou.plugins.IApiInvoker;
 import com.yonyou.plugins.MTLArgs;
@@ -69,25 +70,30 @@ public class StorageApiInvoker implements IApiInvoker {
 
         switch (apiname) {
             case GETAPPINFO:  // 获取单个应用信息
-                String appid = args.getString("appId");
-                if (appid.isEmpty()) {
-                    appid = "appid0";
-                }
-                JSONObject appJson = new JSONObject();
-                try {
-                    AppInfo appInfo = UserUtil.getAppInfo(appid);
-                    // 获取到的应用信息是否为空
-                    if (null != appInfo) {
-                        String json = JSON.toJSONString(appInfo);//关键
-                        appJson.put("appInfo", json);
-                    } else {
-                        appJson.put("appInfo", "");
+                String params = args.getParams();
+                if (!TextUtils.isEmpty(params)) {
+                    JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(params);
+                    String appid = jsonObj.optString("appId");
+                    if (appid.isEmpty()) {
+                        appid = "appid0";
                     }
-                    args.success(appJson);
-                } catch (Exception ee) {
-                    LogerNcc.e(ee);
-                    args.error(ee.toString());
+                    JSONObject appJson = new JSONObject();
+                    try {
+                        AppInfo appInfo = UserUtil.getAppInfo(appid);
+                        // 获取到的应用信息是否为空
+                        if (null != appInfo) {
+                            String json = JSON.toJSONString(appInfo);//关键
+                            appJson.put("appInfo", json);
+                        } else {
+                            appJson.put("appInfo", "");
+                        }
+                        args.success(appJson);
+                    } catch (Exception ee) {
+                        LogerNcc.e(ee);
+                        args.error(ee.toString());
+                    }
                 }
+
                 return "";
             case GETUSERINFO:  // 获取用户信息
                 JSONObject jsonObject1 = new JSONObject();

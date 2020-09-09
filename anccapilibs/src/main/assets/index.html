@@ -571,7 +571,6 @@
                     const editText = document.querySelector('#editText');
                     editText.value = str;
                 }
-
             })
         }
 
@@ -883,7 +882,7 @@
 
         /**
         |--------------------------------------------------
-        |
+        |  改变连续扫码界面,扫码type 1 是连续, 0是单次
         |--------------------------------------------------
         */
         function changeCustomScanModeNcc(){
@@ -908,7 +907,7 @@
         */
         function getAppDataNcc(){
             let action2 = "storage.getAppInfo";  //
-            let param2 = {'xxx': 'xxx' };
+            let param2 = {'appId': 'xxx' };
             window.JSSDK.callAction(action2,param2,value=>{
                     console.log(value);
                     let str = JSON.stringify(value);
@@ -1000,7 +999,7 @@
         |--------------------------------------------------
         */
         function markAndNavigationDestinationNcc(){
-
+            alert('地图打点');
         }
 
         /**
