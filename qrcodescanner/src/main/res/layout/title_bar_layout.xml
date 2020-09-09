@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:orientation="horizontal">
+
+    <!--    左边布局-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/common_left_titlebar"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="left|center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/scan_back_normal" />
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="返回"
+            android:visibility="gone"></TextView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    中间布局-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/common_center_titlebar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pagerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/scan_text"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="26sp"></TextView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <!--    右边布局-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/common_right_titlebar"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/titleBar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="@string/scan_text"
+            android:textAllCaps="false"
+            android:visibility="invisible"></TextView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
