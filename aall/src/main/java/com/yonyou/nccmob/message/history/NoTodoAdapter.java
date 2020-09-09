@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yonyou.common.constant.Constant;
+import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.vo.MessageVO;
 import com.yonyou.nccmob.R;
 
@@ -57,15 +58,45 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         return sendtime;
     }
 
+
+    /*
+     * @功能: 处理内容是HTML的列表item显示
+     * @参数: content
+     * @Date  2020/9/9 9:56 AM
+     * @Author zhangg
+     **/
+    public String getShowContent(String content) {
+        //\u003c,\u003d,\u003e,\u003cspan,class\u003d
+        if (TextUtils.isEmpty(content)) {
+            return "";
+        }
+        String s1 = content.replaceAll("<div class=\"divtext\">", "")
+                .replaceAll("<span class=\"labeltext\">", "")
+                .replaceAll("<span  class=\"labeltext\">", "")
+                .replaceAll("<span class=\"normaltext\">", "")
+                .replaceAll("<span  class=\"normaltext\">", "")
+                .replaceAll("<span class=\"keytext\">", "")
+                .replaceAll("<span  class=\"keytext\">", "")
+                .replaceAll(":</span >", ":")
+                .replaceAll("</span >", " | ")
+                .replaceAll("</div>", "")
+                .replaceAll(":\\n", ":")
+                .replaceAll("\\n\\n\\n\\n", "");
+        if (s1.startsWith("\n")) {
+            s1 = s1.replaceFirst("\\n", "");
+        }
+        LogerNcc.e(s1);
+        return s1;
+    }
+
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-
         MessageVO item = mFruitList.get(position);
-
         holder.fruitName.setText(item.getSubject());
         holder.fruitName2.setText(getDate(item.getSendtime()));
         holder.fruitName3.setText(TextUtils.isEmpty(item.getSenderpersonname()) ? "发送人: 张三 " : item.getSenderpersonname());
+//        holder.fruitName3.setText(getShowContent(item.getContent()));  // 测试使用
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
