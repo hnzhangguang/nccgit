@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -57,6 +59,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     public static final int SCAN_RESULT_CODE = 15613;
     public static final String SCAN_RESULT = "scan_result";
     private ViewfinderView mScanView;
+    private LinearLayoutCompat viewfinder_ll;
     private CaptureActivityHandler handler;
     private Vector<BarcodeFormat> decodeFormats;
     private String characterSet;
@@ -65,6 +68,11 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     private boolean hasSurface;
     private boolean playBeep;
     private boolean vibrate;
+    private TextView titleBar_right;
+    private TextView back;
+
+    // 混合界面显示比率
+    public static float showRate = 0.5f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,19 +105,40 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     }
 
 
+    public TextView getTitleBar_right() {
+        return titleBar_right;
+    }
+
+    public TextView getBack() {
+        return back;
+    }
+
     /**
      * 获取XML里面的控件
      */
     protected void findViews() {
         this.mScanView = findViewById(R.id.viewfinder_view);
+        this.viewfinder_ll = findViewById(R.id.viewfinder_ll);
+        this.back = findViewById(R.id.back);
+        this.titleBar_right = findViewById(R.id.titleBar_right);
+        titleBar_right.setText("确定");
+        titleBar_right.setTextColor(getResources().getColor(R.color.white));
+        back.setTextColor(getResources().getColor(R.color.white));
+
+
+        ViewGroup.LayoutParams layoutParams = viewfinder_ll.getLayoutParams();
+
+        int height = layoutParams.height;
+        height = (int) (height * showRate);
+        layoutParams.height = height;
+        viewfinder_ll.setLayoutParams(layoutParams);
+
         // 闪光灯的控制
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Camera camera = CameraManager.get().getCamera();
-
-
                 camera.startPreview();
                 Camera.Parameters parameters = camera.getParameters();
                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);// 开启
@@ -131,21 +160,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
             }
         });
 
-        // 返回按钮
-        findViewById(R.id.left_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-
-        // 右按钮
-        findViewById(R.id.right_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
 

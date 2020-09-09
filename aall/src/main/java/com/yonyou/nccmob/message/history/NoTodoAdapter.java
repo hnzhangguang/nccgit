@@ -58,7 +58,6 @@ public class NoTodoAdapter extends RecyclerView.Adapter<NoTodoAdapter.ViewHolder
         return sendtime;
     }
 
-
     /*
      * @功能: 处理内容是HTML的列表item显示
      * @参数: content

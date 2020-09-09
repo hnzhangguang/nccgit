@@ -1,5 +1,6 @@
 package com.yonyou.plugins.register;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.plugins.IApiInvoker;
 import com.yonyou.plugins.MTLArgs;
 import com.yonyou.plugins.MTLException;
+import com.yonyou.scan.NccWebviewScannerActivity;
 
 
 /*
@@ -23,7 +25,14 @@ public class RegisterApiInvoker implements IApiInvoker {
 
     private static final String leftBtnCallback = "leftcallback";
     private static final String rightBtnCallback = "rightcallback";
-    private static final String continueScanType = "continueScanType";
+    private static final String continueScanType = "continueScanType";   // 是否支持连续扫码
+    private static final String continueScanAction = "continueScanAction";   // 开始执行扫码
+
+    private static final String openlight = "openlight";   // 灯开
+    private static final String closelight = "closelight";   // 灯关
+
+    private static final String openContinueScanActivity = "openContinueScan";   // 灯关
+
     private static final String titlename = "titlename";
     private static final String scanCallback = "scancallback";
     private static final String openSingleScanActivity = "opensinglescanpage";  // 调起单次扫码界面
@@ -36,6 +45,44 @@ public class RegisterApiInvoker implements IApiInvoker {
     public String call(String apiname, MTLArgs args) throws com.yonyou.plugins.MTLException, MTLException {
 
         switch (apiname) {
+
+
+            case openContinueScanActivity:  // 打开连续扫码界面
+
+                ComponentName componentName = new ComponentName(args.getContext(), "com.yonyou.scan.NccWebviewScannerActivity");
+                Intent intent2 = new Intent();
+                intent2.setComponent(componentName);
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("aa", "aa");
+                intent2.putExtras(bundle2);
+                args.getContext().startActivity(intent2);
+
+                break;
+
+            case openlight:
+                Activity context1 = args.getContext();
+                if (context1 instanceof NccWebviewScannerActivity) {
+                    NccWebviewScannerActivity mActivity1 = (NccWebviewScannerActivity) context1;
+                    mActivity1.openLight();
+                }
+                break;
+            case closelight:
+                Activity context2 = args.getContext();
+                if (context2 instanceof NccWebviewScannerActivity) {
+                    NccWebviewScannerActivity mActivity2 = (NccWebviewScannerActivity) context2;
+                    mActivity2.closeLight();
+                }
+                break;
+
+            case continueScanAction:   // 连续扫码时候开始非第一次的扫码执行
+
+                Activity context = args.getContext();
+                if (context instanceof NccWebviewScannerActivity) {
+                    NccWebviewScannerActivity mActivity = (NccWebviewScannerActivity) context;
+                    mActivity.restartQRScanner();
+                }
+
+                break;
 
             case continueScanType:
 
@@ -66,12 +113,12 @@ public class RegisterApiInvoker implements IApiInvoker {
             case openmixScanActivity:
 
                 ComponentName cn2 = new ComponentName(args.getContext().getPackageName(), "com.yonyou.scan.NccWebviewScannerActivity");
-                Intent intent2 = new Intent();
-                intent2.setComponent(cn2);
-                Bundle bundle2 = new Bundle();
-                bundle2.putString("aa", "aa");
-                intent2.putExtras(bundle2);
-                args.getContext().startActivity(intent2);
+                Intent intent21 = new Intent();
+                intent21.setComponent(cn2);
+                Bundle bundle21 = new Bundle();
+                bundle21.putString("aa", "aa");
+                intent21.putExtras(bundle21);
+                args.getContext().startActivity(intent21);
 
 
                 break;

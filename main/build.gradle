@@ -100,11 +100,7 @@ dependencies {
     api project(':baidulocation_ncc')
 //    扫码单据界面
     implementation project(':zbar_qrcode')
-//    自定义scanwebview
-    implementation project(':qrcodescanner')
     implementation project(':aall')
-
-
 
 
 }

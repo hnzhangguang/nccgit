@@ -133,34 +133,28 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
         layoutParams.height = height;
         viewfinder_ll.setLayoutParams(layoutParams);
 
-        // 闪光灯的控制
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Camera camera = CameraManager.get().getCamera();
-                camera.startPreview();
-                Camera.Parameters parameters = camera.getParameters();
-                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);// 开启
-                camera.setParameters(parameters);
-            }
-        });
-        findViewById(R.id.btnclose).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Camera camera = CameraManager.get().getCamera();
-                if (camera != null) {
-                    Camera.Parameters parameters = camera.getParameters();
-                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);// 关闭
-                    camera.setParameters(parameters);
+    }
+
+
+    public void openLight() {
+        Camera camera = CameraManager.get().getCamera();
+        camera.startPreview();
+        Camera.Parameters parameters = camera.getParameters();
+        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);// 开启
+        camera.setParameters(parameters);
+    }
+
+    public void closeLight() {
+        Camera camera = CameraManager.get().getCamera();
+        if (camera != null) {
+            Camera.Parameters parameters = camera.getParameters();
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);// 关闭
+            camera.setParameters(parameters);
 //					camera.stopPreview();
 //					camera.release();
 //					camera = null;
-                }
-            }
-        });
-
-
+        }
     }
 
 
@@ -395,7 +389,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     /**
      * 连续扫描、调用此方法即可重新扫描
      */
-    protected void restartQRScanner() {
+    public void restartQRScanner() {
         if (null != handler) {
             handler.restartPreviewAndDecode();//重新启动预览和解码
         }

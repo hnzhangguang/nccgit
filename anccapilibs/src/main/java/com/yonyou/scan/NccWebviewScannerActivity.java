@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.zxing.Result;
 import com.iqos.qrscanner.app.QRScannerActivity;
-import com.iqos.qrscanner.camera.CameraManager;
 import com.iqos.qrscanner.utils.QRCodeDecoder;
 import com.yonyou.ancclibs.BuildConfig;
 import com.yonyou.ancclibs.R;
@@ -43,8 +41,6 @@ import java.lang.reflect.Field;
  **/
 public class NccWebviewScannerActivity extends QRScannerActivity implements SurfaceHolder.Callback {
     private YYWebView web;
-
-    private static boolean isContinueScan = false;  // 是否开启连续扫码,默认false
 
     /*
      * @功能: 根据callbackName回调h5 js 函数
@@ -136,34 +132,6 @@ public class NccWebviewScannerActivity extends QRScannerActivity implements Surf
                     UserUtil.setKeyValue_gone(Constant.rightbtncallbackNameKey);
                 } else {
                     finish();
-                }
-            }
-        });
-
-
-        // 闪光灯的控制
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Camera camera = CameraManager.get().getCamera();
-                camera.startPreview();
-                Camera.Parameters parameters = camera.getParameters();
-                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);// 开启
-                camera.setParameters(parameters);
-            }
-        });
-        findViewById(R.id.btnclose).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Camera camera = CameraManager.get().getCamera();
-                if (camera != null) {
-                    Camera.Parameters parameters = camera.getParameters();
-                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);// 关闭
-                    camera.setParameters(parameters);
-//					camera.stopPreview();
-//					camera.release();
-//					camera = null;
                 }
             }
         });

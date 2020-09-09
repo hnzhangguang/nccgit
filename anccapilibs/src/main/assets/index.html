@@ -143,9 +143,13 @@
             registerCallback.addEventListener('click',e=>{
                 registerCallbackNcc();
             });
-            const changeFlashLightStatus = document.querySelector('#changeFlashLightStatus');
-            changeFlashLightStatus.addEventListener('click',e=>{
-                changeFlashLightStatusNcc();
+            const changeFlashLightStatus_open = document.querySelector('#changeFlashLightStatus_open');
+            changeFlashLightStatus_open.addEventListener('click',e=>{
+                changeFlashLightStatus_openNcc();
+            });
+            const changeFlashLightStatus_close = document.querySelector('#changeFlashLightStatus_close');
+            changeFlashLightStatus_close.addEventListener('click',e=>{
+                changeFlashLightStatus_closeNcc();
             });
             const changeCustomScanMode = document.querySelector('#changeCustomScanMode');
             changeCustomScanMode.addEventListener('click',e=>{
@@ -408,6 +412,23 @@
         function scanCallback(name,value){
             let str = JSON.stringify(value);
             alert(str )
+
+            let action32 = 'register.continueScanAction'  // 动作是什么?
+            let param32 = {'callbackName': 'scanCallback'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action32,param32,value=>{
+                console.log(value);
+                const editText = document.querySelector('#editText');
+                if(value){
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                }else{
+                    editText.value = "default~";
+                }
+            })
+
+
         }
         function leftcallbackmethod(){
             alert('leftcallbackmethod')
@@ -784,7 +805,7 @@
         |--------------------------------------------------
         */
         function customScanQRCodeNcc(){
-            let action = 'register.continueScanType'  // 动作是什么?
+            let action = 'register.openContinueScan'  // 动作是什么?
             let param = {type:'1'}; // 参数是什么
             //调用原生api
             window.JSSDK.callAction(action,param,value=>{
@@ -829,16 +850,56 @@
         | 改变闪光点
         |--------------------------------------------------
         */
-        function changeFlashLightStatusNcc(){
+        function changeFlashLightStatus_openNcc(){
+
+            let action2 = "register.openlight";  //openlight 开灯,closelight 关灯
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    editText.value = str;
+                })
 
         }
+
+
+        function changeFlashLightStatus_closeNcc(){
+
+            let action2 = "register.closelight";  //openlight 开灯,closelight 关灯
+            let param2 = {'xxx': 'xxx' };
+            window.JSSDK.callAction(action2,param2,value=>{
+                    console.log(value);
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
+
+                    editText.value = str;
+                })
+
+            }
+
+
+
         /**
         |--------------------------------------------------
         |
         |--------------------------------------------------
         */
         function changeCustomScanModeNcc(){
+            let action = 'register.continueScanType'  // 动作是什么?
+            let param = {type:'1'}; // 参数是什么
+            //调用原生api
+            window.JSSDK.callAction(action,param,value=>{
+                console.log(value);
+                if(value){
+                    let str = JSON.stringify(value);
+                    const editText = document.querySelector('#editText');
 
+                    editText.value = str+"3333";
+                }
+
+            })
         }
         /**
         |--------------------------------------------------
@@ -1041,12 +1102,18 @@
     <button id="simpleScanQRCode">simpleScanQRCode</button>
     <button id="requestNccService">requestNccService</button>
     <button id="customScanQRCode">customScanQRCode</button>
+    <button id="changeFlashLightStatus_open">changeFlashLightStatus_open</button>
+    <button id="changeFlashLightStatus_close">changeFlashLightStatus_close</button>
+    <!-- 是否开启连续扫码 0 是单次, 1 是连续 -->
+    <button id="changeCustomScanMode">changeCustomScanMode</button>
+    <!-- 地图打点,h5实现 -->
+    <button id="markAndNavigationDestination">markAndNavigationDestination</button>
     <div id="div2">未调试.............</div>
 
     <button id="uploadFile">uploadFile</button>
-    <button id="changeFlashLightStatus">changeFlashLightStatus</button>
-    <button id="changeCustomScanMode">changeCustomScanMode</button>
-    <button id="markAndNavigationDestination">markAndNavigationDestination</button>
+
+
+
 
 
 </div>
