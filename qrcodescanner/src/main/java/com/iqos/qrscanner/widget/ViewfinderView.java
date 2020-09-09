@@ -69,6 +69,7 @@ public final class ViewfinderView extends View {
 
         //----------------------------------提示文本--------------------------------------------
         tipText = td.getString(R.styleable.ViewfinderView_scan_tip_text);
+        tipText = "";
 
         //----------------------------------文本是否处于扫描框的上方--------------------------------
         tipAboveRect = td.getBoolean(R.styleable.ViewfinderView_scan_text_above_rect, false);
@@ -121,7 +122,7 @@ public final class ViewfinderView extends View {
         }
         //获取屏幕的宽和高
         int width = getWidth();
-        int height = getHeight() / 2;
+        int height = getHeight();
         //画出扫描框外面的阴影部分，共四个部分，扫描框的上面到屏幕上面，扫描框的下面到屏幕下面
         //扫描框的左边面到屏幕左边，扫描框的右边到屏幕右边
         mPaint.setAlpha(0x40);
