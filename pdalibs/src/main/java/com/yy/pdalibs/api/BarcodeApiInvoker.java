@@ -46,7 +46,7 @@ public class BarcodeApiInvoker implements IApiInvoker {
     private final String MC33_MODE_RFID = "MC33";  // 斑马
     private final String BANMA_MODE = "MC33";  // 斑马
 
-    private final String honeywell_MODE = "honey";  // honeywe=ll
+    private final String honeywell_MODE = "EDA";  // honeywe=ll
     public static final String honeywell_action = "scan";
 
     // 斑马rfid
@@ -206,12 +206,12 @@ public class BarcodeApiInvoker implements IApiInvoker {
                     IntentFilter intentFilter = new IntentFilter(ScanManager.ACTION_SEND_SCAN_RESULT);
                     intentFilter.addAction(ScanManager.ACTION_SEND_SCAN_RESULT);
                     context.registerReceiver(mBarcodeReadBroadCast, intentFilter);
-                } else if (BANMA_MODE.equals(Build.MODEL)) {  // 斑马
+                } else if (Build.MODEL.contains(BANMA_MODE)) {  // 斑马
                     IntentFilter filter = new IntentFilter();
                     filter.addCategory(Intent.CATEGORY_DEFAULT);
                     filter.addAction(context.getResources().getString(R.string.activity_intent_filter_action_banma));
                     context.registerReceiver(mBarcodeReadBroadCast, filter);
-                } else if (honeywell_MODE.equals(Build.MODEL)) { // honeywell
+                } else if (Build.MODEL.contains(honeywell_MODE)) { // honeywell
                     IntentFilter filter = new IntentFilter();
                     filter.addAction(honeywell_action);
                     context.registerReceiver(mBarcodeReadBroadCast, filter);
