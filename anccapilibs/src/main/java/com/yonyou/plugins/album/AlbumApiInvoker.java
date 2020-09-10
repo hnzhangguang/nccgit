@@ -253,20 +253,24 @@ public class AlbumApiInvoker implements IApiInvoker {
                 return "";
             case UPLOAD_IMAGE:
 
+                // 原来已经好的api 参数
                 // filePath -> localId
                 // billId : billpk
                 // fullPath : imageGroup
 
-                String uploadLocalId = args.getString("localId");
-                if (TextUtils.isEmpty(uploadLocalId)) {
-                    args.error("localId为空");
-                    return "";
-                }
                 // 获取传递的参数
                 String params = args.getParams();
                 JsonObjectEx paramJsonObj = JsonObjectEx.getJsonObj(params);
-                String localId = paramJsonObj.getValue("localId");
+                String uploadLocalId = paramJsonObj.getValue("localId");
                 String uploadUrl = paramJsonObj.getValue("uploadUrl");  // 调用哪个action
+                // 如果为空就冲args里面获取
+                if (TextUtils.isEmpty(uploadLocalId)) {
+                    uploadLocalId = args.getString("localId");
+                    if (TextUtils.isEmpty(uploadLocalId)) {
+                        args.error("localId为空");
+                        return "";
+                    }
+                }
                 // 获取要上传的文件路径
                 final String uploadPath = GlobalConstants.idPathMap.get(uploadLocalId);
                 if (TextUtils.isEmpty(uploadPath)) {
