@@ -277,10 +277,8 @@ public class AlbumApiInvoker implements IApiInvoker {
                     args.error(prompt(mContext, R.string.album_file_error));
                     return "";
                 }
-//                String upConfig = ResourcesUtils.getFromAssets(mContext, "www/config.json");
-//                MTLHttpService uploadService = new MTLHttpService(args.getContext().getApplication(), args.getContext());
-//                String uploadUrl = "https://mdoctor.yonyoucloud.com/mtldebugger/mtl/file/uploadToOSS";
                 File file = new File(uploadPath);
+                // 文件存在时候才上传
                 if (file.exists()) {
                     final ProgressDialog tip = showTip(mContext, args.getInteger("isShowProgressTips", 1), mContext.getResources().getString(R.string.mtl_image_up_loading));
 
@@ -321,7 +319,7 @@ public class AlbumApiInvoker implements IApiInvoker {
                         }
                     });
 
-                    //                    uploadService.uploadFile(uploadUrl, file, new MTLCallback() {
+//                    uploadService.uploadFile(uploadUrl, file, new MTLCallback() {
 //                        @Override
 //                        public void onResult(JSONObject data) {
 //                            dismissTip(tip);
@@ -353,6 +351,8 @@ public class AlbumApiInvoker implements IApiInvoker {
 //                            args.error(message);
 //                        }
 //                    });
+                } else {
+                    args.error("上传文件不存在");
                 }
 
                 return "";
