@@ -46,11 +46,7 @@ public class BarcodeApiInvoker implements IApiInvoker {
     private final String honeywell_MODE = "EDA";  // honeywe=ll
     public static final String honeywell_action = "scan";
 
-    // 斑马rfid
-    String BANMA_RFID_ACTION = "com.dwbasicintent1.ACTION";
     private MTLArgs args;
-
-
     // 新大陆
     private ScanManager mScanMgr;
 
