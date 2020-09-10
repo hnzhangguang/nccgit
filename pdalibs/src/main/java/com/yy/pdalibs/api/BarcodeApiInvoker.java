@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +25,6 @@ import com.yy.pdalibs.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Date;
 
 
 /*
