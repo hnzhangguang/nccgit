@@ -48,9 +48,11 @@ public class BarcodeApiInvoker implements IApiInvoker {
     BroadcastReceiver mBarcodeReadBroadCast = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
+            MsgUtil.showMsg("接收到消息了!");
             // 新大陆
             if (intent.getAction().equals(ScanManager.ACTION_SEND_SCAN_RESULT)) {
-                MsgUtil.showMsg("新大陆pad结果进来了~");
+//                MsgUtil.showMsg("新大陆pad结果进来了~");
                 if (intent != null && !TextUtils.isEmpty(intent.getStringExtra("SCAN_BARCODE1"))) {
                     String scanResult_1 = intent.getStringExtra("SCAN_BARCODE1").trim();//扫描到数据含有空格，必须执行trim
                     String scanResult_2 = intent.getStringExtra("SCAN_BARCODE2");
@@ -106,6 +108,7 @@ public class BarcodeApiInvoker implements IApiInvoker {
         this.args = args;
         switch (apiname) {
             case startBarcodeService:
+
                 // 新大陆
                 if (Build.MODEL.contains(NEW_LAND_MODEL)) {
 
@@ -116,6 +119,12 @@ public class BarcodeApiInvoker implements IApiInvoker {
                     intentFilter.addAction(ScanManager.ACTION_SEND_SCAN_RESULT);
                     context.registerReceiver(mBarcodeReadBroadCast, intentFilter);
                 } else if (Build.MODEL.contains(BANMA_MODE)) {  // 斑马
+                    // 设置输出方式
+                    ScanManager mScanMgr = ScanManager.getInstance();
+                    // 输出方式设置为广播
+                    mScanMgr.setOutpuMode(ScanSettings.Global.VALUE_OUT_PUT_MODE_BROADCAST);
+
+                    MsgUtil.showMsg("model:" + Build.MODEL);
                     IntentFilter filter = new IntentFilter();
                     filter.addCategory(Intent.CATEGORY_DEFAULT);
                     filter.addAction(context.getResources().getString(R.string.activity_intent_filter_action_banma));
