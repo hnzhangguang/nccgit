@@ -2,6 +2,7 @@ package com.yonyou.common.vo;
 
 import android.text.TextUtils;
 
+import com.yonyou.album.plugin.utils.PublicWay;
 import com.yonyou.common.utils.logs.LogerNcc;
 
 import org.json.JSONException;
@@ -24,6 +25,11 @@ public class JsonObjectEx extends JSONObject {
     }
 
     public JsonObjectEx(String string) {
+    }
+
+
+    public String getValue(String key) {
+        return this.optString(key, "");
     }
 
     public static JsonObjectEx getJsonObj(String string) {
