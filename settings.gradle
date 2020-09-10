@@ -1,3 +1,4 @@
+include ':pdalibs'
 include ':main'
 include ':baidulocation_ncc'
 include ':zbar_qrcode'

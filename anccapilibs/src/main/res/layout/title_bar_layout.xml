@@ -19,12 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/scan_back_normal" />
+            android:src="@mipmap/scan_back_normal" />
 
         <TextView
             android:id="@+id/back"
             android:gravity="left|center"
-            android:drawableLeft="@drawable/scan_back_normal"
+            android:drawableLeft="@mipmap/scan_back_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
