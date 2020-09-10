@@ -81,7 +81,7 @@ public class BarcodeApiInvoker implements IApiInvoker {
                 } else {
                     args.error("未扫描到数据", true);
                 }
-            } else if (intent.getAction().equals(R.string.activity_intent_filter_action_banma)) {  // 斑马
+            } else if (intent.getAction().equals(context.getResources().getString(R.string.intent_filter_action_banma))) {  // 斑马
                 String decodedSource = intent.getStringExtra(context.getResources().getString(R.string.datawedge_intent_key_source_banma));
                 String decodedData = intent.getStringExtra(context.getResources().getString(R.string.datawedge_intent_key_data_banma));
                 String decodedLabelType = intent.getStringExtra(context.getResources().getString(R.string.datawedge_intent_key_label_type_banma));
@@ -119,15 +119,10 @@ public class BarcodeApiInvoker implements IApiInvoker {
                     intentFilter.addAction(ScanManager.ACTION_SEND_SCAN_RESULT);
                     context.registerReceiver(mBarcodeReadBroadCast, intentFilter);
                 } else if (Build.MODEL.contains(BANMA_MODE)) {  // 斑马
-                    // 设置输出方式
-                    ScanManager mScanMgr = ScanManager.getInstance();
-                    // 输出方式设置为广播
-                    mScanMgr.setOutpuMode(ScanSettings.Global.VALUE_OUT_PUT_MODE_BROADCAST);
-
                     MsgUtil.showMsg("model:" + Build.MODEL);
                     IntentFilter filter = new IntentFilter();
                     filter.addCategory(Intent.CATEGORY_DEFAULT);
-                    filter.addAction(context.getResources().getString(R.string.activity_intent_filter_action_banma));
+                    filter.addAction(context.getResources().getString(R.string.intent_filter_action_banma));
                     context.registerReceiver(mBarcodeReadBroadCast, filter);
                 } else if (Build.MODEL.contains(honeywell_MODE)) { // honeywell
                     IntentFilter filter = new IntentFilter();
