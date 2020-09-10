@@ -42,10 +42,7 @@ public class BarcodeApiInvoker implements IApiInvoker {
     private static final String stopBarcodeService = "stopBarcodeService";
 
     private final String NEW_LAND_MODEL = "NLS-";  // 新大陆
-
-    private final String MC33_MODE_RFID = "MC33";  // 斑马
     private final String BANMA_MODE = "MC33";  // 斑马
-
     private final String honeywell_MODE = "EDA";  // honeywe=ll
     public static final String honeywell_action = "scan";
 
