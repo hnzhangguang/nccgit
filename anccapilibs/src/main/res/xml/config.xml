@@ -88,7 +88,7 @@
     <feature name="barcode">
         <param
             name="android-package"
-            value="com.yonyou.plugins.barcode.BarcodeApiInvoker" />
+            value="com.yy.pdalibs.api.BarcodeApiInvoker" />
     </feature>
 
 
@@ -117,11 +117,7 @@
             name="android-package"
             value="com.yonyou.mtlstatusbar.MTLStatusBarApiInvoker" />
     </feature>
-    <feature name="barcode">
-        <param
-            name="android-package"
-            value="com.yonyou.plugins.barcode.BarcodeApiInvoker" />
-    </feature>
+
     <feature name="webcontrol">
         <param
             name="android-package"
