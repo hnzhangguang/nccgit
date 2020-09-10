@@ -291,7 +291,7 @@ public class AlbumApiInvoker implements IApiInvoker {
                     args.error(mContext.getResources().getString(R.string.album_config_error));
                     return "";
                 }
-                MTLHttpService uploadService = new MTLHttpService(args.getContext().getApplication(), args.getContext());
+//                MTLHttpService uploadService = new MTLHttpService(args.getContext().getApplication(), args.getContext());
 //                String uploadUrl = "https://mdoctor.yonyoucloud.com/mtldebugger/mtl/file/uploadToOSS";
                 File file = new File(uploadPath);
                 if (file.exists()) {
