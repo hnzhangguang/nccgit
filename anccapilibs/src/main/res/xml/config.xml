@@ -91,37 +91,11 @@
             value="com.yy.pdalibs.api.BarcodeApiInvoker" />
     </feature>
 
-
-    <!--....-->
-
     <feature name="download">
         <param
             name="android-package"
             value="com.yonyou.common.download.offline.OffLineUpdateApiInvoker" />
     </feature>
 
-    <feature name="webcontrol">
-        <param
-            name="android-package"
-            value="com.yonyou.mtlmain.webcontrol.WebControlApiInvoker" />
-    </feature>
-
-    <feature name="umshare">
-        <param
-            name="android-package"
-            value="com.yonyou.plugins.umshare.UMShareApiInvoker" />
-    </feature>
-
-    <feature name="statusbar">
-        <param
-            name="android-package"
-            value="com.yonyou.mtlstatusbar.MTLStatusBarApiInvoker" />
-    </feature>
-
-    <feature name="webcontrol">
-        <param
-            name="android-package"
-            value="com.yonyou.mtlmain.webcontrol.WebControlApiInvoker" />
-    </feature>
 
 </widget>
