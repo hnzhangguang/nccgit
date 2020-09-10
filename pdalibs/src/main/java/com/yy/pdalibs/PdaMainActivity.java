@@ -24,7 +24,7 @@ public class PdaMainActivity extends AppCompatActivity {
             String action = intent.getAction();
             Bundle b = intent.getExtras();
             Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
-            if (action.equals(getResources().getString(R.string.activity_intent_filter_action_banma))) {
+            if (action.equals(getResources().getString(R.string.intent_filter_action_banma))) {
                 Toast.makeText(PdaMainActivity.this, "斑马", Toast.LENGTH_SHORT).show();
             }
         }
@@ -52,7 +52,7 @@ public class PdaMainActivity extends AppCompatActivity {
         });
         IntentFilter filter = new IntentFilter();
         filter.addCategory(Intent.CATEGORY_DEFAULT);
-        filter.addAction(getResources().getString(R.string.activity_intent_filter_action_banma));
+        filter.addAction(getResources().getString(R.string.intent_filter_action_banma));
         registerReceiver(myBroadcastReceiver_banma, filter);
 
 
