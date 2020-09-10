@@ -199,10 +199,27 @@
             requestNccService.addEventListener('click',e=>{
                 requestNccServiceNcc();
             });
+            const newland = document.querySelector('#newland');
+            newland.addEventListener('click',e=>{
+                newlandNcc();
+            });
 
 
         })
 
+
+        function newlandNcc(){
+            action = 'barcode.startBarcodeService'  // 动作是什么?
+                let param = {}; // 参数是什么
+                //调用原生api
+                window.JSSDK.callAction(action,param,value=>{
+                    console.log(value);
+                    const editText = document.querySelector('#editText');
+                    let str = JSON.stringify(value);
+                    editText.value = str;
+                    alert(str);
+                })
+        }
         /**
         |--------------------------------------------------
         | 借助原生调用ncc服务
@@ -1108,6 +1125,8 @@
     <!-- 地图打点,h5实现 -->
     <button id="markAndNavigationDestination">markAndNavigationDestination</button>
     <div id="div2">未调试.............</div>
+
+    <button id="newland">newland</button>
 
     <button id="uploadFile">uploadFile</button>
 

@@ -26,7 +26,7 @@ android {
     repositories {
         flatDir {
             dirs 'libs',
-                    '../acommonlibs/libs',
+                    '../pdalibs/libs',
                     '../anccapilibs/libs'
 
         }
@@ -105,6 +105,7 @@ dependencies {
 
 //    扫码单据界面
     implementation project(':zbar_qrcode')
+    implementation project(':pdalibs')
 
     // 是module Application时候,可做自由依赖
     if (isModule.toBoolean()) {

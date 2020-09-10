@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">pdalibs</string>
+
+    <string name="activity_intent_filter_action_banma">com.dwbasicintent1.ACTION</string>
+    <string name="datawedge_intent_key_source_banma">com.symbol.datawedge.source</string>
+    <string name="datawedge_intent_key_label_type_banma">com.symbol.datawedge.label_type</string>
+    <string name="datawedge_intent_key_data_banma">com.symbol.datawedge.data_string</string>
+
 </resources>
