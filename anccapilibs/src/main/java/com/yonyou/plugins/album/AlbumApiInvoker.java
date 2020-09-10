@@ -19,6 +19,7 @@ import com.yonyou.album.plugin.utils.PicFileUtil;
 import com.yonyou.ancclibs.R;
 import com.yonyou.common.callback.MTLCallback;
 import com.yonyou.common.download.OfflineUpdateControl;
+import com.yonyou.common.net.HttpCallBack;
 import com.yonyou.common.onActivityForResult.OnActivityForResultUtils;
 import com.yonyou.common.onActivityForResult.SimpleOnActivityForResultCallback;
 import com.yonyou.common.service.MTLHttpService;
@@ -27,6 +28,8 @@ import com.yonyou.common.utils.GlobalConstants;
 import com.yonyou.common.utils.ImageUtil;
 import com.yonyou.common.utils.bitmap.BitmapUtil;
 import com.yonyou.common.utils.logs.LogerNcc;
+import com.yonyou.common.utils.utils.NetUtil;
+import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.component.SelectDialog;
 import com.yonyou.plugins.IApiInvoker;
 import com.yonyou.plugins.MTLArgs;
@@ -249,6 +252,11 @@ public class AlbumApiInvoker implements IApiInvoker {
                 }
                 return "";
             case UPLOAD_IMAGE:
+
+                // filePath -> localId
+                // billId : billpk
+                // fullPath : imageGroup
+
                 String uploadLocalId = args.getString("localId");
                 if (TextUtils.isEmpty(uploadLocalId)) {
                     args.error("localId为空");
@@ -286,39 +294,80 @@ public class AlbumApiInvoker implements IApiInvoker {
                 MTLHttpService uploadService = new MTLHttpService(args.getContext().getApplication(), args.getContext());
 //                String uploadUrl = "https://mdoctor.yonyoucloud.com/mtldebugger/mtl/file/uploadToOSS";
                 File file = new File(uploadPath);
-                final ProgressDialog tip = showTip(mContext, args.getInteger("isShowProgressTips", 1), mContext.getResources().getString(R.string.mtl_image_up_loading));
-                uploadService.uploadFile(uploadUrl, file, new MTLCallback() {
-                    @Override
-                    public void onResult(JSONObject data) {
-                        dismissTip(tip);
-                        if (data != null) {
-                            JSONObject jsonObject = new JSONObject();
-                            int code = data.optInt("code");
-                            String msg = data.optString("msg");
-                            if (code == 0) {
-                                String serviceId = data.optString("data");
-                                try {
-                                    jsonObject.put("code", code);
-                                    jsonObject.put("msg", msg);
-                                    jsonObject.put("serverId", serviceId);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                args.success(jsonObject);
-                            } else {
-                                args.error(msg);
-                            }
-                        } else {
-                            args.error(prompt(mContext, R.string.album_params_error));
-                        }
-                    }
+                if (file.exists()) {
+                    final ProgressDialog tip = showTip(mContext, args.getInteger("isShowProgressTips", 1), mContext.getResources().getString(R.string.mtl_image_up_loading));
 
-                    @Override
-                    public void onError(String message) {
-                        dismissTip(tip);
-                        args.error(message);
-                    }
-                });
+                    // 发送请求参数
+                    JsonObjectEx bodyParams = JsonObjectEx.getJsonObj();
+                    bodyParams.putEx("file", file);
+                    // 发送请求
+                    NetUtil.callAction(args.getContext(), uploadUrl, bodyParams, new HttpCallBack() {
+                        @Override
+                        public void onFailure(JSONObject error) {
+                            dismissTip(tip);
+                            args.error(error.toString());
+                        }
+
+                        @Override
+                        public void onResponse(JSONObject successJson) {
+                            dismissTip(tip);
+                            if (successJson != null) {
+                                JSONObject jsonObject = new JSONObject();
+                                int code = successJson.optInt("code");
+                                String msg = successJson.optString("msg");
+                                if (code == 0) {
+                                    String serviceId = successJson.optString("data");
+                                    try {
+                                        jsonObject.put("code", code);
+                                        jsonObject.put("msg", msg);
+                                        jsonObject.put("serverId", serviceId);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    args.success(jsonObject);
+                                } else {
+                                    args.error(msg);
+                                }
+                            } else {
+                                args.error(prompt(mContext, R.string.album_params_error));
+                            }
+                        }
+                    });
+
+                    //                    uploadService.uploadFile(uploadUrl, file, new MTLCallback() {
+//                        @Override
+//                        public void onResult(JSONObject data) {
+//                            dismissTip(tip);
+//                            if (data != null) {
+//                                JSONObject jsonObject = new JSONObject();
+//                                int code = data.optInt("code");
+//                                String msg = data.optString("msg");
+//                                if (code == 0) {
+//                                    String serviceId = data.optString("data");
+//                                    try {
+//                                        jsonObject.put("code", code);
+//                                        jsonObject.put("msg", msg);
+//                                        jsonObject.put("serverId", serviceId);
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                    args.success(jsonObject);
+//                                } else {
+//                                    args.error(msg);
+//                                }
+//                            } else {
+//                                args.error(prompt(mContext, R.string.album_params_error));
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(String message) {
+//                            dismissTip(tip);
+//                            args.error(message);
+//                        }
+//                    });
+                }
+
                 return "";
             case DOWNLOAD_IMAGE:
                 final String serverId = args.getString("serverId");
