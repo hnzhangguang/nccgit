@@ -55,8 +55,8 @@ public class AlbumApiInvoker implements IApiInvoker {
     private static final String PREVIEW_IMAGE = "previewImage";
     private static final String GET_LOCAL_IMGSRC = "getLocalImgSrc"; // 图片 路径
     private static final String GET_LOCAL_IMGDATA = "getLocalImgData"; // 图片 base64
-    private static final String UPLOAD_IMAGE = "uploadImage";
-    private static final String DOWNLOAD_IMAGE = "downloadImage";
+    private static final String UPLOAD_IMAGE = "uploadImage";  // 上传图片
+    private static final String DOWNLOAD_IMAGE = "downloadImage"; // 下载图片
     private static final String compressImg = "compressImg";   // 压缩图片
 
     private static final int REQUEST_ALBUM = 999;
