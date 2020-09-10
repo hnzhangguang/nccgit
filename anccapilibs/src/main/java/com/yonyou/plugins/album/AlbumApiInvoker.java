@@ -262,35 +262,18 @@ public class AlbumApiInvoker implements IApiInvoker {
                     args.error("localId为空");
                     return "";
                 }
+                // 获取传递的参数
+                String params = args.getParams();
+                JsonObjectEx paramJsonObj = JsonObjectEx.getJsonObj(params);
+                String localId = paramJsonObj.getValue("localId");
+                String uploadUrl = paramJsonObj.getValue("uploadUrl");  // 调用哪个action
+                // 获取要上传的文件路径
                 final String uploadPath = GlobalConstants.idPathMap.get(uploadLocalId);
                 if (TextUtils.isEmpty(uploadPath)) {
                     args.error(prompt(mContext, R.string.album_file_error));
                     return "";
                 }
-                String uploadUrl;
 //                String upConfig = ResourcesUtils.getFromAssets(mContext, "www/config.json");
-                try {
-//                    JSONObject configJson = new JSONObject(upConfig);
-                    JSONObject config = CommonRes.appConfig.optJSONObject("config");
-                    if (config == null) {
-                        args.error(mContext.getResources().getString(R.string.album_config_error));
-                        return "";
-                    }
-                    JSONObject serviceUrl = config.getJSONObject("serviceUrl");
-                    if (serviceUrl == null) {
-                        args.error(mContext.getResources().getString(R.string.album_service_url_null));
-                        return "";
-                    }
-                    uploadUrl = serviceUrl.optString("uploadUrl");
-                    if (TextUtils.isEmpty(uploadUrl)) {
-                        args.error(mContext.getResources().getString(R.string.album_upload_address_null));
-                        return "";
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    args.error(mContext.getResources().getString(R.string.album_config_error));
-                    return "";
-                }
 //                MTLHttpService uploadService = new MTLHttpService(args.getContext().getApplication(), args.getContext());
 //                String uploadUrl = "https://mdoctor.yonyoucloud.com/mtldebugger/mtl/file/uploadToOSS";
                 File file = new File(uploadPath);
