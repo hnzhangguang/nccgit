@@ -7,14 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 
-import com.honeywell.aidc.AidcManager;
-import com.honeywell.aidc.BarcodeFailureEvent;
-import com.honeywell.aidc.BarcodeReadEvent;
-import com.honeywell.aidc.BarcodeReader;
-import com.honeywell.aidc.TriggerStateChangeEvent;
 import com.nlscan.android.scan.ScanManager;
 import com.nlscan.android.scan.ScanSettings;
 import com.yonyou.common.utils.MsgUtil;
@@ -94,112 +87,11 @@ public class BarcodeApiInvoker implements IApiInvoker {
                 MsgUtil.showMsg(decodedSource + " -> " + decodedData + " -> " + decodedLabelType);
 
             } else if (honeywell_action.equals(intent.getAction())) {   // honeywell
-
+                String data = intent.getStringExtra("data");
+                MsgUtil.showMsg("honeywell结果: " + data);
             }
         }
     };
-
-
-    //honeywell start
-    //SDK 扫描头阅读器
-    private BarcodeReader reader;
-    private AidcManager manager = null;
-
-    /**
-     * 扫描监听
-     */
-    private BarcodeReader.BarcodeListener barcodeListener = new BarcodeReader.BarcodeListener() {
-        @Override
-        public void onBarcodeEvent(final BarcodeReadEvent barcodeReadEvent) {
-            //扫描数据在线程中，如果需要显示在UI 上，必须调用 UI线程来显示
-            args.getContext().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    String barcodeData = barcodeReadEvent.getBarcodeData();
-
-                    Log.i("CodeID:===", barcodeReadEvent.getCodeId());
-                    Log.i("AimID:===", barcodeReadEvent.getAimId());
-                }
-            });
-
-        }
-
-        @Override
-        public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
-
-        }
-    };
-
-    /**
-     * 监听扫描键 true 为 按下
-     */
-    private BarcodeReader.TriggerListener triggerListener = new BarcodeReader.TriggerListener() {
-        @Override
-        public void onTriggerEvent(TriggerStateChangeEvent triggerStateChangeEvent) {
-            Log.i("扫描键状态", String.valueOf(triggerStateChangeEvent.getState()));
-            try {
-                //打开红灯
-                reader.aim(triggerStateChangeEvent.getState());
-                //打开白灯
-                reader.light(triggerStateChangeEvent.getState());
-                //开始解码
-                reader.decode(triggerStateChangeEvent.getState());
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    };
-
-
-    /**
-     * 打开SDK模式
-     */
-    private View.OnClickListener onClickListenerOpenSDK = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            //通过SDK接口 创建 SDK 管理器 step 1
-            AidcManager.create(args.getContext(), new AidcManager.CreatedCallback() {
-                @Override
-                public void onCreated(AidcManager aidcManager) {
-
-                    //step 2
-                    manager = aidcManager;
-                    //step 3
-                    reader = manager.createBarcodeReader();
-                    String strinfo = "";
-                    try {
-                        strinfo += "Name:" + reader.getInfo().getName() + "\n";
-                        strinfo += "ScannerId:" + reader.getInfo().getScannerId() + "\n";
-                        strinfo += "DecodeVersion:" + reader.getInfo().getFullDecodeVersion() + "\n";
-//                        info.setText(strinfo);
-
-
-                        // 设置扫描属性
-                        reader.setProperty(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
-                        reader.setProperty(BarcodeReader.PROPERTY_DATA_PROCESSOR_LAUNCH_BROWSER, false);
-                        // 设置控制类型
-                        reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
-                                BarcodeReader.TRIGGER_CONTROL_MODE_CLIENT_CONTROL);
-                        reader.claim();
-
-                        //添加扫描监听 step 4
-                        reader.addBarcodeListener(barcodeListener);
-                        //监听按扫描键 step 5
-                        reader.addTriggerListener(triggerListener);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    };
-
-
-    //honeywell end
 
 
     /*
