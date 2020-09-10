@@ -68,7 +68,35 @@ public class BarcodeApiInvoker implements IApiInvoker {
         public void onReceive(Context context, Intent intent) {
             // 新大陆
             if (intent.getAction().equals(ScanManager.ACTION_SEND_SCAN_RESULT)) {
-                newLandResult(intent);
+                MsgUtil.showMsg("新大陆pad结果进来了~");
+                if (intent != null && !TextUtils.isEmpty(intent.getStringExtra("SCAN_BARCODE1"))) {
+                    String scanResult_1 = intent.getStringExtra("SCAN_BARCODE1").trim();//扫描到数据含有空格，必须执行trim
+                    String scanResult_2 = intent.getStringExtra("SCAN_BARCODE2");
+                    int barcodeType = intent.getIntExtra("SCAN_BARCODE_TYPE", -1); // -1:unknown
+                    String scanStatus = intent.getStringExtra("SCAN_STATE");
+                    if ("ok".equals(scanStatus)) { //成功
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("data", scanResult_1);
+                            jsonObject.put("scanResult_2", scanResult_2);
+                            jsonObject.put("barcodeType", barcodeType);
+                            if (args != null) {
+                                args.success(jsonObject, true);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            if (args != null) {
+                                args.error("内部错误", true);
+                            }
+                        }
+                    } else {
+                        if (args != null) {
+                            args.error(scanStatus, true);
+                        }
+                    }
+                } else {
+                    args.error("未扫描到数据", true);
+                }
             } else if (intent.getAction().equals(R.string.activity_intent_filter_action_banma)) {  // 斑马
                 String decodedSource = intent.getStringExtra(context.getResources().getString(R.string.datawedge_intent_key_source_banma));
                 String decodedData = intent.getStringExtra(context.getResources().getString(R.string.datawedge_intent_key_data_banma));
@@ -230,47 +258,6 @@ public class BarcodeApiInvoker implements IApiInvoker {
 
         }
         throw new MTLException(apiname + ": function not found");
-    }
-
-
-    /*
-     * @功能: 新大陆pad返回结果
-     * @参数  intent;
-     * @Date  2020/8/6;
-     * @Author zhangg
-     **/
-    private void newLandResult(Intent intent) {
-
-
-        MsgUtil.showMsg("新大陆pad结果进来了~");
-        if (intent != null && !TextUtils.isEmpty(intent.getStringExtra("SCAN_BARCODE1"))) {
-            String scanResult_1 = intent.getStringExtra("SCAN_BARCODE1").trim();//扫描到数据含有空格，必须执行trim
-            String scanResult_2 = intent.getStringExtra("SCAN_BARCODE2");
-            int barcodeType = intent.getIntExtra("SCAN_BARCODE_TYPE", -1); // -1:unknown
-            String scanStatus = intent.getStringExtra("SCAN_STATE");
-            if ("ok".equals(scanStatus)) { //成功
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("data", scanResult_1);
-                    jsonObject.put("scanResult_2", scanResult_2);
-                    jsonObject.put("barcodeType", barcodeType);
-                    if (args != null) {
-                        args.success(jsonObject, true);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    if (args != null) {
-                        args.error("内部错误", true);
-                    }
-                }
-            } else {
-                if (args != null) {
-                    args.error(scanStatus, true);
-                }
-            }
-        } else {
-            args.error("未扫描到数据", true);
-        }
     }
 
 
