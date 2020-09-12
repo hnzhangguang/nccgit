@@ -38,7 +38,7 @@ public class NccMsgUtil {
      * @Date  2020/9/12 3:10 PM
      * @Author zhangg
      **/
-    public void updateAllMessageDB(String resultString) {
+    public static void updateAllMessageDB(String resultString) {
 
         JsonObjectEx jsonObj = JsonObjectEx.getJsonObj(resultString);
         String data = jsonObj.optString("data", "");
