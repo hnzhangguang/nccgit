@@ -121,7 +121,7 @@ public class MessageVO extends LitePalSupport implements Serializable {
         return content_old;
     }
 
-    public void setContent_show(String content_old) {
+    public void setContent_old(String content_old) {
         this.content_old = content_old;
     }
 
