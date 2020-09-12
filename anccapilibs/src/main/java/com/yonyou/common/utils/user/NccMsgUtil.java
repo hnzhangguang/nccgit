@@ -3,6 +3,8 @@ package com.yonyou.common.utils.user;
 import android.text.TextUtils;
 
 import com.yonyou.common.constant.Constant;
+import com.yonyou.common.utils.MsgUtil;
+import com.yonyou.common.utils.utils.CheckUtil;
 import com.yonyou.common.utils.utils.StringUtil;
 import com.yonyou.common.vo.AppInfo;
 import com.yonyou.common.vo.AttachmentVO;
@@ -117,6 +119,10 @@ public class NccMsgUtil {
             return null;
         }
         JsonObjectEx item = JsonObjectEx.getJsonObj(messageString); // messagesJson
+
+        updateMessageVoForDb(item);
+
+
         String pk_message = item.optString("pk_message", "");
         String pk_detail = item.optString("pk_detail", "");
         String subject = item.optString("subject", "");
@@ -128,6 +134,7 @@ public class NccMsgUtil {
         String buttonInfo = item.optString("buttonInfo", ""); // 消息按钮区域所有按钮
         MessageVO messageVO = new MessageVO();
         messageVO.setSenderpersonname(senderpersonname);
+        messageVO.setContent_old(content);
         messageVO.setContent(StringUtil.getShowContent(content));
         messageVO.setMsgtype(msgtype);
         messageVO.setPk_detail(pk_detail);
@@ -141,6 +148,9 @@ public class NccMsgUtil {
         List<AttachmentVO> attachmentVOList = new ArrayList<>();
         for (int j = 0; j < length; j++) {
             JsonObjectEx attachmentJson = JsonObjectEx.getJsonObj(attachmentJsonArray.get(j).toString());
+
+            updateAttachmentVoForDb(attachmentJson, pk_message);
+
             String pk_attachment = attachmentJson.optString("pk_attachment", "");
             String pk_file = attachmentJson.optString("pk_file", "");
             String downurl = attachmentJson.optString("downurl", "");
@@ -168,11 +178,50 @@ public class NccMsgUtil {
             messageVO.setEnableActions(acitons);
         }
 
+
         return messageVO;
     }
 
 
     /***************************** start ***************************************/
+
+
+    /*
+     * @功能: 更新messagevo对象信息
+     * @参数:
+     * @Date  2020/9/12 1:32 PM
+     * @Author zhangg
+     **/
+    public static MessageVO updateMessageVoForDb(JsonObjectEx item) {
+        String pk_message = item.getValue("pk_message");
+        String pk_detail = item.getValue("pk_detail");
+        String subject = item.getValue("subject");
+        String content = item.getValue("content");
+        String msgtype = item.getValue("msgtype");
+        String sendtime = item.getValue("sendtime");
+        String senderpersonname = item.getValue("senderpersonname");
+        String attachment = item.getValue("attachment");
+        String buttonInfo = item.getValue("buttonInfo"); // 消息按钮区域所有按钮
+        MessageVO messageVO = null;
+        List<MessageVO> list = LitePal.where(" pk_message = ? ", pk_message).find(MessageVO.class);
+        if (list != null && list.size() == 1) {
+            messageVO = list.get(0);
+        }
+        if (null == messageVO) {
+            messageVO = new MessageVO();
+            messageVO.setPk_message(pk_message);
+        }
+        messageVO.setSenderpersonname(senderpersonname);
+        messageVO.setContent(StringUtil.getShowContent(content));
+        messageVO.setMsgtype(msgtype);
+        messageVO.setPk_detail(pk_detail);
+        messageVO.setSubject(subject);
+        messageVO.setSendtime(sendtime);
+        messageVO.save();
+        return messageVO;
+
+    }
+
 
     /*
      * @功能: 更新附件
@@ -180,8 +229,11 @@ public class NccMsgUtil {
      * @Date  2020/9/12 1:18 PM
      * @Author zhangg
      **/
-    public AttachmentVO updateAttachmentVoFormDb(JsonObjectEx attachmentJson, String pk_parent) {
+    public static AttachmentVO updateAttachmentVoForDb(JsonObjectEx attachmentJson, String pk_parent) {
         if (null == attachmentJson) {
+            return null;
+        }
+        if (CheckUtil.isNull(pk_parent)) {
             return null;
         }
         String pk_attachment = attachmentJson.getValue("pk_attachment");
