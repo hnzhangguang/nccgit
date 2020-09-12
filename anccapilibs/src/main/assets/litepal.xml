@@ -2,7 +2,7 @@
 <litepal>
 
     <dbname value="nccdb" />
-    <version value="6" />
+    <version value="7" />
 
     <list>
 
