@@ -84,6 +84,10 @@ public class MsgFragment extends BaseFragment {
         return mRootView;
     }
 
+    NoTODOFragment noTODOFragment;
+    AlterFragment alterFragment;
+    NotificationFragment notificationFragment;
+
     private void initData(View mRootView) {
 
         mViewPager.setAdapter(new FragmentPagerAdapter(mActivity.getSupportFragmentManager()) {
@@ -96,11 +100,23 @@ public class MsgFragment extends BaseFragment {
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-                        return NoTODOFragment.newInstance(0);
+                        if (noTODOFragment != null) {
+                            return noTODOFragment;
+                        }
+                        noTODOFragment = NoTODOFragment.newInstance(0);
+                        return noTODOFragment;
                     case 1:
-                        return AlterFragment.newInstance(1);
+                        if (alterFragment != null) {
+                            return alterFragment;
+                        }
+                        alterFragment = AlterFragment.newInstance(1);
+                        return alterFragment;
                     case 2:
-                        return NotificationFragment.newInstance(2);
+                        if (notificationFragment != null) {
+                            return notificationFragment;
+                        }
+                        notificationFragment = NotificationFragment.newInstance(2);
+                        return notificationFragment;
                     default:
                         return new Fragment_undo();
                 }
