@@ -2,7 +2,7 @@
 <litepal>
 
     <dbname value="nccdb" />
-    <version value="3" />
+    <version value="6" />
 
     <list>
 
@@ -14,6 +14,8 @@
         <mapping class="com.yonyou.common.vo.StorageVO" />
         <!--        消息实体vo-->
         <mapping class="com.yonyou.common.vo.MessageVO" />
+        <!--        附件-->
+        <mapping class="com.yonyou.common.vo.AttachmentVO" />
     </list>
 
 
