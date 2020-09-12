@@ -20,7 +20,7 @@ import java.util.List;
  * @Date  2020/9/2 3:18 PM
  * @Author zhangg
  **/
-public class MsgUtil {
+public class NccMsgUtil {
 
 
     public static String getData() throws JSONException {
@@ -95,7 +95,7 @@ public class MsgUtil {
             int length = todoArray.length();
             for (int i = 0; i < length; i++) {
                 Object o = todoArray.get(i);
-                MessageVO messageVO = MsgUtil.getSingleMessageVo(o.toString());
+                MessageVO messageVO = NccMsgUtil.getSingleMessageVo(o.toString());
                 list.add(messageVO);
             }
         }

@@ -14,7 +14,7 @@ import com.yonyou.common.constant.Constant;
 import com.yonyou.common.constant.ConstantUrl;
 import com.yonyou.common.net.HttpCallBack;
 import com.yonyou.common.utils.logs.LogerNcc;
-import com.yonyou.common.utils.user.MsgUtil;
+import com.yonyou.common.utils.user.NccMsgUtil;
 import com.yonyou.common.utils.user.UserUtil;
 import com.yonyou.common.utils.utils.JsonUtil;
 import com.yonyou.common.utils.utils.NetUtil;
@@ -158,8 +158,8 @@ public class NoTODOFragment extends BaseFragment {
     private void initFruits() {
 
         try {
-            String data = MsgUtil.getData();
-            List<MessageVO> messageVosByType = MsgUtil.getMessageVosByType(data, Constant.todo_msg);
+            String data = NccMsgUtil.getData();
+            List<MessageVO> messageVosByType = NccMsgUtil.getMessageVosByType(data, Constant.todo_msg);
             todoList.clear();
             todoList.addAll(messageVosByType);
 
