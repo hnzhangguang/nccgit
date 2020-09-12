@@ -159,7 +159,7 @@ public class NoTODOFragment extends BaseFragment {
 
         try {
             String data = NccMsgUtil.getData();
-            List<MessageVO> messageVosByType = NccMsgUtil.getMessageVosByType(data, Constant.todo_msg);
+            List<MessageVO> messageVosByType = NccMsgUtil.getMessageVosByTypeFromDB(Constant.todo_msg);
             todoList.clear();
             todoList.addAll(messageVosByType);
 
