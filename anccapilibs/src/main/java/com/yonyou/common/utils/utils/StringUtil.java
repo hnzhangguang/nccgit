@@ -38,7 +38,7 @@ public class StringUtil {
         if (s1.startsWith("\n")) {
             s1 = s1.replaceFirst("\\n", "");
         }
-        LogerNcc.e(s1);
+//        LogerNcc.e(s1);
         return s1;
     }
 
