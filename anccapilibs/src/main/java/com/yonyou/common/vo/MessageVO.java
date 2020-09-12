@@ -46,8 +46,8 @@ public class MessageVO extends LitePalSupport implements Serializable {
     private String pk_message;//消息的主键
     private String pk_detail; // 消息对应的流程实例主键，审批的时候用
     private String subject;
-    private String content;
-    private String content_old; //经过处理后的显示内容
+    private String content; // 经过处理后显示内容
+    private String content_old; //经过处理前的显示内容
     private String msgtype;
     private String url;
     private String billStutas;
