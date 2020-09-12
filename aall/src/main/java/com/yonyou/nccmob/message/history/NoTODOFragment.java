@@ -159,7 +159,7 @@ public class NoTODOFragment extends BaseFragment {
 
         try {
             String data = NccMsgUtil.getData();
-            NccMsgUtil.updateAllMessageDB(data);// 更新数据
+//            NccMsgUtil.updateAllMessageDB(data);// 更新数据
             List<MessageVO> messageVosByType = NccMsgUtil.getMessageVosByTypeFromDB(Constant.todo_msg);
             todoList.clear();
             todoList.addAll(messageVosByType);
