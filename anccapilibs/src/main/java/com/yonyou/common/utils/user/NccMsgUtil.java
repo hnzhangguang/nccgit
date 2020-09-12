@@ -184,11 +184,11 @@ public class NccMsgUtil {
         if (null == attachmentJson) {
             return null;
         }
-        String pk_attachment = attachmentJson.optString("pk_attachment", "");
-        String pk_file = attachmentJson.optString("pk_file", "");
-        String downurl = attachmentJson.optString("downurl", "");
-        String filename = attachmentJson.optString("filename", "");
-        String type = attachmentJson.optString("type", "");
+        String pk_attachment = attachmentJson.getValue("pk_attachment");
+        String pk_file = attachmentJson.getValue("pk_file");
+        String downurl = attachmentJson.getValue("downurl");
+        String filename = attachmentJson.getValue("filename");
+        String type = attachmentJson.getValue("type");
         AttachmentVO attachmentVO = null;
         List<AttachmentVO> list = LitePal.where(" pk_attachment = ? ", pk_attachment).find(AttachmentVO.class);
         if (list != null && list.size() == 1) {
