@@ -12,6 +12,8 @@
         <mapping class="com.yonyou.common.vo.NCCUserVo" />
         <!--        普通存储-->
         <mapping class="com.yonyou.common.vo.StorageVO" />
+        <!--        消息实体vo-->
+        <mapping class="com.yonyou.common.vo.MessageVO" />
     </list>
 
 
