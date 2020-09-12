@@ -1,12 +1,16 @@
 package com.yonyou.common.vo;
 
 
+import org.litepal.crud.LitePalSupport;
+
+import java.io.Serializable;
+
 /*
  * @功能: 消息附件实体
  * @Date  2020/8/13;
  * @Author zhangg
  **/
-public class AttachmentVO {
+public class AttachmentVO extends LitePalSupport implements Serializable {
 
 
     private String pk_attachment;
