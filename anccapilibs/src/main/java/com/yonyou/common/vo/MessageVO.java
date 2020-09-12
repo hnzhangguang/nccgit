@@ -56,7 +56,16 @@ public class MessageVO extends LitePalSupport implements Serializable {
     private List<AttachmentVO> attachment;
     private int id;
     private List<String> enableActions; //按钮s
+    private String type;// "todo", prealert,notice
 
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public MessageVO() {
     }
@@ -187,6 +196,7 @@ public class MessageVO extends LitePalSupport implements Serializable {
         sb.append(", sendtime='").append(sendtime).append('\'');
         sb.append(", senderpersonname='").append(senderpersonname).append('\'');
         sb.append(", attachment=").append(attachment);
+        sb.append(", type=").append(type);
         sb.append(", id=").append(id);
         sb.append(", enableActions=").append(enableActions);
         sb.append('}');
