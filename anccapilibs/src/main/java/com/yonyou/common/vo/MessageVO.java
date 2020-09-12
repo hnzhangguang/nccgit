@@ -47,7 +47,7 @@ public class MessageVO extends LitePalSupport implements Serializable {
     private String pk_detail; // 消息对应的流程实例主键，审批的时候用
     private String subject;
     private String content;
-    private String content_show; //经过处理后的显示内容
+    private String content_old; //经过处理后的显示内容
     private String msgtype;
     private String url;
     private String billStutas;
@@ -117,12 +117,12 @@ public class MessageVO extends LitePalSupport implements Serializable {
         this.content = content;
     }
 
-    public String getContent_show() {
-        return content_show;
+    public String getContent_old() {
+        return content_old;
     }
 
-    public void setContent_show(String content_show) {
-        this.content_show = content_show;
+    public void setContent_show(String content_old) {
+        this.content_old = content_old;
     }
 
     public String getMsgtype() {
@@ -180,6 +180,7 @@ public class MessageVO extends LitePalSupport implements Serializable {
         sb.append(", pk_detail='").append(pk_detail).append('\'');
         sb.append(", subject='").append(subject).append('\'');
         sb.append(", content='").append(content).append('\'');
+        sb.append(", content_old='").append(content_old).append('\'');
         sb.append(", msgtype='").append(msgtype).append('\'');
         sb.append(", url='").append(url).append('\'');
         sb.append(", billStutas='").append(billStutas).append('\'');
