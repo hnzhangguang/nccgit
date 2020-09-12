@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.MsgUtil;
+import com.yonyou.common.utils.logs.LogerNcc;
 import com.yonyou.common.utils.utils.CheckUtil;
 import com.yonyou.common.utils.utils.StringUtil;
 import com.yonyou.common.vo.AppInfo;
@@ -104,8 +105,6 @@ public class NccMsgUtil {
             }
         }
         return list;
-
-
     }
 
     /*
@@ -120,54 +119,11 @@ public class NccMsgUtil {
         }
         JsonObjectEx item = JsonObjectEx.getJsonObj(messageString); // messagesJson
 
-        updateMessageVoForDb(item);
+        // 处理消息部分(包含附件)
+        MessageVO messageVO = updateMessageVoForDb(item);
 
-
-        String pk_message = item.optString("pk_message", "");
-        String pk_detail = item.optString("pk_detail", "");
-        String subject = item.optString("subject", "");
-        String content = item.optString("content", "");
-        String msgtype = item.optString("msgtype", "");
-        String sendtime = item.optString("sendtime", "");
-        String senderpersonname = item.optString("senderpersonname", "");
-        String attachment = item.optString("attachment", "");
-        String buttonInfo = item.optString("buttonInfo", ""); // 消息按钮区域所有按钮
-        MessageVO messageVO = new MessageVO();
-        messageVO.setSenderpersonname(senderpersonname);
-        messageVO.setContent_old(content);
-        messageVO.setContent(StringUtil.getShowContent(content));
-        messageVO.setMsgtype(msgtype);
-        messageVO.setPk_detail(pk_detail);
-        messageVO.setPk_message(pk_message);
-        messageVO.setSubject(subject);
-        messageVO.setSendtime(sendtime);
-
-        // 处理附件
-        JSONArray attachmentJsonArray = new JSONArray(attachment);
-        int length = attachmentJsonArray.length();
-        List<AttachmentVO> attachmentVOList = new ArrayList<>();
-        for (int j = 0; j < length; j++) {
-            JsonObjectEx attachmentJson = JsonObjectEx.getJsonObj(attachmentJsonArray.get(j).toString());
-
-            updateAttachmentVoForDb(attachmentJson, pk_message);
-
-            String pk_attachment = attachmentJson.optString("pk_attachment", "");
-            String pk_file = attachmentJson.optString("pk_file", "");
-            String downurl = attachmentJson.optString("downurl", "");
-            String filename = attachmentJson.optString("filename", "");
-            String type = attachmentJson.optString("type", "");
-            AttachmentVO attachmentVO = new AttachmentVO();
-            attachmentVO.setDownurl(downurl);
-            attachmentVO.setFilename(filename);
-            attachmentVO.setPk_attachment(pk_attachment);
-            attachmentVO.setPk_file(pk_file);
-            attachmentVO.setType(type);
-            attachmentVOList.add(attachmentVO);
-        }
-
-        // 附件
-        messageVO.setAttachment(attachmentVOList);
-
+        // 处理按钮区
+        String buttonInfo = item.getValue("buttonInfo"); // 消息按钮区域所有按钮
         // 处理按钮
         JsonObjectEx buttonInfoJson = JsonObjectEx.getJsonObj(buttonInfo);
         String SubmitRejectBillMode = buttonInfoJson.optString("SubmitRejectBillMode", "");
@@ -177,8 +133,6 @@ public class NccMsgUtil {
             List<String> acitons = java.util.Arrays.asList(s.split("\\,"));
             messageVO.setEnableActions(acitons);
         }
-
-
         return messageVO;
     }
 
@@ -201,7 +155,7 @@ public class NccMsgUtil {
         String sendtime = item.getValue("sendtime");
         String senderpersonname = item.getValue("senderpersonname");
         String attachment = item.getValue("attachment");
-        String buttonInfo = item.getValue("buttonInfo"); // 消息按钮区域所有按钮
+//        String buttonInfo = item.getValue("buttonInfo"); // 消息按钮区域所有按钮
         MessageVO messageVO = null;
         List<MessageVO> list = LitePal.where(" pk_message = ? ", pk_message).find(MessageVO.class);
         if (list != null && list.size() == 1) {
@@ -213,11 +167,45 @@ public class NccMsgUtil {
         }
         messageVO.setSenderpersonname(senderpersonname);
         messageVO.setContent(StringUtil.getShowContent(content));
+        messageVO.setContent_old(content);
         messageVO.setMsgtype(msgtype);
         messageVO.setPk_detail(pk_detail);
         messageVO.setSubject(subject);
         messageVO.setSendtime(sendtime);
         messageVO.save();
+
+        // 处理附件
+        JSONArray attachmentJsonArray = null;
+        try {
+            if (!"[]".equals(attachment)) {
+                attachmentJsonArray = new JSONArray(attachment);
+                int length = attachmentJsonArray.length();
+                List<AttachmentVO> attachmentVOList = new ArrayList<>();
+                for (int j = 0; j < length; j++) {
+                    JsonObjectEx attachmentJson = JsonObjectEx.getJsonObj(attachmentJsonArray.get(j).toString());
+//                    String pk_attachment = attachmentJson.optString("pk_attachment", "");
+//                    String pk_file = attachmentJson.optString("pk_file", "");
+//                    String downurl = attachmentJson.optString("downurl", "");
+//                    String filename = attachmentJson.optString("filename", "");
+//                    String type = attachmentJson.optString("type", "");
+//                    AttachmentVO attachmentVO = new AttachmentVO();
+//                    attachmentVO.setDownurl(downurl);
+//                    attachmentVO.setFilename(filename);
+//                    attachmentVO.setPk_attachment(pk_attachment);
+//                    attachmentVO.setPk_file(pk_file);
+//                    attachmentVO.setType(type);
+//                    attachmentVOList.add(attachmentVO);
+                    // 把对应的附件信息存储到库中
+                    updateAttachmentVoForDb(attachmentJson, pk_message);
+
+                }
+            }
+
+        } catch (JSONException e) {
+            LogerNcc.e(e);
+            e.printStackTrace();
+        }
+
         return messageVO;
 
     }
@@ -250,6 +238,7 @@ public class NccMsgUtil {
             attachmentVO = new AttachmentVO();
             attachmentVO.setPk_attachment(pk_attachment);
         }
+        // 存储附件外键->消息主键
         attachmentVO.setPk_parent(pk_parent);
         attachmentVO.setDownurl(downurl);
         attachmentVO.setFilename(filename);
