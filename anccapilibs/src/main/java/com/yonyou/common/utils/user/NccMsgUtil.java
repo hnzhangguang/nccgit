@@ -4,12 +4,14 @@ import android.text.TextUtils;
 
 import com.yonyou.common.constant.Constant;
 import com.yonyou.common.utils.utils.StringUtil;
+import com.yonyou.common.vo.AppInfo;
 import com.yonyou.common.vo.AttachmentVO;
 import com.yonyou.common.vo.JsonObjectEx;
 import com.yonyou.common.vo.MessageVO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,7 +168,46 @@ public class NccMsgUtil {
             messageVO.setEnableActions(acitons);
         }
 
-
         return messageVO;
     }
+
+
+    /***************************** start ***************************************/
+
+    /*
+     * @功能: 更新附件
+     * @参数:
+     * @Date  2020/9/12 1:18 PM
+     * @Author zhangg
+     **/
+    public AttachmentVO updateAttachmentVoFormDb(JsonObjectEx attachmentJson, String pk_parent) {
+        if (null == attachmentJson) {
+            return null;
+        }
+        String pk_attachment = attachmentJson.optString("pk_attachment", "");
+        String pk_file = attachmentJson.optString("pk_file", "");
+        String downurl = attachmentJson.optString("downurl", "");
+        String filename = attachmentJson.optString("filename", "");
+        String type = attachmentJson.optString("type", "");
+        AttachmentVO attachmentVO = null;
+        List<AttachmentVO> list = LitePal.where(" pk_attachment = ? ", pk_attachment).find(AttachmentVO.class);
+        if (list != null && list.size() == 1) {
+            attachmentVO = list.get(0);
+        }
+        if (null == attachmentVO) {
+            attachmentVO = new AttachmentVO();
+            attachmentVO.setPk_attachment(pk_attachment);
+        }
+        attachmentVO.setPk_parent(pk_parent);
+        attachmentVO.setDownurl(downurl);
+        attachmentVO.setFilename(filename);
+        attachmentVO.setPk_file(pk_file);
+        attachmentVO.setType(type);
+        attachmentVO.save();
+
+        return attachmentVO;
+    }
+
+    /***************************** end ***************************************/
+
 }
