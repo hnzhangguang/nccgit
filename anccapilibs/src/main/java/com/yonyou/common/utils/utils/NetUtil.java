@@ -156,7 +156,7 @@ public class NetUtil {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     String data = response.body().string();
-                    LogerNcc.e(data);
+//                    LogerNcc.e(data);
 
                     try {
                         // 为空的时候,走成功回调
