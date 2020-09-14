@@ -25,6 +25,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
 import com.yonyou.common.utils.MTLLog;
+import com.yonyou.common.utils.logs.LogerNcc;
 
 import org.json.JSONObject;
 
@@ -51,6 +52,8 @@ public class ExposedJsApi {
         mWebView = new WeakReference<WebView>(_webView);
         String ua = mWebView.get().getSettings().getUserAgentString();
         mWebView.get().getSettings().setUserAgentString(ua + NCC_ANDROID);
+        String userAgentString = mWebView.get().getSettings().getUserAgentString();
+//        LogerNcc.e(userAgentString);
         mCtx = new WeakReference<Activity>(_ctx);
         invoker = new APIInvoker(_ctx);
     }
