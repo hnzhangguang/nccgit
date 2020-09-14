@@ -267,8 +267,8 @@ public class UserUtil {
 
 
         try {
-            String s = JsonUtil.toJson(userVo);
-            LogerNcc.e(s);
+//            String s = JsonUtil.toJson(userVo);
+//            LogerNcc.e(s);
         } catch (Exception q1) {
             LogerNcc.e(q1);
         }

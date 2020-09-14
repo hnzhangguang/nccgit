@@ -176,8 +176,8 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
         String password = UserUtil.getValueByKey(Constant.password);
         et_name.setText(userCode);
         et_password.setText(password);
-//		et_name.setText("zhangg");
-//		et_password.setText("123456a");
+        et_name.setText("zhangg");
+        et_password.setText("123456a");
 
 
         // 设置账套信息
@@ -346,14 +346,16 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
 //            LogerNcc.e(todo_msg.size());
 //            LogerNcc.e(alter_msg.size());
 //            LogerNcc.e(notification_msg.size());
-            ComponentName cn = new ComponentName(getPackageName(), "com.yonyou.nccmob.NCCMainPagerActivity");
-            Intent intent = new Intent();
-            intent.setComponent(cn);
-            Bundle bundle = new Bundle();
-            bundle.putString("aa", "aa");
-            intent.putExtras(bundle);
-            startActivity(intent);
-            return;
+//            ComponentName cn = new ComponentName(getPackageName(), "com.yonyou.nccmob.NCCMainPagerActivity");
+//            Intent intent = new Intent();
+//            intent.setComponent(cn);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("aa", "aa");
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//            String userAgent = System.getProperty("http.agent");
+//            LogerNcc.e(userAgent);
+//            return;
         }
 
         // 校验是否通过
@@ -420,7 +422,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
 
                 @Override
                 public void onResponse(JSONObject successJson) {
-                    LogerNcc.e(successJson);
+//                    LogerNcc.e(successJson);
                     // 无论如何保存一下用户名
                     saveUserName();
                     setLoginButtonEnabled(true);
